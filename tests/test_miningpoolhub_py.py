@@ -6,7 +6,7 @@ import vcr
 @fixture
 def dashboard_keys():
     return ['raw', 'personal', 'balance', 'balance_for_auto_exchange', 'balance_on_exchange', 'recent_credits',
-            'coin_name', 'system', 'network']
+            'pool', 'system', 'network']
 
 
 @fixture
@@ -30,14 +30,14 @@ def test_dashboard(dashboard_keys):
     response = pool_instance.dashboard()
 
     assert isinstance(response, dict)
-    assert response['coin_name']['info']['currency'] == 'ETH', \
+    assert response['pool']['info']['currency'] == 'ETH', \
         'The coin name should be in the response'
     assert set(dashboard_keys).issubset(response.keys()), "All keys should be in the response"
 
 
 @vcr.use_cassette('tests/vcr_cassettes/coin_name-hourly_hash_rate.yml', filter_query_parameters=['api_key'])
 def test_hourly_hash_rate(hourly_hash_rate_keys):
-    """Tests an API call to get hourly hash rate data for a coin_name"""
+    """Tests an API call to get hourly hash rate data for a pool"""
     pool_instance = Pool('ethereum')
     response = pool_instance.hourly_hash_rate()
 
