@@ -1,5 +1,7 @@
+from __future__ import print_function
+
 from . import session
-from . import APIError
+from .exceptions import APIError
 
 
 class Pool(object):
@@ -22,3 +24,12 @@ class Pool(object):
             raise APIError('Call failed')
 
         return response['return']
+
+
+if __name__ == "__main__":
+    profit_and_statistics = Pool.mining_profit_and_statistics()
+
+    for number, coin in enumerate(profit_and_statistics, start=1):
+        print("{num}. {name} - {normalized_profit}".format(num=number,
+                                                           name=coin['coin_name'],
+                                                           normalized_profit=round(coin['normalized_profit'], 5)))

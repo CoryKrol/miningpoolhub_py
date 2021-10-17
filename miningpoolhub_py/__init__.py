@@ -1,18 +1,14 @@
 import os
 import requests
 from dotenv import load_dotenv
+from .exceptions import APIKeyMissingError
 
 load_dotenv()
+
+__version__ = "0.1.0"
+__author__ = 'Cory Krol'
+
 API_KEY = os.environ.get('MPH_API_KEY', None)
-
-
-class APIKeyMissingError(Exception):
-    pass
-
-
-class APIError(Exception):
-    pass
-
 
 if API_KEY is None:
     raise APIKeyMissingError(
