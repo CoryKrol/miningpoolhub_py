@@ -37,7 +37,7 @@ def test_dashboard(dashboard_keys):
 
 @vcr.use_cassette('tests/vcr_cassettes/coin_name-hourly_hash_rate.yml', filter_query_parameters=['api_key'])
 def test_hourly_hash_rate(hourly_hash_rate_keys):
-    """Tests an API call to get hourly hash rate data for a coin_name"""
+    """Tests an API call to get hourly hash rate data for a pool"""
     pool_instance = Pool('ethereum')
     response = pool_instance.hourly_hash_rate()
 
