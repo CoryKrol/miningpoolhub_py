@@ -23,7 +23,7 @@ def mining_profit_and_statistics_keys():
             'highest_buy_price', 'fee', 'workers']
 
 
-@vcr.use_cassette('tests/vcr_cassettes/coin_name-dashboard.yml', filter_query_parameters=['api_key'])
+@vcr.use_cassette('vcr_cassettes/coin_name-dashboard.yml', filter_query_parameters=['api_key'])
 def test_dashboard(dashboard_keys):
     """Tests an API call to get dashboard data for a coin_name"""
     pool_instance = Pool('ethereum')
@@ -35,7 +35,7 @@ def test_dashboard(dashboard_keys):
     assert set(dashboard_keys).issubset(response.keys()), "All keys should be in the response"
 
 
-@vcr.use_cassette('tests/vcr_cassettes/coin_name-hourly_hash_rate.yml', filter_query_parameters=['api_key'])
+@vcr.use_cassette('vcr_cassettes/coin_name-hourly_hash_rate.yml', filter_query_parameters=['api_key'])
 def test_hourly_hash_rate(hourly_hash_rate_keys):
     """Tests an API call to get hourly hash rate data for a pool"""
     pool_instance = Pool('ethereum')
@@ -46,7 +46,7 @@ def test_hourly_hash_rate(hourly_hash_rate_keys):
     assert set(hourly_hash_rate_keys).issubset(response[0].keys())
 
 
-@vcr.use_cassette('tests/vcr_cassettes/coin_name-mining_profit_and_statistics.yml', filter_query_parameters=['api_key'])
+@vcr.use_cassette('vcr_cassettes/coin_name-mining_profit_and_statistics.yml', filter_query_parameters=['api_key'])
 def test_mining_profit_and_statistics(mining_profit_and_statistics_keys):
     """Tests an API call to get mining profit and statistics"""
     response = Pool.mining_profit_and_statistics()
