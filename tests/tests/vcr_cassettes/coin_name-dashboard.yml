@@ -1,0 +1,71 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.26.0
+    method: GET
+    uri: https://ethereum.miningpoolhub.com/index.php?action=getdashboarddata&page=api
+  response:
+    body:
+      string: !!binary |
+        gzEDAGRT9f1p9WFK4eMBYAHJPbVsTUdb9LNcRKsl+V+noWPmvMORDrAL11ZRVICZWGkbzia8AUZT
+        /KvOhQQ+g4cwSgXpp8MtV3gsc5un077msW3znCGt4AtuP5CANGoEBePSz92tQCJCbZ2EKBQ8BwXt
+        tMf8F9IKk/xmkFY45ek05rlAIiGJQfvIm4J7rSYbMHpjvfVoRJO4TcFrFk5M/4teog+eQ4whaBYF
+        ZZrn7lbuZdxf6+ECiey2KR7ttcTgIyv4eUREFRFLDmi747E7LNf5v4yfBmRZvnYtJCLHqKDry+yu
+        /Zqv88PxBEt/zyb4jaKwu+UZCnUO0iGE8uAUHAsDVlu9zcHplLnn/+oym37stinY52vuDwXSCofa
+        H7vxVlpIqJHJ2MCiYOkrBaKFm6PjiOZYxyYvc20eAGd4Iqc5CDHHwx9h4msPwEYFTu8CG28VJlPD
+        9lSX8WbttswKJ9ktGnJWvGxtVCD9WKGdmuOBkemB8IEEFEAvbJ1jazZlDvS1eomRJCSgyy0m+hBA
+        FlYSsoIeZHpkRBQbbAjO0Lkt2RADkGqO6DxHHiCslbyN0Qrn5BixczJb9qMGDUPtFERMdPZAgZWN
+        j9Gx48y57DwiZwRp/X7pydquP1ZIK/T5ViDBi63e7rLcdk9efH/9dPeh67v+cfe51uvu9bIHBd4y
+        Xnr4DxK8+P4aNgV/63gp4wSJgvHRKYki65SVxAlEZWMtsReVqJXYenGsFSkaY17RQnJeSKw1QYGM
+        nwgSG69j3BTcx+5QIAEoUKq+5BXMeXwsc7NfVzLGTYGvjesLaYVrzS2kH6iFFGqxCnX4pa9knZKw
+        9DYPoiPnMaCLwbiwAJCapgZkrPHFriWZtm0D
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 69fb55802ce963d2-ATL
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - br
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Sun, 17 Oct 2021 17:44:16 GMT
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=dVOvq56jvihfrcnih3YNgajirqFqDJeopX4frg5muwpccFNAnzsYAel4P3UR%2FpZe5RSjUlP0a8G1lB9fJ2VOM%2FAj8%2F6dCbfkmLJqQNkq%2FuWplk9VT9k5T%2BZvbX7qDXwaSay5b4RijQ%2BWJY9y"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - PHPSESSID=gmb7kkof7slcn01qmfeja2qlb6; expires=Wed, 20-Oct-2021 17:44:16 GMT;
+        Max-Age=259200; path=/; domain=.miningpoolhub.com; HttpOnly
+      - AUTH_BEARER_default=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MzQ0OTI2NTYsImp0aSI6ImNZUmRCNHY3ZE9LYkNPR0I1ZnNzSjE3NWpxS1hyVHdMYnBtY1wvXC9mUEFTRT0iLCJpc3MiOiIuZG92ZXdhbGV0LmNvbSIsIm5iZiI6MTYzNDQ5MjY1NiwiZXhwIjoxNjM0NzUxODU2LCJkYXRhIjoiIn0.uhqtQ4WH_lyXXo-5x6uZu1vLLY-HlQH8faxDO9CLvqwzft17z7Zxxrnv5qXW8ybnucLPH-t1gtZ5-oVTfd7ufA;
+        expires=Wed, 20-Oct-2021 17:44:16 GMT; Max-Age=259200; path=/; domain=.miningpoolhub.com;
+        HttpOnly
+      Transfer-Encoding:
+      - chunked
+      alt-svc:
+      - h3=":443"; ma=86400, h3-29=":443"; ma=86400, h3-28=":443"; ma=86400, h3-27=":443";
+        ma=86400
+    status:
+      code: 200
+      message: OK
+version: 1
