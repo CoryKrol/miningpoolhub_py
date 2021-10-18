@@ -10,8 +10,8 @@ class Pool(object):
     __session = None
     __api_key = None
 
-    def __init__(self, coin_name):
-        self.__api_key = API_KEY
+    def __init__(self, coin_name, api_key=API_KEY):
+        self.__api_key = api_key
         self.coin_name = coin_name
         self.urls = Urls()
 
@@ -46,6 +46,20 @@ class Pool(object):
 
     def get_hourly_hash_rate(self):
         return self.__get_data(self.urls.get_hourly_hash_rates_url(pool=self.coin_name))['gethourlyhashrates']['data']['mine']
+
+    def public(self):
+        return self.__get_data(self.urls.public_url(self.coin_name))
+
+    def get_all_user_balances(self):
+        return self.__get_data(self.urls.get_all_user_balances_url())['getuserallbalances']['data']
+
+    def get_auto_switching_and_profits_statistics(self):
+        path = self.urls.get_auto_switching_and_profits_statistics_url()
+        response = self.__get_data(path)
+        if response['success'] is not True:
+            raise APIError('Call failed')
+
+        return response['return']
 
     def get_mining_profit_and_statistics(self):
         path = self.urls.get_mining_profit_and_statistics_url()

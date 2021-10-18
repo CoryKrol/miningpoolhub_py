@@ -1,0 +1,63 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.26.0
+    method: GET
+    uri: https://ethereum.miningpoolhub.com/index.php?action=public&page=api
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA0TNuwrCMBQA0F8pd1IMJWlzkzZ7oYvg4B5SDaY0TSQPHMR/Fyd/4Jw3PGP0Opjd
+        goKpOJts3ZvDdJ2PzXkNa3g0lxh9M9cFCDiTXTLFguqoQCoRJe/bYZQEXjFtNmVQbMAeOwLZmWSz
+        Lm7NOsUa7qBC9Z6AN7noxcfbBor1nHOJlECw5UfofyFaiYx3QozIBUV7YvzzBQAA//8DAIIqzVWw
+        AAAA
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 6a05af7f8e2a63f8-ATL
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Mon, 18 Oct 2021 23:53:20 GMT
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=hb3R9204ahJF9AO43hDyhnpE3flf75zwyA10DXDCFolCWjJW7K5SuIQ4BxqCENWAphNUHs9DCNJnOeO062jei1kU01kdX95DsTGbwBvNHzKcGPb1qt6ee4%2BvSx37UDDc8ZORKxHS%2Fa1uMpYO"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - PHPSESSID=bog07b8vmm0ad7u3spovcp2im6; expires=Thu, 21-Oct-2021 23:53:20 GMT;
+        Max-Age=259200; path=/; domain=.miningpoolhub.com; HttpOnly
+      - AUTH_BEARER_default=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MzQ2MDEyMDAsImp0aSI6Imd4bldsM1VBaUhjSHVpNFY0d0NkRjJYNHJ0S1RCT003b1RpdjUyYTZZS2M9IiwiaXNzIjoiLmRvdmV3YWxldC5jb20iLCJuYmYiOjE2MzQ2MDEyMDAsImV4cCI6MTYzNDg2MDQwMCwiZGF0YSI6IiJ9.aMiin7yWIDQWSuRk_wGPBlGnfawfAqTzvRwfBbdgD7XE_u7ic7CnRZDgfSkwMkPDdpMjvTeyz24MaJkPb_v9Dw;
+        expires=Thu, 21-Oct-2021 23:53:20 GMT; Max-Age=259200; path=/; domain=.miningpoolhub.com;
+        HttpOnly
+      Transfer-Encoding:
+      - chunked
+      alt-svc:
+      - h3=":443"; ma=86400, h3-29=":443"; ma=86400, h3-28=":443"; ma=86400, h3-27=":443";
+        ma=86400
+    status:
+      code: 200
+      message: OK
+version: 1
