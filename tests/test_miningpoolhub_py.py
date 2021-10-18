@@ -49,7 +49,8 @@ def test_hourly_hash_rate(hourly_hash_rate_keys):
 @vcr.use_cassette('vcr_cassettes/coin_name-mining_profit_and_statistics.yml', filter_query_parameters=['api_key'])
 def test_mining_profit_and_statistics(mining_profit_and_statistics_keys):
     """Tests an API call to get mining profit and statistics"""
-    response = Pool.mining_profit_and_statistics()
+    pool_instance = Pool('ethereum')
+    response = pool_instance.mining_profit_and_statistics()
 
     assert isinstance(response, list)
     assert isinstance(response[0], dict)
