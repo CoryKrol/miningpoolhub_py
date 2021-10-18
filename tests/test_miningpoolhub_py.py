@@ -27,7 +27,7 @@ def mining_profit_and_statistics_keys():
 def test_dashboard(dashboard_keys):
     """Tests an API call to get dashboard data for a coin_name"""
     pool_instance = Pool('ethereum')
-    response = pool_instance.dashboard()
+    response = pool_instance.get_dashboard()
 
     assert isinstance(response, dict)
     assert response['pool']['info']['currency'] == 'ETH', \
@@ -39,7 +39,7 @@ def test_dashboard(dashboard_keys):
 def test_hourly_hash_rate(hourly_hash_rate_keys):
     """Tests an API call to get hourly hash rate data for a pool"""
     pool_instance = Pool('ethereum')
-    response = pool_instance.hourly_hash_rate()
+    response = pool_instance.get_hourly_hash_rate()
 
     assert isinstance(response, list)
     assert isinstance(response[0], dict)
@@ -50,7 +50,7 @@ def test_hourly_hash_rate(hourly_hash_rate_keys):
 def test_mining_profit_and_statistics(mining_profit_and_statistics_keys):
     """Tests an API call to get mining profit and statistics"""
     pool_instance = Pool('ethereum')
-    response = pool_instance.mining_profit_and_statistics()
+    response = pool_instance.get_mining_profit_and_statistics()
 
     assert isinstance(response, list)
     assert isinstance(response[0], dict)

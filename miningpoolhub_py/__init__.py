@@ -16,7 +16,5 @@ if API_KEY is None:
         "https://miningpoolhub.com/?page=account&action=edit "
         "for your Mining Pool Hub API Key"
     )
-session = requests.Session()
-session.params = {'api_key': API_KEY}
 
 from .pool import Pool
