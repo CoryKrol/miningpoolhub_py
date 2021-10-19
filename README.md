@@ -7,10 +7,12 @@ A Python wrapper for the Mining Pool Hub REST API
 ## Usage
 ### Universal Endpoints
 Mining Pool Hub supports auto switching between coins. Obtain statistics for all coins with the following methods
+
 ```python
 from miningpoolhub_py import Pool
+
 pool_instance = Pool('ethereum')
-pool_instance.get_all_user_balances()
+pool_instance.get_user_all_balances()
 pool_instance.get_auto_switching_and_profits_statistics()
 pool_instance.get_mining_profit_and_statistics()
 ```
@@ -39,9 +41,9 @@ pool_instance = Pool('ethereum', '<api_key>')
 
 # References
 ## Mining Pool Hub
-[Mining Pool Hub](https://miningpoolhub.com/)
-[API Reference](https://github.com/miningpoolhub/php-mpos/wiki/API-Reference)
-[Mining Pool Hub API Key](https://miningpoolhub.com/?page=account&action=edit)
+- [Mining Pool Hub](https://miningpoolhub.com/)
+- [API Reference](https://github.com/miningpoolhub/php-mpos/wiki/API-Reference)
+- [Mining Pool Hub API Key](https://miningpoolhub.com/?page=account&action=edit)
 
 ## Python API Wrapper & and CI/CD Pipeline
 For anyone else new to developing Python API wrappers or CI/CD in Python these references were invaluable in helping

@@ -20,11 +20,6 @@ def public_keys():
 
 
 @fixture
-def get_all_user_balances_keys():
-    return ['coin', 'confirmed', 'unconfirmed', 'ae_confirmed', 'ae_unconfirmed', 'exchange']
-
-
-@fixture
 def get_auto_switching_and_profits_statistics_keys():
     return ['algo', 'current_mining_coin', 'current_mining_coin_symbol', 'host', 'all_host_list', 'port',
             'algo_switch_port', 'multialgo_switch_port', 'profit', 'normalized_profit_amd', 'normalized_profit_nvidia']
@@ -37,6 +32,11 @@ def get_mining_profit_and_statistics_keys():
             'profit', 'pool_hash', 'net_hash', 'difficulty', 'reward', 'last_block', 'time_since_last_block',
             'time_since_last_block_in_words', 'dovewallet_buy_price', 'bittrex_buy_price', 'poloniex_buy_price',
             'highest_buy_price', 'fee', 'workers']
+
+
+@fixture
+def get_user_all_balances_keys():
+    return ['coin', 'confirmed', 'unconfirmed', 'ae_confirmed', 'ae_unconfirmed', 'exchange']
 
 
 @vcr.use_cassette('vcr_cassettes/coin_name-get_dashboard.yml', filter_query_parameters=['api_key'])
@@ -72,18 +72,6 @@ def test_public(public_keys):
     assert set(public_keys).issubset(response.keys())
 
 
-@vcr.use_cassette('vcr_cassettes/coin_name-get_all_user_balances_keys.yml',
-                  filter_query_parameters=['api_key'])
-def test_get_all_user_balances(get_all_user_balances_keys):
-    """Tests an API call to get mining profit and statistics"""
-    pool_instance = Pool('ethereum')
-    response = pool_instance.get_all_user_balances()
-
-    assert isinstance(response, list)
-    assert isinstance(response[0], dict)
-    assert set(get_all_user_balances_keys).issubset(response[0].keys())
-
-
 @vcr.use_cassette('vcr_cassettes/coin_name-get_auto_switching_and_profits_statistics.yml',
                   filter_query_parameters=['api_key'])
 def test_get_auto_switching_and_profits_statistics(get_auto_switching_and_profits_statistics_keys):
@@ -105,3 +93,15 @@ def test_get_mining_profit_and_statistics(get_mining_profit_and_statistics_keys)
     assert isinstance(response, list)
     assert isinstance(response[0], dict)
     assert set(get_mining_profit_and_statistics_keys).issubset(response[0].keys())
+
+
+@vcr.use_cassette('vcr_cassettes/coin_name-get_user_all_balances_keys.yml',
+                  filter_query_parameters=['api_key'])
+def test_get_user_all_balances(get_user_all_balances_keys):
+    """Tests an API call to get mining profit and statistics"""
+    pool_instance = Pool('ethereum')
+    response = pool_instance.get_user_all_balances()
+
+    assert isinstance(response, list)
+    assert isinstance(response[0], dict)
+    assert set(get_user_all_balances_keys).issubset(response[0].keys())
