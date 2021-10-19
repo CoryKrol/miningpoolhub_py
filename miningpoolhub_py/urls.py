@@ -31,10 +31,10 @@ class Urls:
         self.public = self.protocol + self.coin_pool + self.base_url.format(action='public')
 
         # Info for all mining pools
-        self.get_all_user_balances = self.no_pool_base_url.format(action='getuserallbalances')
         self.get_auto_switching_and_profits_statistics = \
             self.no_pool_base_url.format(action='getautoswitchingandprofitsstatistics')
         self.get_mining_profit_and_statistics = self.no_pool_base_url.format(action='getminingandprofitsstatistics')
+        self.get_user_all_balances = self.no_pool_base_url.format(action='getuserallbalances')
 
     def base_url(self):
         return self.base_url
@@ -105,11 +105,11 @@ class Urls:
     def public_url(self, pool):
         return self.public.format(coin_pool=pool)
 
-    def get_all_user_balances_url(self):
-        return self.get_all_user_balances
-
     def get_auto_switching_and_profits_statistics_url(self):
         return self.get_auto_switching_and_profits_statistics
 
     def get_mining_profit_and_statistics_url(self):
         return self.get_mining_profit_and_statistics
+
+    def get_user_all_balances_url(self):
+        return self.get_user_all_balances
