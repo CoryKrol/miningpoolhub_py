@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>miningpoolhub_py &#8212; miningpoolhub_py 0.1.6 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="miningpoolhub-py">
+<h1>miningpoolhub_py<a class="headerlink" href="#miningpoolhub-py" title="Permalink to this headline">¶</a></h1>
+<p>A Python wrapper for the Mining Pool Hub REST API</p>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>Install $project by running:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install miningpoolhub_py
+</pre></div>
+</div>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="universal-endpoints">
+<h2>Universal Endpoints<a class="headerlink" href="#universal-endpoints" title="Permalink to this headline">¶</a></h2>
+<p>Mining Pool Hub supports auto switching between coins. Obtain statistics for all coins with the following methods</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">miningpoolhub_py</span> <span class="kn">import</span> <span class="n">Pool</span>
+<span class="n">pool_instance</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">(</span><span class="s1">&#39;ethereum&#39;</span><span class="p">)</span>
+<span class="n">pool_instance</span><span class="o">.</span><span class="n">get_all_user_balances</span><span class="p">()</span>
+<span class="n">pool_instance</span><span class="o">.</span><span class="n">get_auto_switching_and_profits_statistics</span><span class="p">()</span>
+<span class="n">pool_instance</span><span class="o">.</span><span class="n">get_mining_profit_and_statistics</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="pool-selection">
+<h2>Pool Selection<a class="headerlink" href="#pool-selection" title="Permalink to this headline">¶</a></h2>
+<p>Mining Pool Hub has different base urls for each coin they offer. Create a new pool object for every coin you are
+interested in mining statistics for</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">miningpoolhub_py</span> <span class="kn">import</span> <span class="n">Pool</span>
+<span class="n">pool_instance</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">(</span><span class="s1">&#39;ethereum&#39;</span><span class="p">)</span>
+<span class="n">pool_instance</span><span class="o">.</span><span class="n">get_dashboard</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="authentication">
+<h2>Authentication<a class="headerlink" href="#authentication" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="environment-file">
+<h2>Environment File<a class="headerlink" href="#environment-file" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">MPH_API_KEY</span><span class="o">=&lt;</span><span class="n">api_key</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="pass-api-key-to-pool-constructor">
+<h2>Pass API Key to Pool Constructor<a class="headerlink" href="#pass-api-key-to-pool-constructor" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">miningpoolhub_py</span> <span class="kn">import</span> <span class="n">Pool</span>
+<span class="n">pool_instance</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">(</span><span class="s1">&#39;ethereum&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;api_key&gt;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="mining-pool-hub">
+<h2>Mining Pool Hub<a class="headerlink" href="#mining-pool-hub" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://miningpoolhub.com/">Mining Pool Hub</a></p></li>
+<li><p><a class="reference external" href="https://github.com/miningpoolhub/php-mpos/wiki/API-Reference">API Reference</a></p></li>
+<li><p><a class="reference external" href="https://miningpoolhub.com/?page=account&amp;action=edit">Mining Pool Hub API Key</a></p></li>
+</ul>
+</section>
+<section id="python-api-wrapper-and-ci-cd-pipeline">
+<h2>Python API Wrapper &amp; and CI/CD Pipeline<a class="headerlink" href="#python-api-wrapper-and-ci-cd-pipeline" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://semaphoreci.com/community/tutorials/building-and-testing-an-api-wrapper-in-python">Building and Testing an API Wrapper in Python</a></p></li>
+<li><p><a class="reference external" href="https://medium.com/analytics-vidhya/creating-a-python-api-wrapper-ally-invest-api-568934a1411c">Creating a Python API Wrapper (Ally Invest API)</a></p></li>
+<li><p><a class="reference external" href="https://www.ianwootten.co.uk/2020/10/20/publishing-a-package-to-pypi-with-poetry/">Publishing a Package to PyPI with Poetry</a></p></li>
+<li><dl class="simple">
+<dt><a class="reference external" href="https://www.ianwootten.co.uk/2020/10/23/publishing-to-pypi-using-github-actions/">Publishing to PyPI Using GitHub Actions</a></dt><dd><ul>
+<li><p><a class="reference external" href="https://github.com/niftydigits/ftrack-s3-accessor/tree/master/.github/workflows">Code Repo</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="contribute">
+<h2>Contribute<a class="headerlink" href="#contribute" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/CoryKrol/miningpoolhub_py/issues">Issue Tracker</a></p></li>
+<li><p><a class="reference external" href="https://github.com/CoryKrol/miningpoolhub_py">Source Code</a></p></li>
+</ul>
+</section>
+<section id="support">
+<h2>Support<a class="headerlink" href="#support" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://github.com/CoryKrol/miningpoolhub_py/issues/new">Open an issue</a></p>
+</section>
+<section id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h2>
+<p>The project is licensed under the Apache 2 license</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">miningpoolhub_py</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Cory Krol.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
