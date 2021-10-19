@@ -15,21 +15,21 @@ interactions:
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA2STzWrbQBSF32W2FsP9m/vjXSGFbkoXLe1aTZTExLGLLRdCyLsXWRrZqpf6dHQ5
-        353Re3rq+t/b/f3LsW/7Y1q/p7/d4bjZ79I6YYYMqUmH067fvHZpLTkcQSCKFA9v0kPbt8M3P/Z9
-        u01rDQCKZnz82W43D2mdRpgm+u3w57kdhkMld5vHx839adu/pTVmdSE1d4jC3YpwCn1/bg/dcegE
-        WNyUvbgJYh3y+dhvXtu+e6hBzAAcgO5WwLsVypT89Lo/7fq0JvKIAtldi4E2Cb/sT4dJJFmaQLWY
-        wULgTK4FNJuWMA2WUJVuhXXybEASWqSgSx1wU16AyVkL+pSopbFkxDKcAKIqNonkujX6UHNktfg1
-        W3Qf0XL7FozOBoXYh6V5jc3tIwwUyflcf3x5u3xQdwIz03lCVeDwbOoRhIwgTbK79u04G2AMV+XM
-        ZoMrtjA4k6UASiBSmJG5dSuMKTX317DibOESWkfc9FeXIDFwtDJl5mtjipmUhBXLcLjyq+te5v7i
-        NKx7hFVgARcGI7pWkFwIrQSTkyONCmPscoMMScgQVL3MU24sSKOgefFCBDU13yQw5QzGoQCGTUL6
-        ut/1z1WkqAGnGVeV//DyZxjZtQ1nI1O2IBEW71ZDkSl30SE2dgl3VvPLoFshInQpLMxGl8qzkhqH
-        5CIRAUwfHx//AAAA//8DADIv+YneBAAA
+        H4sIAAAAAAAAA2STTWvbQBCG/8teLZaZnW/fCin0Unpoac9qoiQmjl1suRBC/nuRpZWt+qhHr4b3
+        Ge2+p6eu/73d378c+7Y/pvV7+tsdjpv9Lq0TZsiQmnQ47frNa5fWkjkQ0EtIcccmPbR9O3zzY9+3
+        27TWACBoxsef7XbzkNZphGmi3w5/ntth+EzuNo+Pm/vTtn9La8zqXMyYFNysWxWcUt+f20N3HEoB
+        SgCoIAVZ1Cmfj/3mte27hxrEDEABJl4cS+lWyFP00+v+tOvTuhSPEMoFGN2wSfhlfzpMKgnTBKrH
+        DBYKZ3KtEFlEkNhUBQW7FcqUmhUKFxXBUK8DbtqLhhDw0PkcmDtnQlPU4SUJNanworRzqmzufcUW
+        1Ue0XL8pm6kDuHcr9Bq62j6oM6GoX0bc7h4E3T2YCtdQNaAoWcmKEhSkaJLdtW/HWQBD08RmgSu2
+        EDiTZX9kRUdHGLbbrbDOnwU0DNTCwS9Db/qrE5pJKLNPmfkHmEgWB4QoIqVJ/KvrXub+7DgcyRFW
+        gQVcGIzoWoGzICspkZlzjApj7HJ+DIcTIIrIl8E3FkUDgoa7CmQ1VT0QjDUriwE5apOwfN3v+ucq
+        IqpxPp4jrir/4eVVGNm1DWUrJsMyQ2OwKTDnLjqFjC04iFX4MuhWqBQ0L2CKpjHnZiU1cszuMkT0
+        4+PjHwAAAP//AwAb+rzU3gQAAA==
     headers:
       CF-Cache-Status:
       - DYNAMIC
       CF-RAY:
-      - 6a0759ce5bfa6402-ATL
+      - 6a079b76fc3e63b7-ATL
       Cache-Control:
       - no-store, no-cache, must-revalidate
       Connection:
@@ -39,7 +39,7 @@ interactions:
       Content-Type:
       - text/html; charset=UTF-8
       Date:
-      - Tue, 19 Oct 2021 04:44:22 GMT
+      - Tue, 19 Oct 2021 05:29:11 GMT
       Expect-CT:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Expires:
@@ -49,14 +49,14 @@ interactions:
       Pragma:
       - no-cache
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=X6DL4UwNSKxjsQUUMa9LftN%2BR3Q%2FgEV9ooTq8kLg75dcdA9C0XMcdZ38FCruc11zEs2vFhxewbpiEj88WUf%2FR9rb%2FBPlIwmG5azO58axzhA68bdGWzPblULjLaDt2omfb6YEhMpNI8mZgMu%2F"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=hKxcv9twKIqy2xfCWucK4KQov6VXV3tW9t4l21vcS%2BT92yPo%2Fmtjnmjn0gsOu%2BHsKad0SV38rFVbqZ4tUp2xDZQFPp%2BbaspIL5a6AkKaUjDq%2Fx3DXVSQVnuBdKNxkY1D0iLE8LfXgAN6xLn4"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Set-Cookie:
-      - PHPSESSID=vacvlkbtj3pkuj53k25t5eh0s6; expires=Fri, 22-Oct-2021 04:44:22 GMT;
+      - PHPSESSID=couht9of45ore0f2vi6tp3cmn3; expires=Fri, 22-Oct-2021 05:29:11 GMT;
         Max-Age=259200; path=/; domain=.miningpoolhub.com; HttpOnly
-      - AUTH_BEARER_default=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MzQ2MTg2NjIsImp0aSI6ImptelMxa056ejVpYVJ2QXpzOVwvUmJ3M3pDSkR1a0dcLzdYWVY4XC9yNEZBekE9IiwiaXNzIjoiLmRvdmV3YWxldC5jb20iLCJuYmYiOjE2MzQ2MTg2NjIsImV4cCI6MTYzNDg3Nzg2MiwiZGF0YSI6IiJ9.uLLHcy6QEzZjTuGlAVgEMhXwGBRLIeUPt-I6V4Z-5sRqgvPVbwv178nynuNzP7OjvwjTYaLS2DWOJnGN4nNZmw;
-        expires=Fri, 22-Oct-2021 04:44:22 GMT; Max-Age=259200; path=/; domain=.miningpoolhub.com;
+      - AUTH_BEARER_default=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MzQ2MjEzNTEsImp0aSI6IjlmS0s1UDU4UjJ4WTVoM1wvVUk2VHo4XC9SYjlrYTZxR01nOFR6VnRqTlRqVT0iLCJpc3MiOiIuZG92ZXdhbGV0LmNvbSIsIm5iZiI6MTYzNDYyMTM1MSwiZXhwIjoxNjM0ODgwNTUxLCJkYXRhIjoiIn0.XKZUrD90PGfHB86IYVKh2dnh8bK27yHiLxYhgSCOsJgKM8h5JYMsL6QCpzFpr3tkygFQ7DgGbpq_lYZTON8x7Q;
+        expires=Fri, 22-Oct-2021 05:29:11 GMT; Max-Age=259200; path=/; domain=.miningpoolhub.com;
         HttpOnly
       Transfer-Encoding:
       - chunked
