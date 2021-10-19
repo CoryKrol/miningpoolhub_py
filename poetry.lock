@@ -489,10 +489,13 @@ python-versions = ">=3.6"
 idna = ">=2.0"
 multidict = ">=4.0"
 
+[extras]
+docs = ["Sphinx", "sphinx-rtd-theme", "sphinxcontrib-napoleon"]
+
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "7856d86b8576da5f67cd41be3bac334456bd4850cba87879fe15a2404e81e564"
+content-hash = "e6a3ccc57136c7d1c71373165e7ab428d3679e1d5d3827c3673c9b709506f3d1"
 
 [metadata.files]
 alabaster = [
