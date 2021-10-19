@@ -1,5 +1,6 @@
 from requests import Session
 from requests import HTTPError
+from json.decoder import JSONDecodeError
 from . import API_KEY
 
 from .exceptions import APIError
@@ -41,6 +42,8 @@ class Pool(object):
 
             return self.__to_json(response)
         except HTTPError as e:
+            pass
+        except JSONDecodeError as e:
             pass
 
     def get_block_count(self):
