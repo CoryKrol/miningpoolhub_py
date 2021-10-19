@@ -1,0 +1,76 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.26.0
+    method: GET
+    uri: https://miningpoolhub.com/index.php?action=getautoswitchingandprofitsstatistics&page=api
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA9SY227bOBCG34XXljA8k+5VmmZToEkWmxRFukVhKDJrE5ElV4dk3aLvvpBcx1Jq
+        ksoufNE7GzOUhP+bGf7kd1Q1aWqqCk3rsjETVJq6KXM0/fQdJdmiQFP0wZT1MqmWaILSpixNXs9W
+        Nrf5YpYWNkdT9GDKuvt5MGFWbVZ3RdY+6P0pmqBlUdVoipbNXbzNWhdF1v5LixWaoCTLZm3KLLPe
+        vHVR1miKCVAy6b50Vj3aOl3OfgZkF1g1WW0PRLfL1mXxxdZoCjFQroTmeILyolwlmf1m5rNteJas
+        5l0KBqE0PpiSP9i5TbZZTGvK+I/Jk35ndeqVz9RLU5pmFaVZUlU2Dcl41pexqSKTVHVsti+Jxso6
+        at0r05TF2gSSksomwffvdccuXNiLCw9wAQiOpfbiEkQzxQO4CFGYSN3D9S55XBePTlpl8mDyMdV+
+        /eHqV0z33cNfTMm3bAfJm9MxCrx8rzW4EIEXEQwRYU6V5l5EmlChdAiRAFBE9Tvqa2O7avv79MIJ
+        6tvIdto+43k77d7w4n7yLnxqKH/WtqNCn/AkPNEOXm3AzauN7nhJimMCWmsihJuYF9QhPq/fnzv5
+        3Nlu04gWRTYPMdo+57dmJFyMhJeR2DNiQsWKSQAmlK+rgGMu2+3N31VcKsH7g++03KzrIreLZR1d
+        FrkpCye7lSe8p3Z7ef0rtbT3lpeCC67dsQsndvjGfMseBXMRZF6CrD8VldJEMM28/IATICF+AIJw
+        zA90nXsimjx1xnsD8ezqd2826kJFvahoH5XUhGqmpB8VAQFhVJwNPcZHU3W1526wTWmTeTcfN97c
+        frd9PIK7Ji67Rrx2jQzsGpFaUsBud61izbGJeFBIJgTFA289ylqHLfXbQ5b6PzrqMYY67KdHlrrL
+        qxGvVyPPvRqWGLxejWgiRdshXkIMtBKS9AhdbMqEXJ8R316SjPHTl39enRyhwLFyCNgG3AK20Z2A
+        OKbaRG7fxGOieaC6RSypMlF/nt/cG5cqaIrmdmHvNrWJKnfaXrw356+PoZ3L1GCvqcE9UyNjMFFg
+        xmKlqAqPBiy57Mn3V3Nn67B8X91pR5fP5Siw11Fg1i897S09EjNGg6UHGA9L78oUN/4N6otJ2tk6
+        pnH/OMq1D3Zd+2DvtQ8eXvuAZJQz4a0/Kig/7Nj61z7AFQjR0/AWY3f1jbBhb05u3h5BN5AO3dqA
+        W7c2ui867qs5HCtggZqjMe7qsqfXZWd5ovOyMFWdjXFGC1/qsY1Ru1se1pF7deTPdJS+bcMh805F
+        HAsphiqG5Pup2Zi+Pb++OYZurqEH3qEHg6EnhL8ABdZj3CQGPNgy3pk0Te7dpZf8M8qonNweQzfX
+        mQa8Zxron2n+/81OYFfIbG3GSHRxlC0BXGcV8J5VoHdWETEIR+V0QrGYitB+ymNGutn2+ce/AAAA
+        //8DAEgskbZeGQAA
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 6a0cafb2dac7f1b2-ATL
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Tue, 19 Oct 2021 20:16:49 GMT
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=kK8Bj1hkpqh2KzzLl9hC6qDTySD9oFSjrTZRiHE%2FrSh5hSAmvflfYx4xDTcM8%2FTzqY752TZc%2FuYbK8mModCmqHTZs5lH5gbIgK2kZ59mGINLDvO%2BT2e3VOH3eoJM%2BUO2bSt2"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - PHPSESSID=90r7hfl4558eivrof92ju5c8u0; expires=Fri, 22-Oct-2021 20:16:49 GMT;
+        Max-Age=259200; path=/; domain=.miningpoolhub.com; HttpOnly
+      Transfer-Encoding:
+      - chunked
+      alt-svc:
+      - h3=":443"; ma=86400, h3-29=":443"; ma=86400, h3-28=":443"; ma=86400, h3-27=":443";
+        ma=86400
+    status:
+      code: 200
+      message: OK
+version: 1

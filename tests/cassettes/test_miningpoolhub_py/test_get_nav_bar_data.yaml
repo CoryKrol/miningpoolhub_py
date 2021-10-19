@@ -11,17 +11,17 @@ interactions:
       User-Agent:
       - python-requests/2.26.0
     method: GET
-    uri: https://ethereum.miningpoolhub.com/index.php?action=getcurrentworkers&page=api
+    uri: https://ethereum.miningpoolhub.com/index.php?action=getnavbardata&page=api
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAAwTBWwqAIBAF0L3cbxEfjZS7kRpCIoVR60Pae+dMnNz3IcKlv1UuloY48bC0XAsi
-        rDbaQEFG6flmRNLWG0OOQiC3eoUj9YRog1/s9n0/AAAA//8DAEJZmrpRAAAA
+        H4sIAAAAAAAAAzTLQQqAIBAF0Lv8tYhZBnqbEYcQSmE0N+LdW/X2b+LiXmhEkkSdECYGS8u1IGDT
+        RhsoyFt6fhjBart7f1jnzOm8VfgPi1RBQMqN4s0Ja60PAAD//wMAHOQrjlsAAAA=
     headers:
       CF-Cache-Status:
       - DYNAMIC
       CF-RAY:
-      - 6a079b79998f63d4-ATL
+      - 6a0cafafda26e3ce-ATL
       Cache-Control:
       - no-store, no-cache, must-revalidate
       Connection:
@@ -31,7 +31,7 @@ interactions:
       Content-Type:
       - text/html; charset=UTF-8
       Date:
-      - Tue, 19 Oct 2021 05:29:12 GMT
+      - Tue, 19 Oct 2021 20:16:48 GMT
       Expect-CT:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Expires:
@@ -41,14 +41,14 @@ interactions:
       Pragma:
       - no-cache
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=Bl7MJSAks72l3obKEjdIoGecaLv9z7esG0ZcYoDRubCrbKILpmg0t8qGErO5X%2FOtVgga8uiPFkgRladVfMUFShlqNi%2FWwWPotInYL6gM98Cqjwp3ldKEB%2BsNu7QwQ78nGvHNdzbZXHa0gGz1"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=mC9glmzTjhC%2B2K5aZ%2FrpUWZ2jwkWWnaBmAlPBf1ZrQJiBoFNsH3bX5ZiKgPkEA3BZLjUMxYlfrLq34y%2FS4Ix5WT0nrQmsi%2BxSBjkXwHk8LYpk9vAvGnY8tbQyf4QRFC3f3d76WfVCo5m7CSZ"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Set-Cookie:
-      - PHPSESSID=jpbah4j0vjpv94tfl1qt2dv4o3; expires=Fri, 22-Oct-2021 05:29:11 GMT;
+      - PHPSESSID=53tdfr14t5r7vplqphuldhrql5; expires=Fri, 22-Oct-2021 20:16:48 GMT;
         Max-Age=259200; path=/; domain=.miningpoolhub.com; HttpOnly
-      - AUTH_BEARER_default=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MzQ2MjEzNTIsImp0aSI6Img1XC91RkFjR0hDdjVnelhcLzdWZmlJZXhHWk9mWHBcL0o1SUVRdnV0RE5DRUk9IiwiaXNzIjoiLmRvdmV3YWxldC5jb20iLCJuYmYiOjE2MzQ2MjEzNTIsImV4cCI6MTYzNDg4MDU1MiwiZGF0YSI6IiJ9.KeDKwihJfEMC-HlJ8YSnMGGULw4M84crnvEhvBW8ox-UpuxTiDBu2h7fMsiM-H6bmPnGX8YCoTlfwVEwfCsy-A;
-        expires=Fri, 22-Oct-2021 05:29:12 GMT; Max-Age=259200; path=/; domain=.miningpoolhub.com;
+      - AUTH_BEARER_default=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MzQ2NzQ2MDgsImp0aSI6Ijg5Z1J2ZE8wakhHQ3pQdkI0VmpIMzRJVGhVN0NHS3R5dHRmeEs5aGxlRWc9IiwiaXNzIjoiLmRvdmV3YWxldC5jb20iLCJuYmYiOjE2MzQ2NzQ2MDgsImV4cCI6MTYzNDkzMzgwOCwiZGF0YSI6IiJ9.ERyxWo1ZTKsUZyTrqJt8VIeOMgq4BdaiptZ0Y46WkmD2qdWPSEJApxDEV-4DNEYbcAHxp1DwlAb_G9oFI0ENiw;
+        expires=Fri, 22-Oct-2021 20:16:48 GMT; Max-Age=259200; path=/; domain=.miningpoolhub.com;
         HttpOnly
       Transfer-Encoding:
       - chunked

@@ -1,6 +1,7 @@
+import miningpoolhub_py
 from miningpoolhub_py import Pool
+import pytest
 from pytest import fixture
-import vcr
 
 
 @fixture
@@ -57,7 +58,7 @@ def get_user_all_balances_keys():
     return ['coin', 'confirmed', 'unconfirmed', 'ae_confirmed', 'ae_unconfirmed', 'exchange']
 
 
-@vcr.use_cassette('vcr_cassettes/coin_name-get_block_count.yml', filter_query_parameters=['api_key'])
+@pytest.mark.vcr
 def test_get_block_count():
     """Tests an API call to get block count data for a coin_name"""
     pool_instance = Pool('ethereum')
@@ -66,7 +67,7 @@ def test_get_block_count():
     assert isinstance(response, int)
 
 
-@vcr.use_cassette('vcr_cassettes/coin_name-get_block_stats.yml', filter_query_parameters=['api_key'])
+@pytest.mark.vcr
 def test_get_block_stats(get_block_stats_keys):
     """Tests an API call to get block stats data for a coin_name"""
     pool_instance = Pool('ethereum')
@@ -76,7 +77,7 @@ def test_get_block_stats(get_block_stats_keys):
     assert set(get_block_stats_keys).issubset(response.keys()), "All keys should be in the response"
 
 
-@vcr.use_cassette('vcr_cassettes/coin_name-get_blocks_found.yml', filter_query_parameters=['api_key'])
+@pytest.mark.vcr
 def test_get_blocks_found(get_blocks_found_keys):
     """Tests an API call to get blocks found data for a coin_name"""
     pool_instance = Pool('ethereum')
@@ -87,7 +88,7 @@ def test_get_blocks_found(get_blocks_found_keys):
     assert set(get_blocks_found_keys).issubset(response[0].keys()), "All keys should be in the response"
 
 
-@vcr.use_cassette('vcr_cassettes/coin_name-get_current_workers.yml', filter_query_parameters=['api_key'])
+@pytest.mark.vcr
 def test_get_current_workers():
     """Tests an API call to get current worker hash rate data for a coin_name"""
     pool_instance = Pool('ethereum')
@@ -96,7 +97,7 @@ def test_get_current_workers():
     assert isinstance(response, int)
 
 
-@vcr.use_cassette('vcr_cassettes/coin_name-get_dashboard.yml', filter_query_parameters=['api_key'])
+@pytest.mark.vcr
 def test_get_dashboard(get_dashboard_keys):
     """Tests an API call to get dashboard data for a coin_name"""
     pool_instance = Pool('ethereum')
@@ -108,7 +109,7 @@ def test_get_dashboard(get_dashboard_keys):
     assert set(get_dashboard_keys).issubset(response.keys()), "All keys should be in the response"
 
 
-@vcr.use_cassette('vcr_cassettes/coin_name-get_difficulty.yml', filter_query_parameters=['api_key'])
+@pytest.mark.vcr
 def test_get_difficulty():
     """Tests an API call to get difficulty data for a coin_name"""
     pool_instance = Pool('ethereum')
@@ -117,7 +118,7 @@ def test_get_difficulty():
     assert isinstance(response, int)
 
 
-@vcr.use_cassette('vcr_cassettes/coin_name-get_estimated_time.yml', filter_query_parameters=['api_key'])
+@pytest.mark.vcr
 def test_get_difficulty():
     """Tests an API call to get estimated time for a coin_name"""
     pool_instance = Pool('ethereum')
@@ -126,7 +127,7 @@ def test_get_difficulty():
     assert isinstance(response, int)
 
 
-@vcr.use_cassette('vcr_cassettes/coin_name-get_hourly_hash_rate.yml', filter_query_parameters=['api_key'])
+@pytest.mark.vcr
 def test_get_hourly_hash_rate(get_hourly_hash_rate_keys):
     """Tests an API call to get hourly hash rate data for a pool"""
     pool_instance = Pool('ethereum')
@@ -137,7 +138,7 @@ def test_get_hourly_hash_rate(get_hourly_hash_rate_keys):
     assert set(get_hourly_hash_rate_keys).issubset(response[0].keys())
 
 
-@vcr.use_cassette('vcr_cassettes/coin_name-get_nav_bar_data.yml', filter_query_parameters=['api_key'])
+@pytest.mark.vcr
 def test_get_nav_bar_data():
     """Tests an API call to get nav bar data for a pool"""
     pool_instance = Pool('ethereum')
@@ -148,7 +149,7 @@ def test_get_nav_bar_data():
         'The endpoint is disabled'
 
 
-@vcr.use_cassette('vcr_cassettes/coin_name-public.yml', filter_query_parameters=['api_key'])
+@pytest.mark.vcr
 def test_public(public_keys):
     """Tests an API call to get public data for a a pool"""
     pool_instance = Pool('ethereum')
@@ -158,8 +159,7 @@ def test_public(public_keys):
     assert set(public_keys).issubset(response.keys())
 
 
-@vcr.use_cassette('vcr_cassettes/coin_name-get_auto_switching_and_profits_statistics.yml',
-                  filter_query_parameters=['api_key'])
+@pytest.mark.vcr
 def test_get_auto_switching_and_profits_statistics(get_auto_switching_and_profits_statistics_keys):
     """Tests an API call to get mining profit and statistics"""
     pool_instance = Pool('ethereum')
@@ -170,7 +170,7 @@ def test_get_auto_switching_and_profits_statistics(get_auto_switching_and_profit
     assert set(get_auto_switching_and_profits_statistics_keys).issubset(response[0].keys())
 
 
-@vcr.use_cassette('vcr_cassettes/coin_name-get_mining_profit_and_statistics.yml', filter_query_parameters=['api_key'])
+@pytest.mark.vcr
 def test_get_mining_profit_and_statistics(get_mining_profit_and_statistics_keys):
     """Tests an API call to get mining profit and statistics"""
     pool_instance = Pool('ethereum')
@@ -181,8 +181,7 @@ def test_get_mining_profit_and_statistics(get_mining_profit_and_statistics_keys)
     assert set(get_mining_profit_and_statistics_keys).issubset(response[0].keys())
 
 
-@vcr.use_cassette('vcr_cassettes/coin_name-get_user_all_balances_keys.yml',
-                  filter_query_parameters=['api_key'])
+@pytest.mark.vcr
 def test_get_user_all_balances(get_user_all_balances_keys):
     """Tests an API call to get mining profit and statistics"""
     pool_instance = Pool('ethereum')
