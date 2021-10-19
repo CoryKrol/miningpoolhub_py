@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
       - name: Run image
-        uses: abatilo/actions-poetry@v2.0.0
+        uses: abatilo/actions-poetry@v2.1.4
       - name: Add test api key to .env file
         run: echo "MPH_API_KEY=${{ secrets.MPH_API_KEY}}" >> .env
       - run: poetry install
