@@ -43,13 +43,92 @@ class Pool(object):
         except HTTPError as e:
             pass
 
+    def get_block_count(self):
+        """"Get current block height in blockchain"""
+        return self.__get_data(self.urls.get_block_count_url(pool=self.coin_name))['getblockcount']['data']
+
+    def get_block_stats(self):
+        """"Get pool block stats"""
+        return self.__get_data(self.urls.get_block_stats_url(pool=self.coin_name))['getblockstats']['data']
+
+    def get_blocks_found(self):
+        """"Get last N blocks found as configured in admin panel"""
+        return self.__get_data(self.urls.get_blocks_found_url(pool=self.coin_name))['getblocksfound']['data']
+
+    def get_current_workers(self):
+        """"Get amount of current active workers"""
+        return self.__get_data(self.urls.get_current_workers_url(pool=self.coin_name))['getcurrentworkers']['data']
+
     def get_dashboard(self):
         """Load a user's dashboard data for a pool: hash rate, share rate, balance, recent credits"""
         return self.__get_data(self.urls.get_dashboard_data_url(pool=self.coin_name))['getdashboarddata']['data']
 
+    def get_difficulty(self):
+        """Get current difficulty in blockchain"""
+        return self.__get_data(self.urls.get_difficulty_url(pool=self.coin_name))['getdifficulty']['data']
+
+    def get_estimated_time(self):
+        """Get estimated time to next block based on pool hashrate (seconds)"""
+        return self.__get_data(self.urls.get_estimated_time_url(pool=self.coin_name))['getestimatedtime']['data']
+
     def get_hourly_hash_rate(self):
-        """Get the average hash rate each hour for the last 24 hours, total and by worker"""
+        """
+        Get the average hash rate each hour for the last 24 hours, total and by worker, currently broken
+        according to API docs
+        """
         return self.__get_data(self.urls.get_hourly_hash_rates_url(pool=self.coin_name))['gethourlyhashrates']['data']['mine']
+
+    def get_nav_bar_data(self):
+        """Get the data displayed on the navbar. Always returns { "error": "disabled" }"""
+        return self.__get_data(self.urls.get_nav_bar_data_url(pool=self.coin_name))['getnavbardata']['data']
+
+    def get_pool_hash_rate(self):
+        """Get current pool hashrate"""
+        return self.__get_data(self.urls.get_pool_hash_rate_url(pool=self.coin_name))['getpoolhashrate']['data']
+
+    def get_pool_info(self):
+        """Get the information on pool settings"""
+        return self.__get_data(self.urls.get_pool_info_url(pool=self.coin_name))['getpoolinfo']['data']
+
+    def get_pool_share_rate(self):
+        """Get current pool share rate (shares/s)"""
+        return self.__get_data(self.urls.get_pool_share_rate_url(pool=self.coin_name))['getpoolsharerate']
+
+    def get_pool_status(self):
+        """Fetch overall pool status"""
+        return self.__get_data(self.urls.get_pool_status_url(pool=self.coin_name))['getpoolstatus']['data']
+
+    def get_time_since_last_block(self):
+        """Get time since last block found (seconds)"""
+        return self.__get_data(self.urls.get_time_since_last_block_url(pool=self.coin_name))['gettimesincelastblock']['data']
+
+    def get_top_contributors(self):
+        """Fetch top contributors data"""
+        return self.__get_data(self.urls.get_top_contributors_url(pool=self.coin_name))['gettopcontributors']['data']
+
+    def get_user_balance(self):
+        """Fetch a user's balance"""
+        return self.__get_data(self.urls.get_user_balance_url(pool=self.coin_name))['getuserbalance']['data']
+
+    def get_user_hash_rate(self):
+        """Fetch a user's hash rate"""
+        return self.__get_data(self.urls.get_user_hash_rate_url(pool=self.coin_name))['getuserhashrate']['data']
+
+    def get_user_share_rate(self):
+        """Fetch a user's share rate"""
+        return self.__get_data(self.urls.get_user_share_rate_url(pool=self.coin_name))['getusersharerate']['data']
+
+    def get_user_status(self):
+        """Fetch a user's overall status"""
+        return self.__get_data(self.urls.get_user_status_url(pool=self.coin_name))['getuserstatus']['data']
+
+    def get_user_transactions(self):
+        """Get a users transactions"""
+        return self.__get_data(self.urls.get_user_transactions_url(pool=self.coin_name))['getusertransactions']['data']
+
+    def get_user_workers(self):
+        """Fetch a users worker status"""
+        return self.__get_data(self.urls.get_user_workers_url(pool=self.coin_name))['getuserworkers']['data']
 
     def public(self):
         """Fetch public pool statistics, no authentication required"""
