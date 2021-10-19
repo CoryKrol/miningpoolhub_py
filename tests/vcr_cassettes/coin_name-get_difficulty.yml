@@ -1,0 +1,61 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.26.0
+    method: GET
+    uri: https://ethereum.miningpoolhub.com/index.php?action=getdifficulty&page=api
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAwTBWwqAIBQFwL2cbxHzcVN3I6khlIFpENLem5nYU48l57KNo7/wE09qd7kqPBYu
+        uABDG7WXM8Fr7rSyeiVD0jDE0AM8nNHGEUmyJImUwvf9AAAA//8DANitTvtXAAAA
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 6a0769c068e21857-ATL
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Tue, 19 Oct 2021 04:55:15 GMT
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=kvbtV6W42BG5Pc%2FUPpV81znp4UXACc6PjEF8Gqds6Wnr71u5leSKHmXvKcXgijXLJ78cHIniYTM0m2jB%2FpVp68W4xdxhwm2qMDCsh6RRCYvlKzpP77VPL1%2F9iI4LB69WL32hh9sZpl5HBVll"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - PHPSESSID=e4nvhgau83cimf3h0e0tqb6la1; expires=Fri, 22-Oct-2021 04:55:15 GMT;
+        Max-Age=259200; path=/; domain=.miningpoolhub.com; HttpOnly
+      - AUTH_BEARER_default=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MzQ2MTkzMTUsImp0aSI6IkFBVnZDVFFMYnhpcUVjWWpNb091M1AyTTc5UTNOZlJkV2RNTXFmRDRMb0U9IiwiaXNzIjoiLmRvdmV3YWxldC5jb20iLCJuYmYiOjE2MzQ2MTkzMTUsImV4cCI6MTYzNDg3ODUxNSwiZGF0YSI6IiJ9.MIW-2sqO1N1PNNkH1ijBTvVk94e4FkkI8GJRI30FWOH-p6FmoVp7HWLURnkDhV2kz8CVBDjLV956TeAoonR21g;
+        expires=Fri, 22-Oct-2021 04:55:15 GMT; Max-Age=259200; path=/; domain=.miningpoolhub.com;
+        HttpOnly
+      Transfer-Encoding:
+      - chunked
+      alt-svc:
+      - h3=":443"; ma=86400, h3-29=":443"; ma=86400, h3-28=":443"; ma=86400, h3-27=":443";
+        ma=86400
+    status:
+      code: 200
+      message: OK
+version: 1
