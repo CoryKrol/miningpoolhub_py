@@ -4,6 +4,24 @@ import vcr
 
 
 @fixture
+def get_block_stats_keys():
+    return ['Total', 'TotalValid', 'TotalOrphan', 'TotalDifficulty', 'TotalShares', 'TotalEstimatedShares',
+            'TotalAmount', '1HourTotal', '1HourValid', '1HourOrphan', '1HourDifficulty', '1HourShares',
+            '1HourEstimatedShares', '1HourAmount', '24HourTotal', '24HourValid', '24HourOrphan', '24HourDifficulty',
+            '24HourShares', '24HourEstimatedShares', '24HourAmount', '7DaysTotal', '7DaysValid', '7DaysOrphan',
+            '7DaysDifficulty', '7DaysShares', '7DaysEstimatedShares', '7DaysAmount', '4WeeksTotal', '4WeeksValid',
+            '4WeeksOrphan', '4WeeksDifficulty', '4WeeksShares', '4WeeksEstimatedShares', '4WeeksAmount', '12MonthTotal',
+            '12MonthValid', '12MonthOrphan', '12MonthDifficulty', '12MonthShares', '12MonthEstimatedShares',
+            '12MonthAmount']
+
+@fixture
+def get_blocks_found_keys():
+    return ['id', 'height', 'blockhash', 'confirmations', 'amount', 'difficulty',
+            'time', 'accounted', 'account_id', 'worker_name', 'shares', 'share_id',
+            'finder', 'is_anonymous', 'estshares']
+
+
+@fixture
 def get_dashboard_keys():
     return ['raw', 'personal', 'balance', 'balance_for_auto_exchange', 'balance_on_exchange', 'recent_credits',
             'pool', 'system', 'network']
@@ -39,6 +57,45 @@ def get_user_all_balances_keys():
     return ['coin', 'confirmed', 'unconfirmed', 'ae_confirmed', 'ae_unconfirmed', 'exchange']
 
 
+@vcr.use_cassette('vcr_cassettes/coin_name-get_block_count.yml', filter_query_parameters=['api_key'])
+def test_get_block_count():
+    """Tests an API call to get block count data for a coin_name"""
+    pool_instance = Pool('ethereum')
+    response = pool_instance.get_block_count()
+
+    assert isinstance(response, int)
+
+
+@vcr.use_cassette('vcr_cassettes/coin_name-get_block_stats.yml', filter_query_parameters=['api_key'])
+def test_get_block_stats(get_block_stats_keys):
+    """Tests an API call to get block stats data for a coin_name"""
+    pool_instance = Pool('ethereum')
+    response = pool_instance.get_block_stats()
+
+    assert isinstance(response, dict)
+    assert set(get_block_stats_keys).issubset(response.keys()), "All keys should be in the response"
+
+
+@vcr.use_cassette('vcr_cassettes/coin_name-get_blocks_found.yml', filter_query_parameters=['api_key'])
+def test_get_blocks_found(get_blocks_found_keys):
+    """Tests an API call to get blocks found data for a coin_name"""
+    pool_instance = Pool('ethereum')
+    response = pool_instance.get_blocks_found()
+
+    assert isinstance(response, list)
+    assert isinstance(response[0], dict)
+    assert set(get_blocks_found_keys).issubset(response[0].keys()), "All keys should be in the response"
+
+
+@vcr.use_cassette('vcr_cassettes/coin_name-get_current_workers.yml', filter_query_parameters=['api_key'])
+def test_get_current_workers():
+    """Tests an API call to get current worker hash rate data for a coin_name"""
+    pool_instance = Pool('ethereum')
+    response = pool_instance.get_current_workers()
+
+    assert isinstance(response, int)
+
+
 @vcr.use_cassette('vcr_cassettes/coin_name-get_dashboard.yml', filter_query_parameters=['api_key'])
 def test_get_dashboard(get_dashboard_keys):
     """Tests an API call to get dashboard data for a coin_name"""
@@ -51,6 +108,24 @@ def test_get_dashboard(get_dashboard_keys):
     assert set(get_dashboard_keys).issubset(response.keys()), "All keys should be in the response"
 
 
+@vcr.use_cassette('vcr_cassettes/coin_name-get_difficulty.yml', filter_query_parameters=['api_key'])
+def test_get_difficulty():
+    """Tests an API call to get difficulty data for a coin_name"""
+    pool_instance = Pool('ethereum')
+    response = pool_instance.get_difficulty()
+
+    assert isinstance(response, int)
+
+
+@vcr.use_cassette('vcr_cassettes/coin_name-get_estimated_time.yml', filter_query_parameters=['api_key'])
+def test_get_difficulty():
+    """Tests an API call to get estimated time for a coin_name"""
+    pool_instance = Pool('ethereum')
+    response = pool_instance.get_estimated_time()
+
+    assert isinstance(response, int)
+
+
 @vcr.use_cassette('vcr_cassettes/coin_name-get_hourly_hash_rate.yml', filter_query_parameters=['api_key'])
 def test_get_hourly_hash_rate(get_hourly_hash_rate_keys):
     """Tests an API call to get hourly hash rate data for a pool"""
@@ -60,6 +135,17 @@ def test_get_hourly_hash_rate(get_hourly_hash_rate_keys):
     assert isinstance(response, list)
     assert isinstance(response[0], dict)
     assert set(get_hourly_hash_rate_keys).issubset(response[0].keys())
+
+
+@vcr.use_cassette('vcr_cassettes/coin_name-get_nav_bar_data.yml', filter_query_parameters=['api_key'])
+def test_get_nav_bar_data():
+    """Tests an API call to get nav bar data for a pool"""
+    pool_instance = Pool('ethereum')
+    response = pool_instance.get_nav_bar_data()
+
+    assert isinstance(response, dict)
+    assert response['error'] == 'disabled', \
+        'The endpoint is disabled'
 
 
 @vcr.use_cassette('vcr_cassettes/coin_name-public.yml', filter_query_parameters=['api_key'])

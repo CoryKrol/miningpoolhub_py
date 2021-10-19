@@ -45,7 +45,7 @@ class Pool(object):
 
     def get_block_count(self):
         """"Get current block height in blockchain"""
-        return self.__get_data(self.urls.get_block_count_url(pool=self.coin_name))['getblockcount']['data']
+        return int(self.__get_data(self.urls.get_block_count_url(pool=self.coin_name))['getblockcount']['data'])
 
     def get_block_stats(self):
         """"Get pool block stats"""
@@ -57,7 +57,7 @@ class Pool(object):
 
     def get_current_workers(self):
         """"Get amount of current active workers"""
-        return self.__get_data(self.urls.get_current_workers_url(pool=self.coin_name))['getcurrentworkers']['data']
+        return int(self.__get_data(self.urls.get_current_workers_url(pool=self.coin_name))['getcurrentworkers']['data'])
 
     def get_dashboard(self):
         """Load a user's dashboard data for a pool: hash rate, share rate, balance, recent credits"""
@@ -65,11 +65,11 @@ class Pool(object):
 
     def get_difficulty(self):
         """Get current difficulty in blockchain"""
-        return self.__get_data(self.urls.get_difficulty_url(pool=self.coin_name))['getdifficulty']['data']
+        return int(self.__get_data(self.urls.get_difficulty_url(pool=self.coin_name))['getdifficulty']['data'])
 
     def get_estimated_time(self):
         """Get estimated time to next block based on pool hashrate (seconds)"""
-        return self.__get_data(self.urls.get_estimated_time_url(pool=self.coin_name))['getestimatedtime']['data']
+        return int(self.__get_data(self.urls.get_estimated_time_url(pool=self.coin_name))['getestimatedtime']['data'])
 
     def get_hourly_hash_rate(self):
         """
