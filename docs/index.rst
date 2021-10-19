@@ -9,4 +9,4 @@
    :maxdepth: 2
    :caption: Contents:
 
-   ./source/modules
+   ./_source/modules
