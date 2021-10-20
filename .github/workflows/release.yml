@@ -6,15 +6,26 @@ on:
 jobs:
   pypi_release:
     name: Builds Using Poetry and Publishes to PyPI
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ 3.9 ]
+        poetry-version: [ 1.1.11 ]
+        os: [ ubuntu-18.04 ]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
       - name: Run image
         uses: abatilo/actions-poetry@v2.1.4
-      - name: Add test api key to .env file
-        run: echo "MPH_API_KEY=${{ secrets.MPH_API_KEY}}" >> .env
-      - run: poetry install
-      - run: poetry config pypi-token.pypi "${{ secrets.PYPI_API_KEY }}"
-      - name: Publish package
-        run: poetry publish --build
+        with:
+          poetry-version: ${{ matrix.poetry-version }}
+      - name: Install venv with Poetry
+        run: poetry install
+      - name: Publish package to PyPi
+        run: |
+          poetry config pypi-token.pypi "${{ secrets.PYPI_API_KEY }}"
+          poetry publish --build
