@@ -81,7 +81,7 @@ class Pool(object):
         Returns
         -------
         int
-            Block count as an integer
+            block count
         """
         return int(self.__get_data(self.urls.get_block_count_url(pool=self.coin_name))['getblockcount']['data'])
 
@@ -91,7 +91,7 @@ class Pool(object):
         Returns
         -------
         dict
-            Returns block stats as dict
+            block stats
         """
         return self.__get_data(self.urls.get_block_stats_url(pool=self.coin_name))['getblockstats']['data']
 
@@ -101,7 +101,7 @@ class Pool(object):
         Returns
         -------
         list of dict:
-            returns list of dicts with data for the last N blocks found
+            data for the last N blocks found
         """
         return self.__get_data(self.urls.get_blocks_found_url(pool=self.coin_name))['getblocksfound']['data']
 
@@ -121,7 +121,7 @@ class Pool(object):
         Returns
         -------
         dict
-            dashboard data as a dict
+            dashboard data
         """
         return self.__get_data(self.urls.get_dashboard_data_url(pool=self.coin_name))['getdashboarddata']['data']
 
@@ -141,7 +141,7 @@ class Pool(object):
         Returns
         -------
         int
-            Estimated time until next block in seconds
+            estimated time until next block in seconds
         """
         return int(self.__get_data(self.urls.get_estimated_time_url(pool=self.coin_name))['getestimatedtime']['data'])
 
@@ -152,7 +152,7 @@ class Pool(object):
         Returns
         -------
         list of dict
-            List of dicts, the first entry in the list is total hashrate, all following entries are for each worker
+            the first entry in the list is total hashrate, all following entries are for each worker
         """
         return self.__get_data(self.urls.get_hourly_hash_rates_url(pool=self.coin_name))['gethourlyhashrates']['data']['mine']
 
@@ -162,7 +162,7 @@ class Pool(object):
         Returns
         -------
         dict of string
-            Returns an error message
+            error message
         """
         return self.__get_data(self.urls.get_nav_bar_data_url(pool=self.coin_name))['getnavbardata']['data']
 
@@ -172,7 +172,7 @@ class Pool(object):
         Returns
         -------
         int
-            Current pool hash rate in kH/s
+            current pool hash rate in kH/s
         """
         return self.__get_data(self.urls.get_pool_hash_rate_url(pool=self.coin_name))['getpoolhashrate']['data']
 
@@ -182,7 +182,7 @@ class Pool(object):
         Returns
         -------
         dict
-            Pool settings as dict
+            pool settings
         """
         return self.__get_data(self.urls.get_pool_info_url(pool=self.coin_name))['getpoolinfo']['data']
 
@@ -192,7 +192,7 @@ class Pool(object):
         Returns
         -------
         int
-            Seems to always be 0
+            seems to always be 0
         """
         return self.__get_data(self.urls.get_pool_share_rate_url(pool=self.coin_name))['getpoolsharerate']
 
@@ -202,7 +202,7 @@ class Pool(object):
         Returns
         -------
         dict
-            Pool status as a dict
+            pool status as a dict
         """
         return self.__get_data(self.urls.get_pool_status_url(pool=self.coin_name))['getpoolstatus']['data']
 
@@ -212,7 +212,7 @@ class Pool(object):
         Returns
         -------
         int
-            Time since last block found in seconds
+            time since last block found in seconds
         """
         return self.__get_data(self.urls.get_time_since_last_block_url(pool=self.coin_name))['gettimesincelastblock']['data']
 
@@ -222,7 +222,7 @@ class Pool(object):
         Returns
         -------
         dict
-            Returns account and hash rate as a dict
+            returns account and hash rate as a dict
         """
         return self.__get_data(self.urls.get_top_contributors_url(pool=self.coin_name))['gettopcontributors']['data']['hashes']
 
@@ -232,7 +232,7 @@ class Pool(object):
         Returns
         -------
         dict of float
-            Returns confirmed and unconfirmed balances as a dict
+            returns confirmed and unconfirmed balances as a dict
         """
         return self.__get_data(self.urls.get_user_balance_url(pool=self.coin_name))['getuserbalance']['data']
 
@@ -242,7 +242,7 @@ class Pool(object):
         Returns
         -------
         float
-            Total hash rate in kH/s
+            total hash rate in kH/s
         """
         return self.__get_data(self.urls.get_user_hash_rate_url(pool=self.coin_name))['getuserhashrate']['data']
 
@@ -252,7 +252,7 @@ class Pool(object):
         Returns
         -------
         int
-            Seems to always be 0
+            seems to always be 0
         """
         return self.__get_data(self.urls.get_user_share_rate_url(pool=self.coin_name))['getusersharerate']['data']
 
@@ -262,28 +262,28 @@ class Pool(object):
         Returns
         -------
         dict
-            User status info as a dict: username, shares[valid|invalid|id|donate_percent|is_anonymous|username],
+            user status info: username, shares[valid|invalid|id|donate_percent|is_anonymous|username],
             hash rate, and share rate
         """
         return self.__get_data(self.urls.get_user_status_url(pool=self.coin_name))['getuserstatus']['data']
 
     def get_user_transactions(self):
-        """Get a users transactions
+        """Get a user's transactions
         
         Returns
         -------
         list of dict
-            list of data on up to the last 30 transactions for a user on a pool
+            data on up to the last 30 transactions for a user on a pool
         """
         return self.__get_data(self.urls.get_user_transactions_url(pool=self.coin_name))['getusertransactions']['data']['transactions']
 
     def get_user_workers(self):
-        """Fetch a users worker status
+        """Fetch a user's worker status
 
         Returns
         -------
         list of dict
-            List of data on each worker represented as a dict: id, username, password, monitor, hash rate, difficulty
+            data on each worker represented as a dict: id, username, password, monitor, hash rate, difficulty
         """
         return self.__get_data(self.urls.get_user_workers_url(pool=self.coin_name))['getuserworkers']['data']
 
@@ -303,7 +303,7 @@ class Pool(object):
         Returns
         -------
         list of dict
-            Get list of auto switching statistics for each algorithm as a dict
+            get list of auto switching statistics for each algorithm as a dict
         """
         path = self.urls.get_auto_switching_and_profits_statistics_url()
         response = self.__get_data(path)
@@ -318,7 +318,7 @@ class Pool(object):
         Returns
         -------
         list of dict
-            Get list of mining statistics for each coin as a dict
+            mining statistics for each coin
         """
         path = self.urls.get_mining_profit_and_statistics_url()
         response = self.__get_data(path)
@@ -333,6 +333,6 @@ class Pool(object):
         Returns
         -------
         list of dict
-            List of balances for each coin represented as a dict
+            balances for each coin
         """
         return self.__get_data(self.urls.get_user_all_balances_url())['getuserallbalances']['data']
