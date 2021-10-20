@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>miningpoolhub_py package &mdash; miningpoolhub_py 0.1.11 documentation</title>
+  <title>miningpoolhub_py package &mdash; miningpoolhub_py 0.1.12 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -105,49 +105,113 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="miningpoolhub_py.pool.Pool.get_auto_switching_and_profits_statistics">
 <span class="sig-name descname"><span class="pre">get_auto_switching_and_profits_statistics</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#miningpoolhub_py.pool.Pool.get_auto_switching_and_profits_statistics" title="Permalink to this definition"></a></dt>
-<dd><p>Get auto switching information</p>
+<dd><p>Get auto switching information for all algorithms</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>get list of auto switching statistics for each algorithm as a dict</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list of dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="miningpoolhub_py.pool.Pool.get_block_count">
 <span class="sig-name descname"><span class="pre">get_block_count</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#miningpoolhub_py.pool.Pool.get_block_count" title="Permalink to this definition"></a></dt>
 <dd><p>“Get current block height in blockchain</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>block count</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="miningpoolhub_py.pool.Pool.get_block_stats">
 <span class="sig-name descname"><span class="pre">get_block_stats</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#miningpoolhub_py.pool.Pool.get_block_stats" title="Permalink to this definition"></a></dt>
 <dd><p>“Get pool block stats</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>block stats</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="miningpoolhub_py.pool.Pool.get_blocks_found">
 <span class="sig-name descname"><span class="pre">get_blocks_found</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#miningpoolhub_py.pool.Pool.get_blocks_found" title="Permalink to this definition"></a></dt>
-<dd><p>“Get last N blocks found as configured in admin panel</p>
+<dd><p>Get last N blocks found as configured in admin panel</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>data for the last N blocks found</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list of dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="miningpoolhub_py.pool.Pool.get_current_workers">
 <span class="sig-name descname"><span class="pre">get_current_workers</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#miningpoolhub_py.pool.Pool.get_current_workers" title="Permalink to this definition"></a></dt>
-<dd><p>“Get amount of current active workers</p>
+<dd><p>Get the total hash rate of current workers for a coin pool</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the hash rate in kH/s</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="miningpoolhub_py.pool.Pool.get_dashboard">
 <span class="sig-name descname"><span class="pre">get_dashboard</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#miningpoolhub_py.pool.Pool.get_dashboard" title="Permalink to this definition"></a></dt>
 <dd><p>Load a user’s dashboard data for a pool: hash rate, share rate, balance, recent credits</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>dashboard data</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="miningpoolhub_py.pool.Pool.get_difficulty">
 <span class="sig-name descname"><span class="pre">get_difficulty</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#miningpoolhub_py.pool.Pool.get_difficulty" title="Permalink to this definition"></a></dt>
 <dd><p>Get current difficulty in blockchain</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>network difficulty</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="miningpoolhub_py.pool.Pool.get_estimated_time">
 <span class="sig-name descname"><span class="pre">get_estimated_time</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#miningpoolhub_py.pool.Pool.get_estimated_time" title="Permalink to this definition"></a></dt>
 <dd><p>Get estimated time to next block based on pool hashrate (seconds)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>estimated time until next block in seconds</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -155,102 +219,239 @@
 <span class="sig-name descname"><span class="pre">get_hourly_hash_rate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#miningpoolhub_py.pool.Pool.get_hourly_hash_rate" title="Permalink to this definition"></a></dt>
 <dd><p>Get the average hash rate each hour for the last 24 hours, total and by worker, currently broken
 according to API docs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the first entry in the list is total hashrate, all following entries are for each worker</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list of dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="miningpoolhub_py.pool.Pool.get_mining_profit_and_statistics">
 <span class="sig-name descname"><span class="pre">get_mining_profit_and_statistics</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#miningpoolhub_py.pool.Pool.get_mining_profit_and_statistics" title="Permalink to this definition"></a></dt>
 <dd><p>Get mining profits statistics</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>mining statistics for each coin</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list of dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="miningpoolhub_py.pool.Pool.get_nav_bar_data">
 <span class="sig-name descname"><span class="pre">get_nav_bar_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#miningpoolhub_py.pool.Pool.get_nav_bar_data" title="Permalink to this definition"></a></dt>
 <dd><p>Get the data displayed on the navbar. Always returns { “error”: “disabled” }</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>error message</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict of str</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="miningpoolhub_py.pool.Pool.get_pool_hash_rate">
 <span class="sig-name descname"><span class="pre">get_pool_hash_rate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#miningpoolhub_py.pool.Pool.get_pool_hash_rate" title="Permalink to this definition"></a></dt>
-<dd><p>Get current pool hashrate</p>
+<dd><p>Get current pool hash rate</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>current pool hash rate in kH/s</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="miningpoolhub_py.pool.Pool.get_pool_info">
 <span class="sig-name descname"><span class="pre">get_pool_info</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#miningpoolhub_py.pool.Pool.get_pool_info" title="Permalink to this definition"></a></dt>
 <dd><p>Get the information on pool settings</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>pool settings</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="miningpoolhub_py.pool.Pool.get_pool_share_rate">
 <span class="sig-name descname"><span class="pre">get_pool_share_rate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#miningpoolhub_py.pool.Pool.get_pool_share_rate" title="Permalink to this definition"></a></dt>
 <dd><p>Get current pool share rate (shares/s)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>seems to always be 0</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="miningpoolhub_py.pool.Pool.get_pool_status">
 <span class="sig-name descname"><span class="pre">get_pool_status</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#miningpoolhub_py.pool.Pool.get_pool_status" title="Permalink to this definition"></a></dt>
 <dd><p>Fetch overall pool status</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>pool status as a dict</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="miningpoolhub_py.pool.Pool.get_time_since_last_block">
 <span class="sig-name descname"><span class="pre">get_time_since_last_block</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#miningpoolhub_py.pool.Pool.get_time_since_last_block" title="Permalink to this definition"></a></dt>
 <dd><p>Get time since last block found (seconds)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>time since last block found in seconds</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="miningpoolhub_py.pool.Pool.get_top_contributors">
 <span class="sig-name descname"><span class="pre">get_top_contributors</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#miningpoolhub_py.pool.Pool.get_top_contributors" title="Permalink to this definition"></a></dt>
 <dd><p>Fetch top contributors data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>returns account and hash rate as a dict</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="miningpoolhub_py.pool.Pool.get_user_all_balances">
 <span class="sig-name descname"><span class="pre">get_user_all_balances</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#miningpoolhub_py.pool.Pool.get_user_all_balances" title="Permalink to this definition"></a></dt>
 <dd><p>Get all currency balances for a user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>balances for each coin</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list of dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="miningpoolhub_py.pool.Pool.get_user_balance">
 <span class="sig-name descname"><span class="pre">get_user_balance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#miningpoolhub_py.pool.Pool.get_user_balance" title="Permalink to this definition"></a></dt>
 <dd><p>Fetch a user’s balance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>returns confirmed and unconfirmed balances as a dict</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict of float</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="miningpoolhub_py.pool.Pool.get_user_hash_rate">
 <span class="sig-name descname"><span class="pre">get_user_hash_rate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#miningpoolhub_py.pool.Pool.get_user_hash_rate" title="Permalink to this definition"></a></dt>
-<dd><p>Fetch a user’s hash rate</p>
+<dd><p>Fetch a user’s total hash rate</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>total hash rate in kH/s</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="miningpoolhub_py.pool.Pool.get_user_share_rate">
 <span class="sig-name descname"><span class="pre">get_user_share_rate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#miningpoolhub_py.pool.Pool.get_user_share_rate" title="Permalink to this definition"></a></dt>
 <dd><p>Fetch a user’s share rate</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>seems to always be 0</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="miningpoolhub_py.pool.Pool.get_user_status">
 <span class="sig-name descname"><span class="pre">get_user_status</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#miningpoolhub_py.pool.Pool.get_user_status" title="Permalink to this definition"></a></dt>
 <dd><p>Fetch a user’s overall status</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>user status info: username, shares[valid|invalid|id|donate_percent|is_anonymous|username],
+hash rate, and share rate</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="miningpoolhub_py.pool.Pool.get_user_transactions">
 <span class="sig-name descname"><span class="pre">get_user_transactions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#miningpoolhub_py.pool.Pool.get_user_transactions" title="Permalink to this definition"></a></dt>
-<dd><p>Get a users transactions</p>
+<dd><p>Get a user’s transactions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>data on up to the last 30 transactions for a user on a pool</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list of dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="miningpoolhub_py.pool.Pool.get_user_workers">
 <span class="sig-name descname"><span class="pre">get_user_workers</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#miningpoolhub_py.pool.Pool.get_user_workers" title="Permalink to this definition"></a></dt>
-<dd><p>Fetch a users worker status</p>
+<dd><p>Fetch a user’s worker status</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>data on each worker represented as a dict: id, username, password, monitor, hash rate, difficulty</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list of dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="miningpoolhub_py.pool.Pool.public">
 <span class="sig-name descname"><span class="pre">public</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#miningpoolhub_py.pool.Pool.public" title="Permalink to this definition"></a></dt>
 <dd><p>Fetch public pool statistics, no authentication required</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>pool_name, hashrate, workers, shares_this_round, last_block, network_hashrate</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
