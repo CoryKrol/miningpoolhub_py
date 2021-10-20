@@ -19,7 +19,6 @@ python-dotenv = "^0.19.1"
 Sphinx = { version = "^4.2.0", optional = true }
 sphinx-rtd-theme = { version = "^1.0.0", optional = true }
 sphinxcontrib-napoleon = { version = "^0.7", optional = true }
-pytest-recording = "^0.12.0"
 
 [tool.poetry.extras]
 docs = ["Sphinx", "sphinx-rtd-theme", "sphinxcontrib-napoleon"]
@@ -27,7 +26,9 @@ docs = ["Sphinx", "sphinx-rtd-theme", "sphinxcontrib-napoleon"]
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.5"
 pytest-recording = "^0.12.0"
+pytest-cov = "^3.0.0"
 flake8 = "^4.0.1"
+black = "^21.9b0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

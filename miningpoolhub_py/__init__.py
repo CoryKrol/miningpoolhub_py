@@ -5,9 +5,9 @@ from .exceptions import APIKeyMissingError
 
 load_dotenv()
 
-__version__ = pkg_resources.get_distribution('miningpoolhub_py').version
-__author__ = 'Cory Krol'
+__version__ = pkg_resources.get_distribution("miningpoolhub_py").version
+__author__ = "Cory Krol"
 
-API_KEY = os.environ.get('MPH_API_KEY', None)
+API_KEY = os.environ.get("MPH_API_KEY", None)
 
 from .pool import Pool
