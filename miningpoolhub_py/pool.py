@@ -29,11 +29,40 @@ class Pool(object):
         raise AttributeError('Setting \'session\' attribute is prohibited.')
 
     def __to_json(self, response):
-        """Private method to call json method on response object"""
+        """Private method to call json method on response object
+
+        Parameters
+        ----------
+        response : Response
+            The response object
+
+        Returns
+        -------
+        dict
+            JSON response represented as a Python dictionary
+        """
         return response.json()
 
     def __get_data(self, url):
-        """Private method to make a GET request to the URL"""
+        """Private method to make a GET request to the URL
+
+        Parameters
+        ----------
+        url : str
+            The URL to query
+
+        Returns
+        -------
+        dict
+            JSON response represented as a Python dictionary
+
+        Raises
+        ------
+        HTTPError
+            Raises on HTTP Error
+        JSONDecodeError
+            Raises when there is an issue parsing the JSON response
+        """
         try:
             response = self.session.get(url)
 
@@ -47,98 +76,235 @@ class Pool(object):
             pass
 
     def get_block_count(self):
-        """"Get current block height in blockchain"""
+        """"Get current block height in blockchain
+
+        Returns
+        -------
+        int
+            Block count as an integer
+        """
         return int(self.__get_data(self.urls.get_block_count_url(pool=self.coin_name))['getblockcount']['data'])
 
     def get_block_stats(self):
-        """"Get pool block stats"""
+        """"Get pool block stats
+
+        Returns
+        -------
+        dict
+            Returns block stats as dict
+        """
         return self.__get_data(self.urls.get_block_stats_url(pool=self.coin_name))['getblockstats']['data']
 
     def get_blocks_found(self):
-        """"Get last N blocks found as configured in admin panel"""
+        """Get last N blocks found as configured in admin panel
+
+        Returns
+        -------
+        list of dict:
+            returns list of dicts with data for the last N blocks found
+        """
         return self.__get_data(self.urls.get_blocks_found_url(pool=self.coin_name))['getblocksfound']['data']
 
     def get_current_workers(self):
-        """"Get amount of current active workers"""
+        """Get the total hash rate of current workers for a coin pool
+
+        Returns
+        -------
+        int
+            the hash rate in kH/s
+        """
         return int(self.__get_data(self.urls.get_current_workers_url(pool=self.coin_name))['getcurrentworkers']['data'])
 
     def get_dashboard(self):
-        """Load a user's dashboard data for a pool: hash rate, share rate, balance, recent credits"""
+        """Load a user's dashboard data for a pool: hash rate, share rate, balance, recent credits
+
+        Returns
+        -------
+        dict
+            dashboard data as a dict
+        """
         return self.__get_data(self.urls.get_dashboard_data_url(pool=self.coin_name))['getdashboarddata']['data']
 
     def get_difficulty(self):
-        """Get current difficulty in blockchain"""
+        """Get current difficulty in blockchain
+
+        Returns
+        -------
+        int
+            network difficulty
+        """
         return int(self.__get_data(self.urls.get_difficulty_url(pool=self.coin_name))['getdifficulty']['data'])
 
     def get_estimated_time(self):
-        """Get estimated time to next block based on pool hashrate (seconds)"""
+        """Get estimated time to next block based on pool hashrate (seconds)
+
+        Returns
+        -------
+        int
+            Estimated time until next block in seconds
+        """
         return int(self.__get_data(self.urls.get_estimated_time_url(pool=self.coin_name))['getestimatedtime']['data'])
 
     def get_hourly_hash_rate(self):
-        """
-        Get the average hash rate each hour for the last 24 hours, total and by worker, currently broken
+        """Get the average hash rate each hour for the last 24 hours, total and by worker, currently broken
         according to API docs
+
+        Returns
+        -------
+        list of dict
+            List of dicts, the first entry in the list is total hashrate, all following entries are for each worker
         """
         return self.__get_data(self.urls.get_hourly_hash_rates_url(pool=self.coin_name))['gethourlyhashrates']['data']['mine']
 
     def get_nav_bar_data(self):
-        """Get the data displayed on the navbar. Always returns { "error": "disabled" }"""
+        """Get the data displayed on the navbar. Always returns { "error": "disabled" }
+
+        Returns
+        -------
+        dict of string
+            Returns an error message
+        """
         return self.__get_data(self.urls.get_nav_bar_data_url(pool=self.coin_name))['getnavbardata']['data']
 
     def get_pool_hash_rate(self):
-        """Get current pool hashrate"""
+        """Get current pool hash rate
+
+        Returns
+        -------
+        int
+            Current pool hash rate in kH/s
+        """
         return self.__get_data(self.urls.get_pool_hash_rate_url(pool=self.coin_name))['getpoolhashrate']['data']
 
     def get_pool_info(self):
-        """Get the information on pool settings"""
+        """Get the information on pool settings
+
+        Returns
+        -------
+        dict
+            Pool settings as dict
+        """
         return self.__get_data(self.urls.get_pool_info_url(pool=self.coin_name))['getpoolinfo']['data']
 
     def get_pool_share_rate(self):
-        """Get current pool share rate (shares/s)"""
+        """Get current pool share rate (shares/s)
+
+        Returns
+        -------
+        int
+            Seems to always be 0
+        """
         return self.__get_data(self.urls.get_pool_share_rate_url(pool=self.coin_name))['getpoolsharerate']
 
     def get_pool_status(self):
-        """Fetch overall pool status"""
+        """Fetch overall pool status
+
+        Returns
+        -------
+        dict
+            Pool status as a dict
+        """
         return self.__get_data(self.urls.get_pool_status_url(pool=self.coin_name))['getpoolstatus']['data']
 
     def get_time_since_last_block(self):
-        """Get time since last block found (seconds)"""
+        """Get time since last block found (seconds)
+
+        Returns
+        -------
+        int
+            Time since last block found in seconds
+        """
         return self.__get_data(self.urls.get_time_since_last_block_url(pool=self.coin_name))['gettimesincelastblock']['data']
 
     def get_top_contributors(self):
-        """Fetch top contributors data"""
-        return self.__get_data(self.urls.get_top_contributors_url(pool=self.coin_name))['gettopcontributors']['data']
+        """Fetch top contributors data
+
+        Returns
+        -------
+        dict
+            Returns account and hash rate as a dict
+        """
+        return self.__get_data(self.urls.get_top_contributors_url(pool=self.coin_name))['gettopcontributors']['data']['hashes']
 
     def get_user_balance(self):
-        """Fetch a user's balance"""
+        """Fetch a user's balance
+
+        Returns
+        -------
+        dict of float
+            Returns confirmed and unconfirmed balances as a dict
+        """
         return self.__get_data(self.urls.get_user_balance_url(pool=self.coin_name))['getuserbalance']['data']
 
     def get_user_hash_rate(self):
-        """Fetch a user's hash rate"""
+        """Fetch a user's total hash rate
+
+        Returns
+        -------
+        float
+            Total hash rate in kH/s
+        """
         return self.__get_data(self.urls.get_user_hash_rate_url(pool=self.coin_name))['getuserhashrate']['data']
 
     def get_user_share_rate(self):
-        """Fetch a user's share rate"""
+        """Fetch a user's share rate
+
+        Returns
+        -------
+        int
+            Seems to always be 0
+        """
         return self.__get_data(self.urls.get_user_share_rate_url(pool=self.coin_name))['getusersharerate']['data']
 
     def get_user_status(self):
-        """Fetch a user's overall status"""
+        """Fetch a user's overall status
+
+        Returns
+        -------
+        dict
+            User status info as a dict: username, shares[valid|invalid|id|donate_percent|is_anonymous|username],
+            hash rate, and share rate
+        """
         return self.__get_data(self.urls.get_user_status_url(pool=self.coin_name))['getuserstatus']['data']
 
     def get_user_transactions(self):
-        """Get a users transactions"""
-        return self.__get_data(self.urls.get_user_transactions_url(pool=self.coin_name))['getusertransactions']['data']
+        """Get a users transactions
+        
+        Returns
+        -------
+        list of dict
+            list of data on up to the last 30 transactions for a user on a pool
+        """
+        return self.__get_data(self.urls.get_user_transactions_url(pool=self.coin_name))['getusertransactions']['data']['transactions']
 
     def get_user_workers(self):
-        """Fetch a users worker status"""
+        """Fetch a users worker status
+
+        Returns
+        -------
+        list of dict
+            List of data on each worker represented as a dict: id, username, password, monitor, hash rate, difficulty
+        """
         return self.__get_data(self.urls.get_user_workers_url(pool=self.coin_name))['getuserworkers']['data']
 
     def public(self):
-        """Fetch public pool statistics, no authentication required"""
+        """Fetch public pool statistics, no authentication required
+
+        Returns
+        -------
+        dict
+            pool_name, hashrate, workers, shares_this_round, last_block, network_hashrate
+        """
         return self.__get_data(self.urls.public_url(self.coin_name))
 
     def get_auto_switching_and_profits_statistics(self):
-        """Get auto switching information"""
+        """Get auto switching information for all algorithms
+
+        Returns
+        -------
+        list of dict
+            Get list of auto switching statistics for each algorithm as a dict
+        """
         path = self.urls.get_auto_switching_and_profits_statistics_url()
         response = self.__get_data(path)
         if response['success'] is not True:
@@ -147,7 +313,13 @@ class Pool(object):
         return response['return']
 
     def get_mining_profit_and_statistics(self):
-        """Get mining profits statistics"""
+        """Get mining profits statistics
+
+        Returns
+        -------
+        list of dict
+            Get list of mining statistics for each coin as a dict
+        """
         path = self.urls.get_mining_profit_and_statistics_url()
         response = self.__get_data(path)
         if response['success'] is not True:
@@ -156,5 +328,11 @@ class Pool(object):
         return response['return']
 
     def get_user_all_balances(self):
-        """Get all currency balances for a user"""
+        """Get all currency balances for a user
+
+        Returns
+        -------
+        list of dict
+            List of balances for each coin represented as a dict
+        """
         return self.__get_data(self.urls.get_user_all_balances_url())['getuserallbalances']['data']
