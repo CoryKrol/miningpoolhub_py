@@ -31,7 +31,7 @@ jobs:
         ./docs/dir.sh
         poetry run sphinx-apidoc -f -o ./docs/_source miningpoolhub_py
         poetry run sphinx-build -b html ./docs ./docs/_build
-        cp -r _build/* ../gh-pages/
+        cp -r ./docs_build/* ./gh-pages/
     - name: Deploy documentation
       if: ${{ github.event_name == 'push' }}
       uses: JamesIves/github-pages-deploy-action@4.1.5
