@@ -1,0 +1,91 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.26.0
+    method: GET
+    uri: https://ethereum.miningpoolhub.com/index.php?action=getusertransactions&page=api
+  response:
+    body:
+      string: !!binary |
+        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
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 6a0f8663ab6fe86a-ATL
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Wed, 20 Oct 2021 04:32:54 GMT
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=tgXUb%2FMwKVJreqwtczNdeUlQMA7G%2Bi4yi6IJvwJy9sLLE9TJNjbhQTfBlssTq0TyqQrKhwUw9V7QBI6M7%2FMxW4pkH%2FL6eNfei2P4UbXW7XQP4lJgkH3UalhzWxeRHpeNHXHPwbb9tGwYLPqR"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - PHPSESSID=92450rro2j17nil6fg4fsievc6; expires=Sat, 23-Oct-2021 04:32:54 GMT;
+        Max-Age=259200; path=/; domain=.miningpoolhub.com; HttpOnly
+      Transfer-Encoding:
+      - chunked
+      alt-svc:
+      - h3=":443"; ma=86400, h3-29=":443"; ma=86400, h3-28=":443"; ma=86400, h3-27=":443";
+        ma=86400
+    status:
+      code: 200
+      message: OK
+version: 1

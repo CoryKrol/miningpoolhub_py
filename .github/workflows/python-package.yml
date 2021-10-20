@@ -18,6 +18,9 @@ jobs:
         poetry-version: [1.1.11]
         os: [ubuntu-18.04]
     runs-on: ${{ matrix.os }}
+    env:
+      COVERAGE_SINGLE: 60
+      COVERAGE_TOTAL: 60
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
@@ -32,6 +35,8 @@ jobs:
       run: echo "MPH_API_KEY=${{ secrets.MPH_API_KEY}}" >> .env
     - name: Install venv
       run: poetry install
+    - name: Code Quality
+      run: poetry run black . --check
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
@@ -40,4 +45,4 @@ jobs:
         poetry run flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
-        poetry run pytest
+        poetry run pytest --cov .

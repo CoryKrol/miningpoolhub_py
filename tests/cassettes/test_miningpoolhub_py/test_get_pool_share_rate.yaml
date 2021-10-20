@@ -1,0 +1,60 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.26.0
+    method: GET
+    uri: https://ethereum.miningpoolhub.com/index.php?action=getpoolsharerate&page=api
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA6pWSk8tKcjPzynOSCxKLUosSVWyMqgFAAAA//8DAG/TrQYWAAAA
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 6a0f86592ea31847-ATL
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Wed, 20 Oct 2021 04:32:52 GMT
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=jnZhVtjLVGtlifShKYm6VjpZRazHslBSq9lCOyABNJ3%2FuRgn5gtSw6uMECXSqly2bp0pLCnPgLvCahedTev%2BDsjVCwQZLUuHg8tofpuK1ItCsYsHm6ku%2FJ2ipQMhBKTZ1iOaIwZS88Qr5H2i"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - PHPSESSID=eck66ibdeu7p97m9jdu3di2190; expires=Sat, 23-Oct-2021 04:32:52 GMT;
+        Max-Age=259200; path=/; domain=.miningpoolhub.com; HttpOnly
+      - AUTH_BEARER_default=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MzQ3MDQzNzIsImp0aSI6ImJBRUJIaEI4K2MxR3I1MFNRS1JnbGUxV1YrakFZT2oyNDYrS0FuKzM5Qmc9IiwiaXNzIjoiLmRvdmV3YWxldC5jb20iLCJuYmYiOjE2MzQ3MDQzNzIsImV4cCI6MTYzNDk2MzU3MiwiZGF0YSI6IiJ9.DNiI3z_Nk9ZsA65uuR5gxhHtPgEtj2YoNMfYAB8PgoEkjgA6Pg-9f7PfoiglgCi2gBskMXEdzsp4nDtcnYAqlw;
+        expires=Sat, 23-Oct-2021 04:32:52 GMT; Max-Age=259200; path=/; domain=.miningpoolhub.com;
+        HttpOnly
+      Transfer-Encoding:
+      - chunked
+      alt-svc:
+      - h3=":443"; ma=86400, h3-29=":443"; ma=86400, h3-28=":443"; ma=86400, h3-27=":443";
+        ma=86400
+    status:
+      code: 200
+      message: OK
+version: 1
