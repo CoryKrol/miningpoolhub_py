@@ -1,7 +1,8 @@
-import miningpoolhub_py
 from miningpoolhub_py import Pool
 import pytest
 from pytest import fixture
+
+NOT_ALL_KEYS_PRESENT = "All keys should be in the response"
 
 
 @fixture
@@ -14,6 +15,7 @@ def get_block_stats_keys():
             '4WeeksOrphan', '4WeeksDifficulty', '4WeeksShares', '4WeeksEstimatedShares', '4WeeksAmount', '12MonthTotal',
             '12MonthValid', '12MonthOrphan', '12MonthDifficulty', '12MonthShares', '12MonthEstimatedShares',
             '12MonthAmount']
+
 
 @fixture
 def get_blocks_found_keys():
@@ -74,7 +76,7 @@ def test_get_block_stats(get_block_stats_keys):
     response = pool_instance.get_block_stats()
 
     assert isinstance(response, dict)
-    assert set(get_block_stats_keys).issubset(response.keys()), "All keys should be in the response"
+    assert set(get_block_stats_keys).issubset(response.keys()), NOT_ALL_KEYS_PRESENT
 
 
 @pytest.mark.vcr
@@ -85,7 +87,7 @@ def test_get_blocks_found(get_blocks_found_keys):
 
     assert isinstance(response, list)
     assert isinstance(response[0], dict)
-    assert set(get_blocks_found_keys).issubset(response[0].keys()), "All keys should be in the response"
+    assert set(get_blocks_found_keys).issubset(response[0].keys()), NOT_ALL_KEYS_PRESENT
 
 
 @pytest.mark.vcr
@@ -106,7 +108,7 @@ def test_get_dashboard(get_dashboard_keys):
     assert isinstance(response, dict)
     assert response['pool']['info']['currency'] == 'ETH', \
         'The coin name should be in the response'
-    assert set(get_dashboard_keys).issubset(response.keys()), "All keys should be in the response"
+    assert set(get_dashboard_keys).issubset(response.keys()), NOT_ALL_KEYS_PRESENT
 
 
 @pytest.mark.vcr
@@ -135,7 +137,7 @@ def test_get_hourly_hash_rate(get_hourly_hash_rate_keys):
 
     assert isinstance(response, list)
     assert isinstance(response[0], dict)
-    assert set(get_hourly_hash_rate_keys).issubset(response[0].keys())
+    assert set(get_hourly_hash_rate_keys).issubset(response[0].keys()), NOT_ALL_KEYS_PRESENT
 
 
 @pytest.mark.vcr
@@ -156,7 +158,7 @@ def test_public(public_keys):
     response = pool_instance.public()
 
     assert isinstance(response, dict)
-    assert set(public_keys).issubset(response.keys())
+    assert set(public_keys).issubset(response.keys()), NOT_ALL_KEYS_PRESENT
 
 
 @pytest.mark.vcr
@@ -167,7 +169,7 @@ def test_get_auto_switching_and_profits_statistics(get_auto_switching_and_profit
 
     assert isinstance(response, list)
     assert isinstance(response[0], dict)
-    assert set(get_auto_switching_and_profits_statistics_keys).issubset(response[0].keys())
+    assert set(get_auto_switching_and_profits_statistics_keys).issubset(response[0].keys()), NOT_ALL_KEYS_PRESENT
 
 
 @pytest.mark.vcr
@@ -178,7 +180,7 @@ def test_get_mining_profit_and_statistics(get_mining_profit_and_statistics_keys)
 
     assert isinstance(response, list)
     assert isinstance(response[0], dict)
-    assert set(get_mining_profit_and_statistics_keys).issubset(response[0].keys())
+    assert set(get_mining_profit_and_statistics_keys).issubset(response[0].keys()), NOT_ALL_KEYS_PRESENT
 
 
 @pytest.mark.vcr
@@ -189,4 +191,4 @@ def test_get_user_all_balances(get_user_all_balances_keys):
 
     assert isinstance(response, list)
     assert isinstance(response[0], dict)
-    assert set(get_user_all_balances_keys).issubset(response[0].keys())
+    assert set(get_user_all_balances_keys).issubset(response[0].keys()), NOT_ALL_KEYS_PRESENT
