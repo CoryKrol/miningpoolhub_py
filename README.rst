@@ -1,6 +1,6 @@
 
 miningpoolhub_py
-============================================
+----------------
 .. image:: https://github.com/CoryKrol/miningpoolhub_py/workflows/CI/badge.svg?branch=master
      :target: https://github.com/CoryKrol/miningpoolhub_py/actions?workflow=CI
      :alt: CI Status

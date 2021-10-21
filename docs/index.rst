@@ -3,10 +3,25 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-.. include:: ../README.rst
-
+Welcome to MiningPoolHub_py's documentation!
+=============================================
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
    :caption: Contents:
 
-   ./_source/modules
+   readme
+
+.. rubric:: Modules
+
+.. autosummary::
+   :nosignatures:
+   :toctree: generated
+
+   miningpoolhub_py.pool
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`

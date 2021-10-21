@@ -93,7 +93,7 @@ class Pool(object):
         )
 
     def get_block_stats(self):
-        """ "Get pool block stats
+        """Get pool block stats
 
         Returns
         -------
