@@ -1,8 +1,10 @@
-from requests import Session
+from yarl import URL
 from requests import HTTPError
+from aiohttp import ClientSession, ClientResponse
 from json.decoder import JSONDecodeError
 from . import API_KEY
 
+from .client import MiningPoolHubClient
 from .exceptions import APIError
 from .urls import Urls
 
@@ -10,32 +12,20 @@ DATA = "data"
 
 
 class Pool(object):
-    __session = None
-    __api_key = None
+    __client = None
 
-    def __init__(self, api_key=API_KEY):
+    def __init__(self, session: ClientSession, api_key: str = API_KEY):
         self.__api_key = api_key
+        self.__client = MiningPoolHubClient(session=session, api_key=api_key)
         self.urls = Urls()
 
-    @property
-    def session(self):
-        if self.__session is None:
-            self.__session = Session()
-            self.__session.params = {"api_key": self.__api_key}
-
-        return self.__session
-
-    @session.setter
-    def session(self, value):
-        raise AttributeError("Setting 'session' attribute is prohibited.")
-
     @staticmethod
-    def __to_json(response):
+    async def __to_json(response: ClientResponse):
         """Private method to call json method on response object
 
         Parameters
         ----------
-        response : Response
+        response : ClientResponse
             The response object
 
         Returns
@@ -43,9 +33,9 @@ class Pool(object):
         dict
             JSON response represented as a Python dictionary
         """
-        return response.json()
+        return await response.json(content_type="text/html")
 
-    def __get_data(self, url):
+    async def __get_data(self, url: URL):
         """Private method to make a GET request to the URL
 
         Parameters
@@ -66,18 +56,18 @@ class Pool(object):
             Raises when there is an issue parsing the JSON response
         """
         try:
-            response = self.session.get(url)
+            response = await self.__client.get_request(url)
 
             # raises if the status code is an error - 4xx, 5xx
             response.raise_for_status()
 
-            return self.__to_json(response)
+            return await self.__to_json(response)
         except HTTPError as e:
             pass
         except JSONDecodeError as e:
             pass
 
-    def get_block_count(self, coin_name='ethereum'):
+    async def async_get_block_count(self, coin_name="ethereum"):
         """ "Get current block height in blockchain
 
         Returns
@@ -85,225 +75,323 @@ class Pool(object):
         int
             block count
         """
-        return int(
-            self.__get_data(self.urls.get_block_count_url(pool=coin_name))[
-                self.urls.action_get_block_count
-            ][DATA]
+        response = await self.__get_data(
+            self.urls.get_block_count_url(coin_name=coin_name)
         )
+        return int((response[self.urls.action_get_block_count][DATA]))
 
-    def get_block_stats(self, coin_name='ethereum'):
+    async def async_get_block_stats(self, coin_name: str = "ethereum"):
         """Get pool block stats
+
+        Parameters
+        ----------
+        coin_name : str
+            coin to use for mining pool query
 
         Returns
         -------
         dict
             block stats
         """
-        return self.__get_data(self.urls.get_block_stats_url(pool=coin_name))[
-            self.urls.action_get_block_stats
-        ][DATA]
+        result = await self.__get_data(
+            self.urls.get_block_stats_url(coin_name=coin_name)
+        )
+        return result[self.urls.action_get_block_stats][DATA]
 
-    def get_blocks_found(self, coin_name='ethereum'):
+    async def async_get_blocks_found(self, coin_name: str = "ethereum"):
         """Get last N blocks found as configured in admin panel
+
+        Parameters
+        ----------
+        coin_name : str
+            coin to use for mining pool query
 
         Returns
         -------
         list of dict:
             data for the last N blocks found
         """
-        return self.__get_data(self.urls.get_blocks_found_url(pool=coin_name))[
-            self.urls.action_get_blocks_found
-        ][DATA]
+        result = await self.__get_data(
+            self.urls.get_blocks_found_url(coin_name=coin_name)
+        )
+        return result[self.urls.action_get_blocks_found][DATA]
 
-    def get_current_workers(self, coin_name='ethereum'):
+    async def async_get_current_workers(self, coin_name: str = "ethereum"):
         """Get the total hash rate of current workers for a coin pool
+
+        Parameters
+        ----------
+        coin_name : str
+            coin to use for mining pool query
 
         Returns
         -------
         int
             the hash rate in kH/s
         """
-        return int(
-            self.__get_data(self.urls.get_current_workers_url(pool=coin_name))[
-                self.urls.action_get_current_workers
-            ][DATA]
+        result = await self.__get_data(
+            self.urls.get_current_workers_url(coin_name=coin_name)
         )
+        return int(result[self.urls.action_get_current_workers][DATA])
 
-    def get_dashboard(self, coin_name='ethereum'):
+    async def async_get_dashboard(self, coin_name: str = "ethereum"):
         """Load a user's dashboard data for a pool: hash rate, share rate, balance, recent credits
+
+        Parameters
+        ----------
+        coin_name : str
+            coin to use for mining pool query
 
         Returns
         -------
         dict
             dashboard data
         """
-        return self.__get_data(self.urls.get_dashboard_data_url(pool=coin_name))[
-            self.urls.action_get_dashboard_data
-        ][DATA]
+        result = await self.__get_data(
+            self.urls.get_dashboard_data_url(coin_name=coin_name)
+        )
+        return result[self.urls.action_get_dashboard_data][DATA]
 
-    def get_difficulty(self, coin_name='ethereum'):
+    async def async_get_difficulty(self, coin_name: str = "ethereum"):
         """Get current difficulty in blockchain
+
+        Parameters
+        ----------
+        coin_name : str
+            coin to use for mining pool query
 
         Returns
         -------
         int
             network difficulty
         """
-        return int(
-            self.__get_data(self.urls.get_difficulty_url(pool=coin_name))[
-                self.urls.action_get_difficulty
-            ][DATA]
+        result = await self.__get_data(
+            self.urls.get_difficulty_url(coin_name=coin_name)
         )
+        return int(result[self.urls.action_get_difficulty][DATA])
 
-    def get_estimated_time(self, coin_name='ethereum'):
+    async def async_get_estimated_time(self, coin_name: str = "ethereum"):
         """Get estimated time to next block based on pool hashrate (seconds)
+
+        Parameters
+        ----------
+        coin_name : str
+            coin to use for mining pool query
 
         Returns
         -------
         int
             estimated time until next block in seconds
         """
-        return int(
-            self.__get_data(self.urls.get_estimated_time_url(pool=coin_name))[
-                self.urls.action_get_estimated_time
-            ][DATA]
+        result = await self.__get_data(
+            self.urls.get_estimated_time_url(coin_name=coin_name)
         )
+        return int(result[self.urls.action_get_estimated_time][DATA])
 
-    def get_hourly_hash_rate(self, coin_name='ethereum'):
+    async def async_get_hourly_hash_rate(self, coin_name: str = "ethereum"):
         """Get the average hash rate each hour for the last 24 hours, total and by worker, currently broken
         according to API docs
+
+        Parameters
+        ----------
+        coin_name : str
+            coin to use for mining pool query
 
         Returns
         -------
         list of dict
             the first entry in the list is total hashrate, all following entries are for each worker
         """
-        return self.__get_data(
-            self.urls.get_hourly_hash_rates_url(pool=coin_name)
-        )[self.urls.action_get_hourly_hash_rates][DATA]["mine"]
+        result = await self.__get_data(
+            self.urls.get_hourly_hash_rates_url(coin_name=coin_name)
+        )
+        return result[self.urls.action_get_hourly_hash_rates][DATA]["mine"]
 
-    def get_nav_bar_data(self, coin_name='ethereum'):
+    async def async_get_nav_bar_data(self, coin_name: str = "ethereum"):
         """Get the data displayed on the navbar. Always returns { "error": "disabled" }
+
+        Parameters
+        ----------
+        coin_name : str
+            coin to use for mining pool query
 
         Returns
         -------
         dict of str
             error message
         """
-        return self.__get_data(self.urls.get_nav_bar_data_url(pool=coin_name))[
-            self.urls.action_get_nav_bar_data
-        ][DATA]
+        result = await self.__get_data(
+            self.urls.get_nav_bar_data_url(coin_name=coin_name)
+        )
+        return result[self.urls.action_get_nav_bar_data][DATA]
 
-    def get_pool_hash_rate(self, coin_name='ethereum'):
+    async def async_get_pool_hash_rate(self, coin_name: str = "ethereum"):
         """Get current pool hash rate
+
+        Parameters
+        ----------
+        coin_name : str
+            coin to use for mining pool query
 
         Returns
         -------
         float
             current pool hash rate in kH/s
         """
-        return self.__get_data(self.urls.get_pool_hash_rate_url(pool=coin_name))[
-            self.urls.action_get_pool_hash_rate
-        ][DATA]
+        result = await self.__get_data(
+            self.urls.get_pool_hash_rate_url(coin_name=coin_name)
+        )
+        return result[self.urls.action_get_pool_hash_rate][DATA]
 
-    def get_pool_info(self, coin_name='ethereum'):
+    async def async_get_pool_info(self, coin_name: str = "ethereum"):
         """Get the information on pool settings
+
+        Parameters
+        ----------
+        coin_name : str
+            coin to use for mining pool query
 
         Returns
         -------
         dict
             pool settings
         """
-        return self.__get_data(self.urls.get_pool_info_url(pool=coin_name))[
-            self.urls.action_get_pool_info
-        ][DATA]
+        result = await self.__get_data(self.urls.get_pool_info_url(coin_name=coin_name))
+        return result[self.urls.action_get_pool_info][DATA]
 
-    def get_pool_share_rate(self, coin_name='ethereum'):
+    async def async_get_pool_share_rate(self, coin_name: str = "ethereum"):
         """Get current pool share rate (shares/s)
+
+        Parameters
+        ----------
+        coin_name : str
+            coin to use for mining pool query
 
         Returns
         -------
         int
             seems to always be 0
         """
-        return self.__get_data(self.urls.get_pool_share_rate_url(pool=coin_name))[
-            self.urls.action_get_pool_share_rate
-        ]
+        result = await self.__get_data(
+            self.urls.get_pool_share_rate_url(coin_name=coin_name)
+        )
+        return result[self.urls.action_get_pool_share_rate]
 
-    def get_pool_status(self, coin_name='ethereum'):
+    async def async_get_pool_status(self, coin_name: str = "ethereum"):
         """Fetch overall pool status
+
+        Parameters
+        ----------
+        coin_name : str
+            coin to use for mining pool query
 
         Returns
         -------
         dict
-            pool status as a dict
+            pool status
         """
-        return self.__get_data(self.urls.get_pool_status_url(pool=coin_name))[
-            self.urls.action_get_pool_status
-        ][DATA]
+        result = await self.__get_data(
+            self.urls.get_pool_status_url(coin_name=coin_name)
+        )
+        return result[self.urls.action_get_pool_status][DATA]
 
-    def get_time_since_last_block(self, coin_name='ethereum'):
+    async def async_get_time_since_last_block(self, coin_name: str = "ethereum"):
         """Get time since last block found (seconds)
+
+        Parameters
+        ----------
+        coin_name : str
+            coin to use for mining pool query
 
         Returns
         -------
         int
             time since last block found in seconds
         """
-        return self.__get_data(
-            self.urls.get_time_since_last_block_url(pool=coin_name)
-        )[self.urls.action_get_time_since_last_block][DATA]
+        result = await self.__get_data(
+            self.urls.get_time_since_last_block_url(coin_name=coin_name)
+        )
+        return result[self.urls.action_get_time_since_last_block][DATA]
 
-    def get_top_contributors(self, coin_name='ethereum'):
+    async def async_get_top_contributors(self, coin_name: str = "ethereum"):
         """Fetch top contributors data
+
+        Parameters
+        ----------
+        coin_name : str
+            coin to use for mining pool query
 
         Returns
         -------
         dict
             returns account and hash rate as a dict
         """
-        return self.__get_data(self.urls.get_top_contributors_url(pool=coin_name))[
-            self.urls.action_get_top_contributors
-        ][DATA]["hashes"]
+        result = await self.__get_data(
+            self.urls.get_top_contributors_url(coin_name=coin_name)
+        )
+        return result[self.urls.action_get_top_contributors][DATA]["hashes"]
 
-    def get_user_balance(self, coin_name='ethereum'):
+    async def async_get_user_balance(self, coin_name: str = "ethereum"):
         """Fetch a user's balance
+
+        Parameters
+        ----------
+        coin_name : str
+            coin to use for mining pool query
 
         Returns
         -------
         dict of float
             returns confirmed and unconfirmed balances as a dict
         """
-        return self.__get_data(self.urls.get_user_balance_url(pool=coin_name))[
-            self.urls.action_get_user_balance
-        ][DATA]
+        result = await self.__get_data(
+            self.urls.get_user_balance_url(coin_name=coin_name)
+        )
+        return result[self.urls.action_get_user_balance][DATA]
 
-    def get_user_hash_rate(self, coin_name='ethereum'):
+    async def async_get_user_hash_rate(self, coin_name: str = "ethereum"):
         """Fetch a user's total hash rate
+
+        Parameters
+        ----------
+        coin_name : str
+            coin to use for mining pool query
 
         Returns
         -------
         float
             total hash rate in kH/s
         """
-        return self.__get_data(self.urls.get_user_hash_rate_url(pool=coin_name))[
-            self.urls.action_get_user_hash_rate
-        ][DATA]
+        result = await self.__get_data(
+            self.urls.get_user_hash_rate_url(coin_name=coin_name)
+        )
+        return result[self.urls.action_get_user_hash_rate][DATA]
 
-    def get_user_share_rate(self, coin_name='ethereum'):
+    async def async_get_user_share_rate(self, coin_name: str = "ethereum"):
         """Fetch a user's share rate
+
+        Parameters
+        ----------
+        coin_name : str
+            coin to use for mining pool query
 
         Returns
         -------
         int
             seems to always be 0
         """
-        return self.__get_data(self.urls.get_user_share_rate_url(pool=coin_name))[
-            self.urls.action_get_user_share_rate
-        ][DATA]
+        result = await self.__get_data(
+            self.urls.get_user_share_rate_url(coin_name=coin_name)
+        )
+        return result[self.urls.action_get_user_share_rate][DATA]
 
-    def get_user_status(self, coin_name='ethereum'):
+    async def async_get_user_status(self, coin_name: str = "ethereum"):
         """Fetch a user's overall status
+
+        Parameters
+        ----------
+        coin_name : str
+            coin to use for mining pool query
 
         Returns
         -------
@@ -311,45 +399,63 @@ class Pool(object):
             user status info: username, shares[valid|invalid|id|donate_percent|is_anonymous|username],
             hash rate, and share rate
         """
-        return self.__get_data(self.urls.get_user_status_url(pool=coin_name))[
-            self.urls.action_get_user_status
-        ][DATA]
+        result = await self.__get_data(
+            self.urls.get_user_status_url(coin_name=coin_name)
+        )
+        return result[self.urls.action_get_user_status][DATA]
 
-    def get_user_transactions(self, coin_name='ethereum'):
+    async def async_get_user_transactions(self, coin_name: str = "ethereum"):
         """Get a user's transactions
+
+        Parameters
+        ----------
+        coin_name : str
+            coin to use for mining pool query
 
         Returns
         -------
         list of dict
             data on up to the last 30 transactions for a user on a pool
         """
-        return self.__get_data(
-            self.urls.get_user_transactions_url(pool=coin_name)
-        )[self.urls.action_get_user_transactions][DATA]["transactions"]
+        result = await self.__get_data(
+            self.urls.get_user_transactions_url(coin_name=coin_name)
+        )
+        return result[self.urls.action_get_user_transactions][DATA]["transactions"]
 
-    def get_user_workers(self, coin_name='ethereum'):
+    async def async_get_user_workers(self, coin_name: str = "ethereum"):
         """Fetch a user's worker status
+
+        Parameters
+        ----------
+        coin_name : str
+            coin to use for mining pool query
 
         Returns
         -------
         list of dict
             data on each worker represented as a dict: id, username, password, monitor, hash rate, difficulty
         """
-        return self.__get_data(self.urls.get_user_workers_url(pool=coin_name))[
-            self.urls.action_get_user_workers
-        ][DATA]
+        result = await self.__get_data(
+            self.urls.get_user_workers_url(coin_name=coin_name)
+        )
+        return result[self.urls.action_get_user_workers][DATA]
 
-    def public(self, coin_name='ethereum'):
+    async def async_public(self, coin_name: str = "ethereum"):
         """Fetch public pool statistics, no authentication required
+
+        Parameters
+        ----------
+        coin_name : str
+            coin to use for mining pool query
 
         Returns
         -------
         dict
             pool_name, hashrate, workers, shares_this_round, last_block, network_hashrate
         """
-        return self.__get_data(self.urls.public_url(coin_name))
+        return await self.__get_data(self.urls.public_url(coin_name))
 
-    def get_auto_switching_and_profits_statistics(self):
+    async def async_get_auto_switching_and_profits_statistics(self):
         """Get auto switching information for all algorithms
 
         Returns
@@ -358,13 +464,13 @@ class Pool(object):
             get list of auto switching statistics for each algorithm as a dict
         """
         path = self.urls.get_auto_switching_and_profits_statistics_url()
-        response = self.__get_data(path)
+        response = await self.__get_data(path)
         if response["success"] is not True:
             raise APIError("Call failed")
 
         return response["return"]
 
-    def get_mining_profit_and_statistics(self):
+    async def async_get_mining_profit_and_statistics(self):
         """Get mining profits statistics
 
         Returns
@@ -373,13 +479,13 @@ class Pool(object):
             mining statistics for each coin
         """
         path = self.urls.get_mining_profit_and_statistics_url()
-        response = self.__get_data(path)
+        response = await self.__get_data(path)
         if response["success"] is not True:
             raise APIError("Call failed")
 
         return response["return"]
 
-    def get_user_all_balances(self):
+    async def async_get_user_all_balances(self):
         """Get all currency balances for a user
 
         Returns
@@ -387,6 +493,5 @@ class Pool(object):
         list of dict
             balances for each coin
         """
-        return self.__get_data(self.urls.get_user_all_balances_url())[
-            self.urls.action_get_user_all_balances
-        ][DATA]
+        result = await self.__get_data(self.urls.get_user_all_balances_url())
+        return result[self.urls.action_get_user_all_balances][DATA]
