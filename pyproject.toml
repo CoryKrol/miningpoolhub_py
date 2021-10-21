@@ -14,13 +14,13 @@ include = [
 
 [tool.poetry.dependencies]
 python = "^3.8"
-requests = "^2.26.0"
 python-dotenv = "^0.19.1"
 Sphinx = { version = "^4.2.0", optional = true }
 sphinx-rtd-theme = { version = "^1.0.0", optional = true }
 sphinxcontrib-napoleon = { version = "^0.7", optional = true }
 aiohttp = "^3.7.4"
 orjson = "^3.6.4"
+yarl = "^1.7.0"
 
 [tool.poetry.extras]
 docs = ["Sphinx", "sphinx-rtd-theme", "sphinxcontrib-napoleon"]
@@ -31,6 +31,7 @@ pytest-recording = "^0.12.0"
 pytest-cov = "^3.0.0"
 flake8 = "^4.0.1"
 black = "^21.9b0"
+pytest-asyncio = "^0.16.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
