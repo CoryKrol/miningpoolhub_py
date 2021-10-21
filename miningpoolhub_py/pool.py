@@ -13,9 +13,8 @@ class Pool(object):
     __session = None
     __api_key = None
 
-    def __init__(self, coin_name, api_key=API_KEY):
+    def __init__(self, api_key=API_KEY):
         self.__api_key = api_key
-        self.coin_name = coin_name
         self.urls = Urls()
 
     @property
@@ -78,7 +77,7 @@ class Pool(object):
         except JSONDecodeError as e:
             pass
 
-    def get_block_count(self):
+    def get_block_count(self, coin_name='ethereum'):
         """ "Get current block height in blockchain
 
         Returns
@@ -87,12 +86,12 @@ class Pool(object):
             block count
         """
         return int(
-            self.__get_data(self.urls.get_block_count_url(pool=self.coin_name))[
+            self.__get_data(self.urls.get_block_count_url(pool=coin_name))[
                 self.urls.action_get_block_count
             ][DATA]
         )
 
-    def get_block_stats(self):
+    def get_block_stats(self, coin_name='ethereum'):
         """Get pool block stats
 
         Returns
@@ -100,11 +99,11 @@ class Pool(object):
         dict
             block stats
         """
-        return self.__get_data(self.urls.get_block_stats_url(pool=self.coin_name))[
+        return self.__get_data(self.urls.get_block_stats_url(pool=coin_name))[
             self.urls.action_get_block_stats
         ][DATA]
 
-    def get_blocks_found(self):
+    def get_blocks_found(self, coin_name='ethereum'):
         """Get last N blocks found as configured in admin panel
 
         Returns
@@ -112,11 +111,11 @@ class Pool(object):
         list of dict:
             data for the last N blocks found
         """
-        return self.__get_data(self.urls.get_blocks_found_url(pool=self.coin_name))[
+        return self.__get_data(self.urls.get_blocks_found_url(pool=coin_name))[
             self.urls.action_get_blocks_found
         ][DATA]
 
-    def get_current_workers(self):
+    def get_current_workers(self, coin_name='ethereum'):
         """Get the total hash rate of current workers for a coin pool
 
         Returns
@@ -125,12 +124,12 @@ class Pool(object):
             the hash rate in kH/s
         """
         return int(
-            self.__get_data(self.urls.get_current_workers_url(pool=self.coin_name))[
+            self.__get_data(self.urls.get_current_workers_url(pool=coin_name))[
                 self.urls.action_get_current_workers
             ][DATA]
         )
 
-    def get_dashboard(self):
+    def get_dashboard(self, coin_name='ethereum'):
         """Load a user's dashboard data for a pool: hash rate, share rate, balance, recent credits
 
         Returns
@@ -138,11 +137,11 @@ class Pool(object):
         dict
             dashboard data
         """
-        return self.__get_data(self.urls.get_dashboard_data_url(pool=self.coin_name))[
+        return self.__get_data(self.urls.get_dashboard_data_url(pool=coin_name))[
             self.urls.action_get_dashboard_data
         ][DATA]
 
-    def get_difficulty(self):
+    def get_difficulty(self, coin_name='ethereum'):
         """Get current difficulty in blockchain
 
         Returns
@@ -151,12 +150,12 @@ class Pool(object):
             network difficulty
         """
         return int(
-            self.__get_data(self.urls.get_difficulty_url(pool=self.coin_name))[
+            self.__get_data(self.urls.get_difficulty_url(pool=coin_name))[
                 self.urls.action_get_difficulty
             ][DATA]
         )
 
-    def get_estimated_time(self):
+    def get_estimated_time(self, coin_name='ethereum'):
         """Get estimated time to next block based on pool hashrate (seconds)
 
         Returns
@@ -165,12 +164,12 @@ class Pool(object):
             estimated time until next block in seconds
         """
         return int(
-            self.__get_data(self.urls.get_estimated_time_url(pool=self.coin_name))[
+            self.__get_data(self.urls.get_estimated_time_url(pool=coin_name))[
                 self.urls.action_get_estimated_time
             ][DATA]
         )
 
-    def get_hourly_hash_rate(self):
+    def get_hourly_hash_rate(self, coin_name='ethereum'):
         """Get the average hash rate each hour for the last 24 hours, total and by worker, currently broken
         according to API docs
 
@@ -180,10 +179,10 @@ class Pool(object):
             the first entry in the list is total hashrate, all following entries are for each worker
         """
         return self.__get_data(
-            self.urls.get_hourly_hash_rates_url(pool=self.coin_name)
+            self.urls.get_hourly_hash_rates_url(pool=coin_name)
         )[self.urls.action_get_hourly_hash_rates][DATA]["mine"]
 
-    def get_nav_bar_data(self):
+    def get_nav_bar_data(self, coin_name='ethereum'):
         """Get the data displayed on the navbar. Always returns { "error": "disabled" }
 
         Returns
@@ -191,11 +190,11 @@ class Pool(object):
         dict of str
             error message
         """
-        return self.__get_data(self.urls.get_nav_bar_data_url(pool=self.coin_name))[
+        return self.__get_data(self.urls.get_nav_bar_data_url(pool=coin_name))[
             self.urls.action_get_nav_bar_data
         ][DATA]
 
-    def get_pool_hash_rate(self):
+    def get_pool_hash_rate(self, coin_name='ethereum'):
         """Get current pool hash rate
 
         Returns
@@ -203,11 +202,11 @@ class Pool(object):
         float
             current pool hash rate in kH/s
         """
-        return self.__get_data(self.urls.get_pool_hash_rate_url(pool=self.coin_name))[
+        return self.__get_data(self.urls.get_pool_hash_rate_url(pool=coin_name))[
             self.urls.action_get_pool_hash_rate
         ][DATA]
 
-    def get_pool_info(self):
+    def get_pool_info(self, coin_name='ethereum'):
         """Get the information on pool settings
 
         Returns
@@ -215,11 +214,11 @@ class Pool(object):
         dict
             pool settings
         """
-        return self.__get_data(self.urls.get_pool_info_url(pool=self.coin_name))[
+        return self.__get_data(self.urls.get_pool_info_url(pool=coin_name))[
             self.urls.action_get_pool_info
         ][DATA]
 
-    def get_pool_share_rate(self):
+    def get_pool_share_rate(self, coin_name='ethereum'):
         """Get current pool share rate (shares/s)
 
         Returns
@@ -227,11 +226,11 @@ class Pool(object):
         int
             seems to always be 0
         """
-        return self.__get_data(self.urls.get_pool_share_rate_url(pool=self.coin_name))[
+        return self.__get_data(self.urls.get_pool_share_rate_url(pool=coin_name))[
             self.urls.action_get_pool_share_rate
         ]
 
-    def get_pool_status(self):
+    def get_pool_status(self, coin_name='ethereum'):
         """Fetch overall pool status
 
         Returns
@@ -239,11 +238,11 @@ class Pool(object):
         dict
             pool status as a dict
         """
-        return self.__get_data(self.urls.get_pool_status_url(pool=self.coin_name))[
+        return self.__get_data(self.urls.get_pool_status_url(pool=coin_name))[
             self.urls.action_get_pool_status
         ][DATA]
 
-    def get_time_since_last_block(self):
+    def get_time_since_last_block(self, coin_name='ethereum'):
         """Get time since last block found (seconds)
 
         Returns
@@ -252,10 +251,10 @@ class Pool(object):
             time since last block found in seconds
         """
         return self.__get_data(
-            self.urls.get_time_since_last_block_url(pool=self.coin_name)
+            self.urls.get_time_since_last_block_url(pool=coin_name)
         )[self.urls.action_get_time_since_last_block][DATA]
 
-    def get_top_contributors(self):
+    def get_top_contributors(self, coin_name='ethereum'):
         """Fetch top contributors data
 
         Returns
@@ -263,11 +262,11 @@ class Pool(object):
         dict
             returns account and hash rate as a dict
         """
-        return self.__get_data(self.urls.get_top_contributors_url(pool=self.coin_name))[
+        return self.__get_data(self.urls.get_top_contributors_url(pool=coin_name))[
             self.urls.action_get_top_contributors
         ][DATA]["hashes"]
 
-    def get_user_balance(self):
+    def get_user_balance(self, coin_name='ethereum'):
         """Fetch a user's balance
 
         Returns
@@ -275,11 +274,11 @@ class Pool(object):
         dict of float
             returns confirmed and unconfirmed balances as a dict
         """
-        return self.__get_data(self.urls.get_user_balance_url(pool=self.coin_name))[
+        return self.__get_data(self.urls.get_user_balance_url(pool=coin_name))[
             self.urls.action_get_user_balance
         ][DATA]
 
-    def get_user_hash_rate(self):
+    def get_user_hash_rate(self, coin_name='ethereum'):
         """Fetch a user's total hash rate
 
         Returns
@@ -287,11 +286,11 @@ class Pool(object):
         float
             total hash rate in kH/s
         """
-        return self.__get_data(self.urls.get_user_hash_rate_url(pool=self.coin_name))[
+        return self.__get_data(self.urls.get_user_hash_rate_url(pool=coin_name))[
             self.urls.action_get_user_hash_rate
         ][DATA]
 
-    def get_user_share_rate(self):
+    def get_user_share_rate(self, coin_name='ethereum'):
         """Fetch a user's share rate
 
         Returns
@@ -299,11 +298,11 @@ class Pool(object):
         int
             seems to always be 0
         """
-        return self.__get_data(self.urls.get_user_share_rate_url(pool=self.coin_name))[
+        return self.__get_data(self.urls.get_user_share_rate_url(pool=coin_name))[
             self.urls.action_get_user_share_rate
         ][DATA]
 
-    def get_user_status(self):
+    def get_user_status(self, coin_name='ethereum'):
         """Fetch a user's overall status
 
         Returns
@@ -312,11 +311,11 @@ class Pool(object):
             user status info: username, shares[valid|invalid|id|donate_percent|is_anonymous|username],
             hash rate, and share rate
         """
-        return self.__get_data(self.urls.get_user_status_url(pool=self.coin_name))[
+        return self.__get_data(self.urls.get_user_status_url(pool=coin_name))[
             self.urls.action_get_user_status
         ][DATA]
 
-    def get_user_transactions(self):
+    def get_user_transactions(self, coin_name='ethereum'):
         """Get a user's transactions
 
         Returns
@@ -325,10 +324,10 @@ class Pool(object):
             data on up to the last 30 transactions for a user on a pool
         """
         return self.__get_data(
-            self.urls.get_user_transactions_url(pool=self.coin_name)
+            self.urls.get_user_transactions_url(pool=coin_name)
         )[self.urls.action_get_user_transactions][DATA]["transactions"]
 
-    def get_user_workers(self):
+    def get_user_workers(self, coin_name='ethereum'):
         """Fetch a user's worker status
 
         Returns
@@ -336,11 +335,11 @@ class Pool(object):
         list of dict
             data on each worker represented as a dict: id, username, password, monitor, hash rate, difficulty
         """
-        return self.__get_data(self.urls.get_user_workers_url(pool=self.coin_name))[
+        return self.__get_data(self.urls.get_user_workers_url(pool=coin_name))[
             self.urls.action_get_user_workers
         ][DATA]
 
-    def public(self):
+    def public(self, coin_name='ethereum'):
         """Fetch public pool statistics, no authentication required
 
         Returns
@@ -348,7 +347,7 @@ class Pool(object):
         dict
             pool_name, hashrate, workers, shares_this_round, last_block, network_hashrate
         """
-        return self.__get_data(self.urls.public_url(self.coin_name))
+        return self.__get_data(self.urls.public_url(coin_name))
 
     def get_auto_switching_and_profits_statistics(self):
         """Get auto switching information for all algorithms
