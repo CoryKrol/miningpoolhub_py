@@ -11,11 +11,10 @@ from .urls import Urls
 DATA = "data"
 
 
-class Pool(object):
+class MiningPoolHubAPI(object):
     __client = None
 
     def __init__(self, session: ClientSession, api_key: str = API_KEY):
-        self.__api_key = api_key
         self.__client = MiningPoolHubClient(session=session, api_key=api_key)
         self.urls = Urls()
 

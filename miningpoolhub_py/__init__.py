@@ -10,4 +10,4 @@ __author__ = "Cory Krol"
 
 API_KEY = os.environ.get("MPH_API_KEY", None)
 
-from .pool import Pool
+from .miningpoolhubapi import MiningPoolHubAPI
