@@ -1,8 +1,9 @@
 from __future__ import print_function
-from miningpoolhub_py import Pool
+from miningpoolhub_py import MiningPoolHubAPI
+from aiohttp import ClientSession
 
-pool = Pool("ethereum")
-profit_and_statistics = pool.get_mining_profit_and_statistics()
+pool = MiningPoolHubAPI(ClientSession())
+profit_and_statistics = await pool.async_get_mining_profit_and_statistics()
 
 for number, coin in enumerate(profit_and_statistics, start=1):
     print(
