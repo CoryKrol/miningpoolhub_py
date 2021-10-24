@@ -1,31 +1,18 @@
 interactions:
 - request:
     body: null
-    headers:
-      Accept:
-      - '*/*'
-      Accept-Encoding:
-      - gzip, deflate
-      Connection:
-      - keep-alive
-      User-Agent:
-      - python-requests/2.26.0
-    method: GET
+    headers: {}
+    method: get
     uri: https://ethereum.miningpoolhub.com/index.php?action=getpoolstatus&page=api
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA1yQy2rDMBBFf8XMqiVC6DWWpX0gm0IX3RfFmdQijlwkuQ9C/r0oLbR0O2fO3OFe
-        4IXq67LMpYa6FvAXeKNc4pLAg+SCC2CQ11TjmcAPyCWi6/XgrBXI4BBqaE678JxC24FtnSjTeu7u
-        tk+7++4hppheusdlmbvdugcGUyhTDpXAS4dKaLROS46oGNDxGMdIafwE7xx3isH7kk+UC3jZ2x4t
-        g3HNmVJNVBvaz8t4ar9qgwqlAgaJPv7RH6gZzKHUv0NtTBNuy4d4PIIHZ51Gp5RWg5FO9MCASv0u
-        QEk0g0YjtJCGqxspU8hUwBsupDSI2g5oFW2kY9CsEtNILbfpwt7ifivouXNolBZKGxyQNtJcr9cv
-        AAAA//8DANtQBl6XAQAA
+      string: '{"getpoolstatus":{"version":"1.0.0","runtime":33.962965011597,"data":{"pool_name":"Ethereum
+        (ETH) Mining Pool Hub","hashrate":19392174632.517,"efficiency":0,"workers":164957,"currentnetworkblock":"13459131","nextnetworkblock":13459132,"lastblock":13459069,"networkdiff":"9873379019637827","esttime":2186750108946,"estshares":4.0441360464437e+19,"timesincelast":1000,"nethashrate":7.0524135854556e+14}}}'
     headers:
       CF-Cache-Status:
       - DYNAMIC
       CF-RAY:
-      - 6a0f865a3a6763c2-ATL
+      - 6a181020ebd4105c-ATL
       Cache-Control:
       - no-store, no-cache, must-revalidate
       Connection:
@@ -35,7 +22,7 @@ interactions:
       Content-Type:
       - text/html; charset=UTF-8
       Date:
-      - Wed, 20 Oct 2021 04:32:52 GMT
+      - Thu, 21 Oct 2021 05:25:02 GMT
       Expect-CT:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Expires:
@@ -45,14 +32,14 @@ interactions:
       Pragma:
       - no-cache
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=4AVb7Xuy43hyA3tCOkWbhLYXRNvIJN%2BiOnsaUws%2B6%2BhFXfdhA1ez5ppk1q4xIWons9YUmofQzj%2BV5gZEPvEsEj9Tv8ZfPM31n0OsbSy78UcWJT2ywYH%2BtQuLqh2fl4SJRJfxoed8g2aBTfIj"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=7dMxQ2pqjtvoKKv%2FM4JYpJdd9R9Rvf5BwOl1RH%2BDE85buu3AMja1Mkz8%2BesjdHsyKKYtUOKv0bOCr1HeDO0%2FLVbbU31j%2FbmeilMh6jkNuifNqyGPe0GWE%2FC68885vCJZ0iLAiNwrymr5fluJ"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Set-Cookie:
-      - PHPSESSID=ffdt18hmlpqe4k7ha75ov8mr94; expires=Sat, 23-Oct-2021 04:32:52 GMT;
+      - PHPSESSID=d44afdct2af28s8r8mkmb2c0f7; expires=Sun, 24-Oct-2021 05:25:02 GMT;
         Max-Age=259200; path=/; domain=.miningpoolhub.com; HttpOnly
-      - AUTH_BEARER_default=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MzQ3MDQzNzIsImp0aSI6ImNRcXgwUzVyem12bzVWSlBqOW55MVkyOFdLYXFxNENDcG15WE85dGUwc2M9IiwiaXNzIjoiLmRvdmV3YWxldC5jb20iLCJuYmYiOjE2MzQ3MDQzNzIsImV4cCI6MTYzNDk2MzU3MiwiZGF0YSI6IiJ9.VttV2FDVY5ucQpsG2lRdoRN5a9yjHqbC6OJfMxSRc0kQ6F8NX1-WGxSb0gU5hINk8gX_t7Fv_V8Xdr4phwct0g;
-        expires=Sat, 23-Oct-2021 04:32:52 GMT; Max-Age=259200; path=/; domain=.miningpoolhub.com;
+      - AUTH_BEARER_default=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MzQ3OTM5MDIsImp0aSI6IkF5a3BtODJ0bGd4UHhpZ2JOWVpLVUlLeUVoeE1FM0lRaytzbCtUUzJTRWs9IiwiaXNzIjoiLmRvdmV3YWxldC5jb20iLCJuYmYiOjE2MzQ3OTM5MDIsImV4cCI6MTYzNTA1MzEwMiwiZGF0YSI6IiJ9.2v3HGzNv5eEvcgy3oXsQuu1lX2ldPbilzTWURwWRHAmV7Hc2akRWK-oUCivjCAuwmaquUdTr_gUOJQsL44rHrg;
+        expires=Sun, 24-Oct-2021 05:25:02 GMT; Max-Age=259200; path=/; domain=.miningpoolhub.com;
         HttpOnly
       Transfer-Encoding:
       - chunked
@@ -62,4 +49,107 @@ interactions:
     status:
       code: 200
       message: OK
+    url: https://ethereum.miningpoolhub.com/index.php?page=api&action=getpoolstatus&api_key=ed24341abdc62f10957f8afc9a750b3cf1ba4f59322ff7c1c7161728961dd4ac
+- request:
+    body: null
+    headers: {}
+    method: get
+    uri: https://ethereum.miningpoolhub.com/index.php?action=getpoolstatus&page=api
+  response:
+    body:
+      string: '{"getpoolstatus":{"version":"1.0.0","runtime":34.039974212646,"data":{"pool_name":"Ethereum
+        (ETH) Mining Pool Hub","hashrate":19392174632.517,"efficiency":0,"workers":164957,"currentnetworkblock":"13459131","nextnetworkblock":13459132,"lastblock":13459069,"networkdiff":"9873379019637827","esttime":2186750108946,"estshares":4.0441360464437e+19,"timesincelast":1075,"nethashrate":7.0524135854556e+14}}}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 6a1811f7ad0b0fe4-ATL
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Thu, 21 Oct 2021 05:26:17 GMT
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=dG%2BjMV0fhtZv6ED1fcquKeBzQpfG48RGGBbIME4wilQQDc2sBuXplWZUrS4PsTo8FKet44hAgFJIqiG4AIJ8BqXshMK0ZleAPxfh8ML9fXsH4mizrFM%2B22XzBewAg49OvC2nZx6t7RsHChbT"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - PHPSESSID=0bhpdb9uokcl5gl41lp6o6rgl7; expires=Sun, 24-Oct-2021 05:26:17 GMT;
+        Max-Age=259200; path=/; domain=.miningpoolhub.com; HttpOnly
+      - AUTH_BEARER_default=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MzQ3OTM5NzcsImp0aSI6ImV6bHlTU2JZZzdVeDR1SHZOeXRKQ0p5aWN4RnBKRmVrYlM5OU1SdThPSDA9IiwiaXNzIjoiLmRvdmV3YWxldC5jb20iLCJuYmYiOjE2MzQ3OTM5NzcsImV4cCI6MTYzNTA1MzE3NywiZGF0YSI6IiJ9.90W-gtrsLbYXLFOVOEFfodeaIGzVOt8H_yDO6d-BUuGp7nSLhuxWNAygJgXBOgbZctt9U8T2UJ944u35CH6feg;
+        expires=Sun, 24-Oct-2021 05:26:17 GMT; Max-Age=259200; path=/; domain=.miningpoolhub.com;
+        HttpOnly
+      Transfer-Encoding:
+      - chunked
+      alt-svc:
+      - h3=":443"; ma=86400, h3-29=":443"; ma=86400, h3-28=":443"; ma=86400, h3-27=":443";
+        ma=86400
+    status:
+      code: 200
+      message: OK
+    url: https://ethereum.miningpoolhub.com/index.php?page=api&action=getpoolstatus&api_key=ed24341abdc62f10957f8afc9a750b3cf1ba4f59322ff7c1c7161728961dd4ac
+- request:
+    body: null
+    headers: {}
+    method: get
+    uri: https://ethereum.miningpoolhub.com/index.php?action=getpoolstatus&page=api
+  response:
+    body:
+      string: '{"getpoolstatus":{"version":"1.0.0","runtime":32.155990600586,"data":{"pool_name":"Ethereum
+        (ETH) Mining Pool Hub","hashrate":19392174632.517,"efficiency":0,"workers":164957,"currentnetworkblock":"13459131","nextnetworkblock":13459132,"lastblock":13459069,"networkdiff":"9873379019637827","esttime":2186750108946,"estshares":4.0441360464437e+19,"timesincelast":1122,"nethashrate":7.0524135854556e+14}}}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 6a18131f7826185b-ATL
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Thu, 21 Oct 2021 05:27:04 GMT
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=fFxE96O1Kz3T3CExgG6Kg926YiMnX1BoJIHOSkYKT%2Bl4ytEfzRUbqthgE8A1gClTUkpStT7lce2mPLnLRLOxDzL8aGt9fiiHRBHXljJ%2BX6y75JoLDmqn8d1dplDeb08Nyen2NkC6stzWPr37"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - PHPSESSID=d3a3bt7gj90ldtvk30up0kj3i7; expires=Sun, 24-Oct-2021 05:27:04 GMT;
+        Max-Age=259200; path=/; domain=.miningpoolhub.com; HttpOnly
+      - AUTH_BEARER_default=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MzQ3OTQwMjQsImp0aSI6IkhVSU9jTVgzM2JtQ3dYeXR5WGMyVUY5cUk5aTBtZ0JhcVJDeldpQU9aR0E9IiwiaXNzIjoiLmRvdmV3YWxldC5jb20iLCJuYmYiOjE2MzQ3OTQwMjQsImV4cCI6MTYzNTA1MzIyNCwiZGF0YSI6IiJ9.ftf8Gx0W9DcSmzQsOD7DGEuEOiZMt5MUYsMN8OqXnmrDILl8201e5N1sqScj40OBGimTNmmfJckViRp5_eGw3Q;
+        expires=Sun, 24-Oct-2021 05:27:04 GMT; Max-Age=259200; path=/; domain=.miningpoolhub.com;
+        HttpOnly
+      Transfer-Encoding:
+      - chunked
+      alt-svc:
+      - h3=":443"; ma=86400, h3-29=":443"; ma=86400, h3-28=":443"; ma=86400, h3-27=":443";
+        ma=86400
+    status:
+      code: 200
+      message: OK
+    url: https://ethereum.miningpoolhub.com/index.php?page=api&action=getpoolstatus&api_key=ed24341abdc62f10957f8afc9a750b3cf1ba4f59322ff7c1c7161728961dd4ac
 version: 1

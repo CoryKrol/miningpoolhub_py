@@ -1,45 +1,17 @@
 interactions:
 - request:
     body: null
-    headers:
-      Accept:
-      - '*/*'
-      Accept-Encoding:
-      - gzip, deflate
-      Connection:
-      - keep-alive
-      User-Agent:
-      - python-requests/2.26.0
-    method: GET
+    headers: {}
+    method: get
     uri: https://miningpoolhub.com/index.php?action=getautoswitchingandprofitsstatistics&page=api
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA9SY227bOBCG34XXljA8k+5VmmZToEkWmxRFukVhKDJrE5ElV4dk3aLvvpBcx1Jq
-        ksoufNE7GzOUhP+bGf7kd1Q1aWqqCk3rsjETVJq6KXM0/fQdJdmiQFP0wZT1MqmWaILSpixNXs9W
-        Nrf5YpYWNkdT9GDKuvt5MGFWbVZ3RdY+6P0pmqBlUdVoipbNXbzNWhdF1v5LixWaoCTLZm3KLLPe
-        vHVR1miKCVAy6b50Vj3aOl3OfgZkF1g1WW0PRLfL1mXxxdZoCjFQroTmeILyolwlmf1m5rNteJas
-        5l0KBqE0PpiSP9i5TbZZTGvK+I/Jk35ndeqVz9RLU5pmFaVZUlU2Dcl41pexqSKTVHVsti+Jxso6
-        at0r05TF2gSSksomwffvdccuXNiLCw9wAQiOpfbiEkQzxQO4CFGYSN3D9S55XBePTlpl8mDyMdV+
-        /eHqV0z33cNfTMm3bAfJm9MxCrx8rzW4EIEXEQwRYU6V5l5EmlChdAiRAFBE9Tvqa2O7avv79MIJ
-        6tvIdto+43k77d7w4n7yLnxqKH/WtqNCn/AkPNEOXm3AzauN7nhJimMCWmsihJuYF9QhPq/fnzv5
-        3Nlu04gWRTYPMdo+57dmJFyMhJeR2DNiQsWKSQAmlK+rgGMu2+3N31VcKsH7g++03KzrIreLZR1d
-        FrkpCye7lSe8p3Z7ef0rtbT3lpeCC67dsQsndvjGfMseBXMRZF6CrD8VldJEMM28/IATICF+AIJw
-        zA90nXsimjx1xnsD8ezqd2826kJFvahoH5XUhGqmpB8VAQFhVJwNPcZHU3W1526wTWmTeTcfN97c
-        frd9PIK7Ji67Rrx2jQzsGpFaUsBud61izbGJeFBIJgTFA289ylqHLfXbQ5b6PzrqMYY67KdHlrrL
-        qxGvVyPPvRqWGLxejWgiRdshXkIMtBKS9AhdbMqEXJ8R316SjPHTl39enRyhwLFyCNgG3AK20Z2A
-        OKbaRG7fxGOieaC6RSypMlF/nt/cG5cqaIrmdmHvNrWJKnfaXrw356+PoZ3L1GCvqcE9UyNjMFFg
-        xmKlqAqPBiy57Mn3V3Nn67B8X91pR5fP5Siw11Fg1i897S09EjNGg6UHGA9L78oUN/4N6otJ2tk6
-        pnH/OMq1D3Zd+2DvtQ8eXvuAZJQz4a0/Kig/7Nj61z7AFQjR0/AWY3f1jbBhb05u3h5BN5AO3dqA
-        W7c2ui867qs5HCtggZqjMe7qsqfXZWd5ovOyMFWdjXFGC1/qsY1Ru1se1pF7deTPdJS+bcMh805F
-        HAsphiqG5Pup2Zi+Pb++OYZurqEH3qEHg6EnhL8ABdZj3CQGPNgy3pk0Te7dpZf8M8qonNweQzfX
-        mQa8Zxron2n+/81OYFfIbG3GSHRxlC0BXGcV8J5VoHdWETEIR+V0QrGYitB+ymNGutn2+ce/AAAA
-        //8DAEgskbZeGQAA
+      string: '{"success":true,"return":[{"algo":"Verthash","current_mining_coin":"vertcoin","current_mining_coin_symbol":"VTC","host":"hub.miningpoolhub.com","all_host_list":"hub.miningpoolhub.com","port":12032,"algo_switch_port":17032,"multialgo_switch_port":12032,"profit":0.02950756,"normalized_profit_amd":0.00879325,"normalized_profit_nvidia":0.01233416},{"algo":"Etchash","current_mining_coin":"ethereum-classic","current_mining_coin_symbol":"ETC","host":"us-east.etchash-hub.miningpoolhub.com","all_host_list":"us-east.etchash-hub.miningpoolhub.com;europe.etchash-hub.miningpoolhub.com;asia.etchash-hub.miningpoolhub.com","port":12031,"algo_switch_port":17031,"multialgo_switch_port":12031,"profit":0.00069484,"normalized_profit_amd":0.0173711,"normalized_profit_nvidia":0.02431954},{"algo":"Kawpow","current_mining_coin":"ravencoin","current_mining_coin_symbol":"RVN","host":"us-east.kawpow-hub.miningpoolhub.com","all_host_list":"us-east.kawpow-hub.miningpoolhub.com;europe.kawpow-hub.miningpoolhub.com;asia.kawpow-hub.miningpoolhub.com","port":12030,"algo_switch_port":17030,"multialgo_switch_port":12030,"profit":0.00145151,"normalized_profit_amd":0.01814392,"normalized_profit_nvidia":0.02453058},{"algo":"Equihash-ZCL","current_mining_coin":"zclassic","current_mining_coin_symbol":"ZCL","host":"us-east.equihash-hub.miningpoolhub.com","all_host_list":"us-east.equihash-hub.miningpoolhub.com;europe.equihash-hub.miningpoolhub.com;asia.equihash-hub.miningpoolhub.com","port":12029,"algo_switch_port":17029,"multialgo_switch_port":12029,"profit":832.22102809,"normalized_profit_amd":0,"normalized_profit_nvidia":0},{"algo":"Equihash-BTG","current_mining_coin":"bitcoin-gold","current_mining_coin_symbol":"BTG","host":"us-east.equihash-hub.miningpoolhub.com","all_host_list":"us-east.equihash-hub.miningpoolhub.com;europe.equihash-hub.miningpoolhub.com;asia.equihash-hub.miningpoolhub.com","port":12026,"algo_switch_port":17026,"multialgo_switch_port":12026,"profit":378.17838663,"normalized_profit_amd":0.00415996,"normalized_profit_nvidia":0.02079981},{"algo":"Cryptonight-Monero","current_mining_coin":"monero","current_mining_coin_symbol":"XMR","host":"us-east.cryptonight-hub.miningpoolhub.com","all_host_list":"us-east.cryptonight-hub.miningpoolhub.com;europe.cryptonight-hub.miningpoolhub.com;asia.cryptonight-hub.miningpoolhub.com","port":12024,"algo_switch_port":17024,"multialgo_switch_port":12024,"profit":0.83743918,"normalized_profit_amd":0.0004899,"normalized_profit_nvidia":0.00058872},{"algo":"Equihash","current_mining_coin":"zencash","current_mining_coin_symbol":"ZEN","host":"us-east.equihash-hub.miningpoolhub.com","all_host_list":"us-east.equihash-hub.miningpoolhub.com;europe.equihash-hub.miningpoolhub.com;asia.equihash-hub.miningpoolhub.com","port":12023,"algo_switch_port":17023,"multialgo_switch_port":12023,"profit":0.67300135,"normalized_profit_amd":0.00017498,"normalized_profit_nvidia":0.00046101},{"algo":"Yescrypt","current_mining_coin":"myriadcoin-yescrypt","current_mining_coin_symbol":"XMY","host":"hub.miningpoolhub.com","all_host_list":"hub.miningpoolhub.com","port":12021,"algo_switch_port":17021,"multialgo_switch_port":12021,"profit":0.30408548,"normalized_profit_amd":9.731e-5,"normalized_profit_nvidia":0.00050691},{"algo":"Ethash","current_mining_coin":"ethereum","current_mining_coin_symbol":"ETH","host":"us-east.ethash-hub.miningpoolhub.com","all_host_list":"us-east.ethash-hub.miningpoolhub.com;europe.ethash-hub.miningpoolhub.com;asia.ethash-hub.miningpoolhub.com","port":12020,"algo_switch_port":17020,"multialgo_switch_port":12020,"profit":0.00121381,"normalized_profit_amd":0.03034523,"normalized_profit_nvidia":0.04248332},{"algo":"Lyra2RE2","current_mining_coin":"monacoin","current_mining_coin_symbol":"MONA","host":"hub.miningpoolhub.com","all_host_list":"hub.miningpoolhub.com","port":12018,"algo_switch_port":17018,"multialgo_switch_port":12018,"profit":1.44e-6,"normalized_profit_amd":5.464e-5,"normalized_profit_nvidia":6.953e-5},{"algo":"Skein","current_mining_coin":"digibyte-skein","current_mining_coin_symbol":"DGB","host":"hub.miningpoolhub.com","all_host_list":"hub.miningpoolhub.com","port":12016,"algo_switch_port":17016,"multialgo_switch_port":12016,"profit":4.3e-7,"normalized_profit_amd":0.00011621,"normalized_profit_nvidia":0.00025759},{"algo":"Qubit","current_mining_coin":"digibyte-qubit","current_mining_coin_symbol":"DGB","host":"hub.miningpoolhub.com","all_host_list":"hub.miningpoolhub.com","port":12014,"algo_switch_port":17014,"multialgo_switch_port":12014,"profit":4.04e-6,"normalized_profit_amd":4.974e-5,"normalized_profit_nvidia":0.0001224},{"algo":"NeoScrypt","current_mining_coin":"feathercoin","current_mining_coin_symbol":"FTC","host":"hub.miningpoolhub.com","all_host_list":"hub.miningpoolhub.com","port":12012,"algo_switch_port":17012,"multialgo_switch_port":12012,"profit":0.00595066,"normalized_profit_amd":0.00290987,"normalized_profit_nvidia":0.00846779},{"algo":"X11","current_mining_coin":"dash","current_mining_coin_symbol":"DASH","host":"hub.miningpoolhub.com","all_host_list":"hub.miningpoolhub.com","port":12007,"algo_switch_port":17007,"multialgo_switch_port":12007,"profit":8.7e-7,"normalized_profit_amd":1.047e-5,"normalized_profit_nvidia":1.824e-5},{"algo":"Myriad-Groestl","current_mining_coin":"myriadcoin-groestl","current_mining_coin_symbol":"XMY","host":"hub.miningpoolhub.com","all_host_list":"hub.miningpoolhub.com","port":12005,"algo_switch_port":17005,"multialgo_switch_port":12005,"profit":2.0e-7,"normalized_profit_amd":7.08e-6,"normalized_profit_nvidia":2.281e-5},{"algo":"Groestl","current_mining_coin":"groestlcoin","current_mining_coin_symbol":"GRS","host":"hub.miningpoolhub.com","all_host_list":"hub.miningpoolhub.com","port":12004,"algo_switch_port":17004,"multialgo_switch_port":12004,"profit":1.31e-6,"normalized_profit_amd":1.281e-5,"normalized_profit_nvidia":8.039e-5},{"algo":"Keccak","current_mining_coin":"maxcoin","current_mining_coin_symbol":"MAX","host":"hub.miningpoolhub.com","all_host_list":"hub.miningpoolhub.com","port":12003,"algo_switch_port":17003,"multialgo_switch_port":12003,"profit":0,"normalized_profit_amd":0,"normalized_profit_nvidia":0},{"algo":"Scrypt","current_mining_coin":"litecoin","current_mining_coin_symbol":"LTC","host":"hub.miningpoolhub.com","all_host_list":"hub.miningpoolhub.com","port":12001,"algo_switch_port":17001,"multialgo_switch_port":12001,"profit":6.779e-5,"normalized_profit_amd":4.881e-5,"normalized_profit_nvidia":6.068e-5}]}'
     headers:
       CF-Cache-Status:
       - DYNAMIC
       CF-RAY:
-      - 6a0cafb2dac7f1b2-ATL
+      - 6a18102e285863e1-ATL
       Cache-Control:
       - no-store, no-cache, must-revalidate
       Connection:
@@ -49,7 +21,7 @@ interactions:
       Content-Type:
       - text/html; charset=UTF-8
       Date:
-      - Tue, 19 Oct 2021 20:16:49 GMT
+      - Thu, 21 Oct 2021 05:25:04 GMT
       Expect-CT:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Expires:
@@ -59,11 +31,11 @@ interactions:
       Pragma:
       - no-cache
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=kK8Bj1hkpqh2KzzLl9hC6qDTySD9oFSjrTZRiHE%2FrSh5hSAmvflfYx4xDTcM8%2FTzqY752TZc%2FuYbK8mModCmqHTZs5lH5gbIgK2kZ59mGINLDvO%2BT2e3VOH3eoJM%2BUO2bSt2"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=jKAYeU0p0bejVDdig4QLZJLbsFzAhLc2tst7tyzX%2BU8KBxLwqhbNUtnxMk6IuVVVXSljjjg%2BZ8kyMuw%2B0A17%2Bu0VgUszPH9HxFikzshJSwr1CwaR9NehFM3AELzpYG%2FPXLmU"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Set-Cookie:
-      - PHPSESSID=90r7hfl4558eivrof92ju5c8u0; expires=Fri, 22-Oct-2021 20:16:49 GMT;
+      - PHPSESSID=69u8bujeitqqd5dj0ieooa0kp3; expires=Sun, 24-Oct-2021 05:25:04 GMT;
         Max-Age=259200; path=/; domain=.miningpoolhub.com; HttpOnly
       Transfer-Encoding:
       - chunked
@@ -73,4 +45,99 @@ interactions:
     status:
       code: 200
       message: OK
+    url: https://miningpoolhub.com/index.php?page=api&action=getautoswitchingandprofitsstatistics&api_key=ed24341abdc62f10957f8afc9a750b3cf1ba4f59322ff7c1c7161728961dd4ac
+- request:
+    body: null
+    headers: {}
+    method: get
+    uri: https://miningpoolhub.com/index.php?action=getautoswitchingandprofitsstatistics&page=api
+  response:
+    body:
+      string: '{"success":true,"return":[{"algo":"Verthash","current_mining_coin":"vertcoin","current_mining_coin_symbol":"VTC","host":"hub.miningpoolhub.com","all_host_list":"hub.miningpoolhub.com","port":12032,"algo_switch_port":17032,"multialgo_switch_port":12032,"profit":0.02950756,"normalized_profit_amd":0.00879325,"normalized_profit_nvidia":0.01233416},{"algo":"Etchash","current_mining_coin":"ethereum-classic","current_mining_coin_symbol":"ETC","host":"us-east.etchash-hub.miningpoolhub.com","all_host_list":"us-east.etchash-hub.miningpoolhub.com;europe.etchash-hub.miningpoolhub.com;asia.etchash-hub.miningpoolhub.com","port":12031,"algo_switch_port":17031,"multialgo_switch_port":12031,"profit":0.00069484,"normalized_profit_amd":0.0173711,"normalized_profit_nvidia":0.02431954},{"algo":"Kawpow","current_mining_coin":"ravencoin","current_mining_coin_symbol":"RVN","host":"us-east.kawpow-hub.miningpoolhub.com","all_host_list":"us-east.kawpow-hub.miningpoolhub.com;europe.kawpow-hub.miningpoolhub.com;asia.kawpow-hub.miningpoolhub.com","port":12030,"algo_switch_port":17030,"multialgo_switch_port":12030,"profit":0.00145151,"normalized_profit_amd":0.01814392,"normalized_profit_nvidia":0.02453058},{"algo":"Equihash-ZCL","current_mining_coin":"zclassic","current_mining_coin_symbol":"ZCL","host":"us-east.equihash-hub.miningpoolhub.com","all_host_list":"us-east.equihash-hub.miningpoolhub.com;europe.equihash-hub.miningpoolhub.com;asia.equihash-hub.miningpoolhub.com","port":12029,"algo_switch_port":17029,"multialgo_switch_port":12029,"profit":832.22102809,"normalized_profit_amd":0,"normalized_profit_nvidia":0},{"algo":"Equihash-BTG","current_mining_coin":"bitcoin-gold","current_mining_coin_symbol":"BTG","host":"us-east.equihash-hub.miningpoolhub.com","all_host_list":"us-east.equihash-hub.miningpoolhub.com;europe.equihash-hub.miningpoolhub.com;asia.equihash-hub.miningpoolhub.com","port":12026,"algo_switch_port":17026,"multialgo_switch_port":12026,"profit":378.17838663,"normalized_profit_amd":0.00415996,"normalized_profit_nvidia":0.02079981},{"algo":"Cryptonight-Monero","current_mining_coin":"monero","current_mining_coin_symbol":"XMR","host":"us-east.cryptonight-hub.miningpoolhub.com","all_host_list":"us-east.cryptonight-hub.miningpoolhub.com;europe.cryptonight-hub.miningpoolhub.com;asia.cryptonight-hub.miningpoolhub.com","port":12024,"algo_switch_port":17024,"multialgo_switch_port":12024,"profit":0.83743918,"normalized_profit_amd":0.0004899,"normalized_profit_nvidia":0.00058872},{"algo":"Equihash","current_mining_coin":"zencash","current_mining_coin_symbol":"ZEN","host":"us-east.equihash-hub.miningpoolhub.com","all_host_list":"us-east.equihash-hub.miningpoolhub.com;europe.equihash-hub.miningpoolhub.com;asia.equihash-hub.miningpoolhub.com","port":12023,"algo_switch_port":17023,"multialgo_switch_port":12023,"profit":0.67300135,"normalized_profit_amd":0.00017498,"normalized_profit_nvidia":0.00046101},{"algo":"Yescrypt","current_mining_coin":"myriadcoin-yescrypt","current_mining_coin_symbol":"XMY","host":"hub.miningpoolhub.com","all_host_list":"hub.miningpoolhub.com","port":12021,"algo_switch_port":17021,"multialgo_switch_port":12021,"profit":0.30408548,"normalized_profit_amd":9.731e-5,"normalized_profit_nvidia":0.00050691},{"algo":"Ethash","current_mining_coin":"ethereum","current_mining_coin_symbol":"ETH","host":"us-east.ethash-hub.miningpoolhub.com","all_host_list":"us-east.ethash-hub.miningpoolhub.com;europe.ethash-hub.miningpoolhub.com;asia.ethash-hub.miningpoolhub.com","port":12020,"algo_switch_port":17020,"multialgo_switch_port":12020,"profit":0.00121381,"normalized_profit_amd":0.03034523,"normalized_profit_nvidia":0.04248332},{"algo":"Lyra2RE2","current_mining_coin":"monacoin","current_mining_coin_symbol":"MONA","host":"hub.miningpoolhub.com","all_host_list":"hub.miningpoolhub.com","port":12018,"algo_switch_port":17018,"multialgo_switch_port":12018,"profit":1.44e-6,"normalized_profit_amd":5.464e-5,"normalized_profit_nvidia":6.953e-5},{"algo":"Skein","current_mining_coin":"digibyte-skein","current_mining_coin_symbol":"DGB","host":"hub.miningpoolhub.com","all_host_list":"hub.miningpoolhub.com","port":12016,"algo_switch_port":17016,"multialgo_switch_port":12016,"profit":4.3e-7,"normalized_profit_amd":0.00011621,"normalized_profit_nvidia":0.00025759},{"algo":"Qubit","current_mining_coin":"digibyte-qubit","current_mining_coin_symbol":"DGB","host":"hub.miningpoolhub.com","all_host_list":"hub.miningpoolhub.com","port":12014,"algo_switch_port":17014,"multialgo_switch_port":12014,"profit":4.04e-6,"normalized_profit_amd":4.974e-5,"normalized_profit_nvidia":0.0001224},{"algo":"NeoScrypt","current_mining_coin":"feathercoin","current_mining_coin_symbol":"FTC","host":"hub.miningpoolhub.com","all_host_list":"hub.miningpoolhub.com","port":12012,"algo_switch_port":17012,"multialgo_switch_port":12012,"profit":0.00595066,"normalized_profit_amd":0.00290987,"normalized_profit_nvidia":0.00846779},{"algo":"X11","current_mining_coin":"dash","current_mining_coin_symbol":"DASH","host":"hub.miningpoolhub.com","all_host_list":"hub.miningpoolhub.com","port":12007,"algo_switch_port":17007,"multialgo_switch_port":12007,"profit":8.7e-7,"normalized_profit_amd":1.047e-5,"normalized_profit_nvidia":1.824e-5},{"algo":"Myriad-Groestl","current_mining_coin":"myriadcoin-groestl","current_mining_coin_symbol":"XMY","host":"hub.miningpoolhub.com","all_host_list":"hub.miningpoolhub.com","port":12005,"algo_switch_port":17005,"multialgo_switch_port":12005,"profit":2.0e-7,"normalized_profit_amd":7.08e-6,"normalized_profit_nvidia":2.281e-5},{"algo":"Groestl","current_mining_coin":"groestlcoin","current_mining_coin_symbol":"GRS","host":"hub.miningpoolhub.com","all_host_list":"hub.miningpoolhub.com","port":12004,"algo_switch_port":17004,"multialgo_switch_port":12004,"profit":1.31e-6,"normalized_profit_amd":1.281e-5,"normalized_profit_nvidia":8.039e-5},{"algo":"Keccak","current_mining_coin":"maxcoin","current_mining_coin_symbol":"MAX","host":"hub.miningpoolhub.com","all_host_list":"hub.miningpoolhub.com","port":12003,"algo_switch_port":17003,"multialgo_switch_port":12003,"profit":0,"normalized_profit_amd":0,"normalized_profit_nvidia":0},{"algo":"Scrypt","current_mining_coin":"litecoin","current_mining_coin_symbol":"LTC","host":"hub.miningpoolhub.com","all_host_list":"hub.miningpoolhub.com","port":12001,"algo_switch_port":17001,"multialgo_switch_port":12001,"profit":6.779e-5,"normalized_profit_amd":4.881e-5,"normalized_profit_nvidia":6.068e-5}]}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 6a181202fbb4104d-ATL
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Thu, 21 Oct 2021 05:26:19 GMT
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=6CWyT5Az7P%2BsBMhTpWrh8bPsYkYHlrc%2FzH2lAhYZkrcWiTGn9qQa92jiaLDXrQpfoUO8Smuv%2Fx7NtKuHdg8GrQ1onyqaZyzRa2WyAkVTU1bVmyHDB7qhaxMmPV7yMnCm75eh"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - PHPSESSID=b5uk6kcscdu8ro2hstg7ccdc97; expires=Sun, 24-Oct-2021 05:26:19 GMT;
+        Max-Age=259200; path=/; domain=.miningpoolhub.com; HttpOnly
+      Transfer-Encoding:
+      - chunked
+      alt-svc:
+      - h3=":443"; ma=86400, h3-29=":443"; ma=86400, h3-28=":443"; ma=86400, h3-27=":443";
+        ma=86400
+    status:
+      code: 200
+      message: OK
+    url: https://miningpoolhub.com/index.php?page=api&action=getautoswitchingandprofitsstatistics&api_key=ed24341abdc62f10957f8afc9a750b3cf1ba4f59322ff7c1c7161728961dd4ac
+- request:
+    body: null
+    headers: {}
+    method: get
+    uri: https://miningpoolhub.com/index.php?action=getautoswitchingandprofitsstatistics&page=api
+  response:
+    body:
+      string: '{"success":true,"return":[{"algo":"Verthash","current_mining_coin":"vertcoin","current_mining_coin_symbol":"VTC","host":"hub.miningpoolhub.com","all_host_list":"hub.miningpoolhub.com","port":12032,"algo_switch_port":17032,"multialgo_switch_port":12032,"profit":0.02950756,"normalized_profit_amd":0.00879325,"normalized_profit_nvidia":0.01233416},{"algo":"Etchash","current_mining_coin":"ethereum-classic","current_mining_coin_symbol":"ETC","host":"us-east.etchash-hub.miningpoolhub.com","all_host_list":"us-east.etchash-hub.miningpoolhub.com;europe.etchash-hub.miningpoolhub.com;asia.etchash-hub.miningpoolhub.com","port":12031,"algo_switch_port":17031,"multialgo_switch_port":12031,"profit":0.00069484,"normalized_profit_amd":0.0173711,"normalized_profit_nvidia":0.02431954},{"algo":"Kawpow","current_mining_coin":"ravencoin","current_mining_coin_symbol":"RVN","host":"us-east.kawpow-hub.miningpoolhub.com","all_host_list":"us-east.kawpow-hub.miningpoolhub.com;europe.kawpow-hub.miningpoolhub.com;asia.kawpow-hub.miningpoolhub.com","port":12030,"algo_switch_port":17030,"multialgo_switch_port":12030,"profit":0.00145151,"normalized_profit_amd":0.01814392,"normalized_profit_nvidia":0.02453058},{"algo":"Equihash-ZCL","current_mining_coin":"zclassic","current_mining_coin_symbol":"ZCL","host":"us-east.equihash-hub.miningpoolhub.com","all_host_list":"us-east.equihash-hub.miningpoolhub.com;europe.equihash-hub.miningpoolhub.com;asia.equihash-hub.miningpoolhub.com","port":12029,"algo_switch_port":17029,"multialgo_switch_port":12029,"profit":832.22102809,"normalized_profit_amd":0,"normalized_profit_nvidia":0},{"algo":"Equihash-BTG","current_mining_coin":"bitcoin-gold","current_mining_coin_symbol":"BTG","host":"us-east.equihash-hub.miningpoolhub.com","all_host_list":"us-east.equihash-hub.miningpoolhub.com;europe.equihash-hub.miningpoolhub.com;asia.equihash-hub.miningpoolhub.com","port":12026,"algo_switch_port":17026,"multialgo_switch_port":12026,"profit":378.17838663,"normalized_profit_amd":0.00415996,"normalized_profit_nvidia":0.02079981},{"algo":"Cryptonight-Monero","current_mining_coin":"monero","current_mining_coin_symbol":"XMR","host":"us-east.cryptonight-hub.miningpoolhub.com","all_host_list":"us-east.cryptonight-hub.miningpoolhub.com;europe.cryptonight-hub.miningpoolhub.com;asia.cryptonight-hub.miningpoolhub.com","port":12024,"algo_switch_port":17024,"multialgo_switch_port":12024,"profit":0.83743918,"normalized_profit_amd":0.0004899,"normalized_profit_nvidia":0.00058872},{"algo":"Equihash","current_mining_coin":"zencash","current_mining_coin_symbol":"ZEN","host":"us-east.equihash-hub.miningpoolhub.com","all_host_list":"us-east.equihash-hub.miningpoolhub.com;europe.equihash-hub.miningpoolhub.com;asia.equihash-hub.miningpoolhub.com","port":12023,"algo_switch_port":17023,"multialgo_switch_port":12023,"profit":0.67300135,"normalized_profit_amd":0.00017498,"normalized_profit_nvidia":0.00046101},{"algo":"Yescrypt","current_mining_coin":"myriadcoin-yescrypt","current_mining_coin_symbol":"XMY","host":"hub.miningpoolhub.com","all_host_list":"hub.miningpoolhub.com","port":12021,"algo_switch_port":17021,"multialgo_switch_port":12021,"profit":0.30408548,"normalized_profit_amd":9.731e-5,"normalized_profit_nvidia":0.00050691},{"algo":"Ethash","current_mining_coin":"ethereum","current_mining_coin_symbol":"ETH","host":"us-east.ethash-hub.miningpoolhub.com","all_host_list":"us-east.ethash-hub.miningpoolhub.com;europe.ethash-hub.miningpoolhub.com;asia.ethash-hub.miningpoolhub.com","port":12020,"algo_switch_port":17020,"multialgo_switch_port":12020,"profit":0.00121381,"normalized_profit_amd":0.03034523,"normalized_profit_nvidia":0.04248332},{"algo":"Lyra2RE2","current_mining_coin":"monacoin","current_mining_coin_symbol":"MONA","host":"hub.miningpoolhub.com","all_host_list":"hub.miningpoolhub.com","port":12018,"algo_switch_port":17018,"multialgo_switch_port":12018,"profit":1.44e-6,"normalized_profit_amd":5.464e-5,"normalized_profit_nvidia":6.953e-5},{"algo":"Skein","current_mining_coin":"digibyte-skein","current_mining_coin_symbol":"DGB","host":"hub.miningpoolhub.com","all_host_list":"hub.miningpoolhub.com","port":12016,"algo_switch_port":17016,"multialgo_switch_port":12016,"profit":4.3e-7,"normalized_profit_amd":0.00011621,"normalized_profit_nvidia":0.00025759},{"algo":"Qubit","current_mining_coin":"digibyte-qubit","current_mining_coin_symbol":"DGB","host":"hub.miningpoolhub.com","all_host_list":"hub.miningpoolhub.com","port":12014,"algo_switch_port":17014,"multialgo_switch_port":12014,"profit":4.04e-6,"normalized_profit_amd":4.974e-5,"normalized_profit_nvidia":0.0001224},{"algo":"NeoScrypt","current_mining_coin":"feathercoin","current_mining_coin_symbol":"FTC","host":"hub.miningpoolhub.com","all_host_list":"hub.miningpoolhub.com","port":12012,"algo_switch_port":17012,"multialgo_switch_port":12012,"profit":0.00595066,"normalized_profit_amd":0.00290987,"normalized_profit_nvidia":0.00846779},{"algo":"X11","current_mining_coin":"dash","current_mining_coin_symbol":"DASH","host":"hub.miningpoolhub.com","all_host_list":"hub.miningpoolhub.com","port":12007,"algo_switch_port":17007,"multialgo_switch_port":12007,"profit":8.7e-7,"normalized_profit_amd":1.047e-5,"normalized_profit_nvidia":1.824e-5},{"algo":"Myriad-Groestl","current_mining_coin":"myriadcoin-groestl","current_mining_coin_symbol":"XMY","host":"hub.miningpoolhub.com","all_host_list":"hub.miningpoolhub.com","port":12005,"algo_switch_port":17005,"multialgo_switch_port":12005,"profit":2.0e-7,"normalized_profit_amd":7.08e-6,"normalized_profit_nvidia":2.281e-5},{"algo":"Groestl","current_mining_coin":"groestlcoin","current_mining_coin_symbol":"GRS","host":"hub.miningpoolhub.com","all_host_list":"hub.miningpoolhub.com","port":12004,"algo_switch_port":17004,"multialgo_switch_port":12004,"profit":1.31e-6,"normalized_profit_amd":1.281e-5,"normalized_profit_nvidia":8.039e-5},{"algo":"Keccak","current_mining_coin":"maxcoin","current_mining_coin_symbol":"MAX","host":"hub.miningpoolhub.com","all_host_list":"hub.miningpoolhub.com","port":12003,"algo_switch_port":17003,"multialgo_switch_port":12003,"profit":0,"normalized_profit_amd":0,"normalized_profit_nvidia":0},{"algo":"Scrypt","current_mining_coin":"litecoin","current_mining_coin_symbol":"LTC","host":"hub.miningpoolhub.com","all_host_list":"hub.miningpoolhub.com","port":12001,"algo_switch_port":17001,"multialgo_switch_port":12001,"profit":6.779e-5,"normalized_profit_amd":4.881e-5,"normalized_profit_nvidia":6.068e-5}]}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 6a18132a4ce0186b-ATL
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Thu, 21 Oct 2021 05:27:06 GMT
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=6LVapNxbgvgtsXotkVBEDNBU7tvEqqrFU0JyIZd8%2BYIAl9hWFOg2PqOOEXVculrbmhWmzmYuluS7fu924uVOMNXXaJe3v%2FTiWqpgl0MzpajrIoUY63nc%2BR%2F6J88HXLc5kX0C"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - PHPSESSID=mnirpbcj034tmpaiefmlricmu5; expires=Sun, 24-Oct-2021 05:27:06 GMT;
+        Max-Age=259200; path=/; domain=.miningpoolhub.com; HttpOnly
+      Transfer-Encoding:
+      - chunked
+      alt-svc:
+      - h3=":443"; ma=86400, h3-29=":443"; ma=86400, h3-28=":443"; ma=86400, h3-27=":443";
+        ma=86400
+    status:
+      code: 200
+      message: OK
+    url: https://miningpoolhub.com/index.php?page=api&action=getautoswitchingandprofitsstatistics&api_key=ed24341abdc62f10957f8afc9a750b3cf1ba4f59322ff7c1c7161728961dd4ac
 version: 1
