@@ -1,3 +1,6 @@
+from yarl import URL
+
+
 class Urls:
     def __init__(self):
         self.protocol = "https://"
@@ -157,80 +160,80 @@ class Urls:
             action=self.action_get_user_all_balances
         )
 
-    def base_url(self):
+    def base_url(self) -> str:
         return self.base_url
 
-    def get_block_count_url(self, pool):
-        return self.get_block_count.format(coin_pool=pool)
+    def get_block_count_url(self, coin_name: str) -> URL:
+        return URL(self.get_block_count.format(coin_pool=coin_name))
 
-    def get_block_stats_url(self, pool):
-        return self.get_block_stats.format(coin_pool=pool)
+    def get_block_stats_url(self, coin_name: str) -> URL:
+        return URL(self.get_block_stats.format(coin_pool=coin_name))
 
-    def get_blocks_found_url(self, pool):
-        return self.get_blocks_found.format(coin_pool=pool)
+    def get_blocks_found_url(self, coin_name: str) -> URL:
+        return URL(self.get_blocks_found.format(coin_pool=coin_name))
 
-    def get_current_workers_url(self, pool):
-        return self.get_current_workers.format(coin_pool=pool)
+    def get_current_workers_url(self, coin_name: str) -> URL:
+        return URL(self.get_current_workers.format(coin_pool=coin_name))
 
-    def get_dashboard_data_url(self, pool):
-        return self.get_dashboard_data.format(coin_pool=pool)
+    def get_dashboard_data_url(self, coin_name: str) -> URL:
+        return URL(self.get_dashboard_data.format(coin_pool=coin_name))
 
-    def get_difficulty_url(self, pool):
-        return self.get_difficulty.format(coin_pool=pool)
+    def get_difficulty_url(self, coin_name: str) -> URL:
+        return URL(self.get_difficulty.format(coin_pool=coin_name))
 
-    def get_estimated_time_url(self, pool):
-        return self.get_estimated_time.format(coin_pool=pool)
+    def get_estimated_time_url(self, coin_name: str) -> URL:
+        return URL(self.get_estimated_time.format(coin_pool=coin_name))
 
-    def get_hourly_hash_rates_url(self, pool):
-        return self.get_hourly_hash_rates.format(coin_pool=pool)
+    def get_hourly_hash_rates_url(self, coin_name: str) -> URL:
+        return URL(self.get_hourly_hash_rates.format(coin_pool=coin_name))
 
-    def get_nav_bar_data_url(self, pool):
-        return self.get_nav_bar_data.format(coin_pool=pool)
+    def get_nav_bar_data_url(self, coin_name: str) -> URL:
+        return URL(self.get_nav_bar_data.format(coin_pool=coin_name))
 
-    def get_pool_hash_rate_url(self, pool):
-        return self.get_pool_hash_rate.format(coin_pool=pool)
+    def get_pool_hash_rate_url(self, coin_name: str) -> URL:
+        return URL(self.get_pool_hash_rate.format(coin_pool=coin_name))
 
-    def get_pool_info_url(self, pool):
-        return self.get_pool_info.format(coin_pool=pool)
+    def get_pool_info_url(self, coin_name: str) -> URL:
+        return URL(self.get_pool_info.format(coin_pool=coin_name))
 
-    def get_pool_share_rate_url(self, pool):
-        return self.get_pool_share_rate.format(coin_pool=pool)
+    def get_pool_share_rate_url(self, coin_name: str) -> URL:
+        return URL(self.get_pool_share_rate.format(coin_pool=coin_name))
 
-    def get_pool_status_url(self, pool):
-        return self.get_pool_status.format(coin_pool=pool)
+    def get_pool_status_url(self, coin_name: str) -> URL:
+        return URL(self.get_pool_status.format(coin_pool=coin_name))
 
-    def get_time_since_last_block_url(self, pool):
-        return self.get_time_since_last_block.format(coin_pool=pool)
+    def get_time_since_last_block_url(self, coin_name: str) -> URL:
+        return URL(self.get_time_since_last_block.format(coin_pool=coin_name))
 
-    def get_top_contributors_url(self, pool):
-        return self.get_top_contributors.format(coin_pool=pool)
+    def get_top_contributors_url(self, coin_name: str) -> URL:
+        return URL(self.get_top_contributors.format(coin_pool=coin_name))
 
-    def get_user_balance_url(self, pool):
-        return self.get_user_balance.format(coin_pool=pool)
+    def get_user_balance_url(self, coin_name: str) -> URL:
+        return URL(self.get_user_balance.format(coin_pool=coin_name))
 
-    def get_user_hash_rate_url(self, pool):
-        return self.get_user_hash_rate.format(coin_pool=pool)
+    def get_user_hash_rate_url(self, coin_name: str) -> URL:
+        return URL(self.get_user_hash_rate.format(coin_pool=coin_name))
 
-    def get_user_share_rate_url(self, pool):
-        return self.get_user_share_rate.format(coin_pool=pool)
+    def get_user_share_rate_url(self, coin_name: str) -> URL:
+        return URL(self.get_user_share_rate.format(coin_pool=coin_name))
 
-    def get_user_status_url(self, pool):
-        return self.get_user_status.format(coin_pool=pool)
+    def get_user_status_url(self, coin_name: str) -> URL:
+        return URL(self.get_user_status.format(coin_pool=coin_name))
 
-    def get_user_transactions_url(self, pool):
-        return self.get_user_transactions.format(coin_pool=pool)
+    def get_user_transactions_url(self, coin_name: str) -> URL:
+        return URL(self.get_user_transactions.format(coin_pool=coin_name))
 
-    def get_user_workers_url(self, pool):
-        return self.get_user_workers.format(coin_pool=pool)
+    def get_user_workers_url(self, coin_name: str) -> URL:
+        return URL(self.get_user_workers.format(coin_pool=coin_name))
 
-    def public_url(self, pool):
-        return self.public.format(coin_pool=pool)
+    def public_url(self, coin_name: str) -> URL:
+        return URL(self.public.format(coin_pool=coin_name))
 
-    def get_auto_switching_and_profits_statistics_url(self):
-        return self.get_auto_switching_and_profits_statistics
+    def get_auto_switching_and_profits_statistics_url(self) -> URL:
+        return URL(self.get_auto_switching_and_profits_statistics)
 
-    def get_mining_profit_and_statistics_url(self):
-        return self.get_mining_profit_and_statistics
+    def get_mining_profit_and_statistics_url(self) -> URL:
+        return URL(self.get_mining_profit_and_statistics)
 
-    def get_user_all_balances_url(self):
-        return self.get_user_all_balances
+    def get_user_all_balances_url(self) -> URL:
+        return URL(self.get_user_all_balances)
