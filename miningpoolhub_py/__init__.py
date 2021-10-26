@@ -1,7 +1,6 @@
 import os
 from dotenv import load_dotenv
 import pkg_resources
-from .exceptions import APIKeyMissingError
 
 load_dotenv()
 

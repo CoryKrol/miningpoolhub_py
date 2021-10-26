@@ -1,6 +1,8 @@
-class APIKeyMissingError(Exception):
+class APIError(Exception):
     pass
 
+class NotFoundError(Exception):
+    pass
 
-class APIError(Exception):
+class JsonFormatError(Exception):
     pass
