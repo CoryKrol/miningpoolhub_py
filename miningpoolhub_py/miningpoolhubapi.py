@@ -1,5 +1,10 @@
 from yarl import URL
-from aiohttp import ClientSession, ClientResponse, ClientResponseError, ClientConnectionError
+from aiohttp import (
+    ClientSession,
+    ClientResponse,
+    ClientResponseError,
+    ClientConnectionError,
+)
 from json.decoder import JSONDecodeError
 from . import API_KEY
 
