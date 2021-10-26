@@ -1,5 +1,4 @@
 from yarl import URL
-from requests import HTTPError
 from aiohttp import ClientSession, ClientResponse, ClientResponseError
 from json.decoder import JSONDecodeError
 from . import API_KEY
@@ -62,7 +61,7 @@ class MiningPoolHubAPI(object):
 
             return await self.__to_json(response)
         except ClientResponseError as e:
-            raise HTTPError(e)
+            raise APIError(e)
         except JSONDecodeError as e:
             pass
 
