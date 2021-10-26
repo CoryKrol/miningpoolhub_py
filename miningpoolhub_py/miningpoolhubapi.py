@@ -1,10 +1,10 @@
 from yarl import URL
-from aiohttp import ClientSession, ClientResponse, ClientResponseError
+from aiohttp import ClientSession, ClientResponse, ClientResponseError, ClientConnectionError
 from json.decoder import JSONDecodeError
 from . import API_KEY
 
 from .client import MiningPoolHubClient
-from .exceptions import APIError
+from .exceptions import APIError, JsonFormatError, NotFoundError
 from .urls import Urls
 
 DATA = "data"
@@ -62,8 +62,10 @@ class MiningPoolHubAPI(object):
             return await self.__to_json(response)
         except ClientResponseError as e:
             raise APIError(e)
+        except ClientConnectionError as e:
+            raise NotFoundError(e)
         except JSONDecodeError as e:
-            pass
+            raise JsonFormatError(e)
 
     async def async_get_block_count(self, coin_name="ethereum"):
         """ "Get current block height in blockchain
