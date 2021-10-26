@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "miningpoolhub_py"
-version = "1.0.8"
+version = "1.0.9"
 description = "An async Python wrapper for the Mining Pool Hub REST API"
 authors = ["CoryKrol <16892390+CoryKrol@users.noreply.github.com>"]
 license = "Apache 2"
