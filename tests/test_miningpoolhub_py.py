@@ -1,5 +1,6 @@
 import aiohttp
 
+from miningpoolhub_py.exceptions import NotFoundError
 from miningpoolhub_py import MiningPoolHubAPI
 import pytest
 from pytest import fixture
@@ -306,6 +307,16 @@ async def test_get_dashboard(get_dashboard_keys):
             response["pool"]["info"]["currency"] == "ETH"
         ), "The coin name should be in the response"
         assert set(get_dashboard_keys).issubset(response.keys()), NOT_ALL_KEYS_PRESENT
+
+
+@pytest.mark.asyncio
+@pytest.mark.vcr
+async def test_get_dashboard_invalid_name():
+    """Tests an API call to get dashboard data for a coin_name that is invalid"""
+    async with aiohttp.ClientSession() as session:
+        pool_instance = MiningPoolHubAPI(session=session)
+        with pytest.raises(NotFoundError):
+            await pool_instance.async_get_dashboard(coin_name="poocash")
 
 
 @pytest.mark.asyncio
