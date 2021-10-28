@@ -244,7 +244,7 @@ def get_user_all_balances_keys():
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
+@pytest.mark.vcr(filter_query_parameters=["api_key"])
 async def test_get_block_count():
     """Tests an API call to get block count data for a coin_name"""
     async with aiohttp.ClientSession() as session:
@@ -256,7 +256,7 @@ async def test_get_block_count():
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
+@pytest.mark.vcr(filter_query_parameters=["api_key"])
 async def test_get_block_stats(get_block_stats_keys):
     """Tests an API call to get block stats data for a coin_name"""
     async with aiohttp.ClientSession() as session:
@@ -268,7 +268,7 @@ async def test_get_block_stats(get_block_stats_keys):
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
+@pytest.mark.vcr(filter_query_parameters=["api_key"])
 async def test_get_blocks_found(get_blocks_found_keys):
     """Tests an API call to get blocks found data for a coin_name"""
     async with aiohttp.ClientSession() as session:
@@ -283,7 +283,7 @@ async def test_get_blocks_found(get_blocks_found_keys):
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
+@pytest.mark.vcr(filter_query_parameters=["api_key"])
 async def test_get_current_workers():
     """Tests an API call to get current worker hash rate data for a coin_name"""
     async with aiohttp.ClientSession() as session:
@@ -294,7 +294,7 @@ async def test_get_current_workers():
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
+@pytest.mark.vcr(filter_query_parameters=["api_key"])
 async def test_get_dashboard(get_dashboard_keys):
     """Tests an API call to get dashboard data for a coin_name"""
     async with aiohttp.ClientSession() as session:
@@ -309,7 +309,7 @@ async def test_get_dashboard(get_dashboard_keys):
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
+@pytest.mark.vcr(filter_query_parameters=["api_key"])
 async def test_get_difficulty():
     """Tests an API call to get difficulty data for a coin_name"""
     async with aiohttp.ClientSession() as session:
@@ -320,7 +320,7 @@ async def test_get_difficulty():
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
+@pytest.mark.vcr(filter_query_parameters=["api_key"])
 async def test_get_difficulty():
     """Tests an API call to get estimated time for a coin_name"""
     async with aiohttp.ClientSession() as session:
@@ -331,7 +331,7 @@ async def test_get_difficulty():
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
+@pytest.mark.vcr(filter_query_parameters=["api_key"])
 async def test_get_hourly_hash_rate(get_hourly_hash_rate_keys):
     """Tests an API call to get hourly hash rate data for a pool"""
     async with aiohttp.ClientSession() as session:
@@ -346,7 +346,7 @@ async def test_get_hourly_hash_rate(get_hourly_hash_rate_keys):
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
+@pytest.mark.vcr(filter_query_parameters=["api_key"])
 async def test_get_nav_bar_data():
     """Tests an API call to get nav bar data for a pool"""
     async with aiohttp.ClientSession() as session:
@@ -358,7 +358,7 @@ async def test_get_nav_bar_data():
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
+@pytest.mark.vcr(filter_query_parameters=["api_key"])
 async def test_get_pool_hash_rate():
     """Tests an API call to get pool hash rate"""
     async with aiohttp.ClientSession() as session:
@@ -369,7 +369,7 @@ async def test_get_pool_hash_rate():
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
+@pytest.mark.vcr(filter_query_parameters=["api_key"])
 async def test_get_pool_info(get_pool_info_keys):
     """Tests an API call to get pool info"""
     async with aiohttp.ClientSession() as session:
@@ -381,7 +381,7 @@ async def test_get_pool_info(get_pool_info_keys):
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
+@pytest.mark.vcr(filter_query_parameters=["api_key"])
 async def test_get_pool_share_rate():
     """Tests an API call to get pool share rate"""
     async with aiohttp.ClientSession() as session:
@@ -392,7 +392,7 @@ async def test_get_pool_share_rate():
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
+@pytest.mark.vcr(filter_query_parameters=["api_key"])
 async def test_get_pool_status(get_pool_status_keys):
     """Tests an API call to get pool status"""
     async with aiohttp.ClientSession() as session:
@@ -404,7 +404,7 @@ async def test_get_pool_status(get_pool_status_keys):
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
+@pytest.mark.vcr(filter_query_parameters=["api_key"])
 async def test_get_time_since_last_block():
     """Tests an API call to get time since last block found"""
     async with aiohttp.ClientSession() as session:
@@ -415,7 +415,7 @@ async def test_get_time_since_last_block():
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
+@pytest.mark.vcr(filter_query_parameters=["api_key"])
 async def test_get_top_contributors(get_top_contributors_keys):
     """Tests an API call to get top contributor information"""
     async with aiohttp.ClientSession() as session:
@@ -429,7 +429,7 @@ async def test_get_top_contributors(get_top_contributors_keys):
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
+@pytest.mark.vcr(filter_query_parameters=["api_key"])
 async def test_get_user_balance(get_user_balance_keys):
     """Tests an API call to get user balance information"""
     async with aiohttp.ClientSession() as session:
@@ -443,7 +443,7 @@ async def test_get_user_balance(get_user_balance_keys):
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
+@pytest.mark.vcr(filter_query_parameters=["api_key"])
 async def test_get_user_hash_rate():
     """Tests an API call to get user hash rate"""
     async with aiohttp.ClientSession() as session:
@@ -454,7 +454,7 @@ async def test_get_user_hash_rate():
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
+@pytest.mark.vcr(filter_query_parameters=["api_key"])
 async def test_get_user_share_rate():
     """Tests an API call to get user share rate"""
     async with aiohttp.ClientSession() as session:
@@ -465,7 +465,7 @@ async def test_get_user_share_rate():
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
+@pytest.mark.vcr(filter_query_parameters=["api_key"])
 async def test_get_user_status(get_user_status_keys):
     """Tests an API call to get user status"""
     async with aiohttp.ClientSession() as session:
@@ -477,7 +477,7 @@ async def test_get_user_status(get_user_status_keys):
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
+@pytest.mark.vcr(filter_query_parameters=["api_key"])
 async def test_get_user_transactions(get_user_transactions_keys):
     """Tests an API call to get user transactions"""
     async with aiohttp.ClientSession() as session:
@@ -492,7 +492,7 @@ async def test_get_user_transactions(get_user_transactions_keys):
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
+@pytest.mark.vcr(filter_query_parameters=["api_key"])
 async def test_public(public_keys):
     """Tests an API call to get public data for a a pool"""
     async with aiohttp.ClientSession() as session:
@@ -504,7 +504,7 @@ async def test_public(public_keys):
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
+@pytest.mark.vcr(filter_query_parameters=["api_key"])
 async def test_get_auto_switching_and_profits_statistics(
     get_auto_switching_and_profits_statistics_keys,
 ):
@@ -521,7 +521,7 @@ async def test_get_auto_switching_and_profits_statistics(
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
+@pytest.mark.vcr(filter_query_parameters=["api_key"])
 async def test_get_mining_profit_and_statistics(get_mining_profit_and_statistics_keys):
     """Tests an API call to get mining profit and statistics"""
     async with aiohttp.ClientSession() as session:
@@ -536,7 +536,7 @@ async def test_get_mining_profit_and_statistics(get_mining_profit_and_statistics
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
+@pytest.mark.vcr(filter_query_parameters=["api_key"])
 async def test_get_user_all_balances(get_user_all_balances_keys):
     """Tests an API call to get mining profit and statistics"""
     async with aiohttp.ClientSession() as session:
