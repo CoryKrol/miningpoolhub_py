@@ -8,7 +8,6 @@ from aiohttp import (
 from json.decoder import JSONDecodeError
 from . import API_KEY
 
-from .client import MiningPoolHubClient
 from .exceptions import APIError, JsonFormatError, NotFoundError
 from .urls import Urls
 
@@ -19,7 +18,8 @@ class MiningPoolHubAPI(object):
     __client = None
 
     def __init__(self, session: ClientSession, api_key: str = API_KEY):
-        self.__client = MiningPoolHubClient(session=session, api_key=api_key)
+        self.__client = session
+        self.__api_key = {"api_key": api_key}
         self.urls = Urls()
 
     @staticmethod
@@ -59,7 +59,7 @@ class MiningPoolHubAPI(object):
             Raises when there is an issue parsing the JSON response
         """
         try:
-            response = await self.__client.get_request(url)
+            response = await self.__client.get(url % self.__api_key)
 
             # raises if the status code is an error - 4xx, 5xx
             response.raise_for_status()

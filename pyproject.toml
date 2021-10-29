@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "miningpoolhub_py"
-version = "1.0.11"
+version = "1.0.12"
 description = "An async Python wrapper for the Mining Pool Hub REST API"
 authors = ["CoryKrol <16892390+CoryKrol@users.noreply.github.com>"]
 license = "Apache 2"
@@ -27,7 +27,6 @@ docs = ["Sphinx", "sphinx-rtd-theme", "sphinxcontrib-napoleon"]
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.5"
-pytest-recording = "^0.12.0"
 pytest-cov = "^2.9.0"
 flake8 = "^4.0.1"
 black = "^21.9b0"
@@ -39,6 +38,8 @@ safety = "^1.10.3"
 mypy = "^0.910"
 pre-commit = "^2.15.0"
 mutmut = "^2.2.0"
+aioresponses = "^0.7.2"
+asynctest = "^0.13.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
