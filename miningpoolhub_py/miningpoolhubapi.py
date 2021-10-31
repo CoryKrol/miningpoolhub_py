@@ -22,6 +22,9 @@ class MiningPoolHubAPI(object):
         self.__api_key = {"api_key": api_key}
         self.urls = Urls()
 
+    def api_key_set(self):
+        return self.__api_key is not None
+
     @staticmethod
     async def __to_json(response: ClientResponse):
         """Private method to call json method on response object
@@ -47,7 +50,6 @@ class MiningPoolHubAPI(object):
             The URL to query
 
         Returns
-        -------
         dict
             JSON response represented as a Python dictionary
 
