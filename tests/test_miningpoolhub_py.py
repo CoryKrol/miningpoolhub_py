@@ -7,6 +7,9 @@ from aioresponses import aioresponses
 
 NOT_ALL_KEYS_PRESENT = "All keys should be in the response"
 
+CONTENT_HEADERS = {"Content-Type": "text/html"}
+ETHEREUM = "ethereum"
+
 
 @pytest.mark.asyncio
 async def test_get_block_count(get_block_count_response):
@@ -19,10 +22,10 @@ async def test_get_block_count(get_block_count_response):
             "https://ethereum.miningpoolhub.com/index.php?action=getblockcount&api_key=test&page=api",
             status=200,
             body=json.dumps(get_block_count_response),
-            headers={"Content-Type": "text/html"},
+            headers=CONTENT_HEADERS,
         )
 
-        resp = await miningpoolhubapi.async_get_block_count(coin_name="ethereum")
+        resp = await miningpoolhubapi.async_get_block_count(coin_name=ETHEREUM)
         assert isinstance(resp, int)
         assert resp == 13503059
 
@@ -40,10 +43,10 @@ async def test_get_block_stats(get_block_stats_keys, get_block_stats_response):
             "https://ethereum.miningpoolhub.com/index.php?action=getblockstats&api_key=test&page=api",
             status=200,
             payload=get_block_stats_response,
-            headers={"Content-Type": "text/html"},
+            headers=CONTENT_HEADERS,
         )
 
-        result = await miningpoolhubapi.async_get_block_stats(coin_name="ethereum")
+        result = await miningpoolhubapi.async_get_block_stats(coin_name=ETHEREUM)
         assert isinstance(result, dict)
         assert set(get_block_stats_keys).issubset(result.keys()), NOT_ALL_KEYS_PRESENT
 
@@ -61,9 +64,9 @@ async def test_get_blocks_found(get_blocks_found_keys, get_blocks_found_response
             "https://ethereum.miningpoolhub.com/index.php?action=getblocksfound&api_key=test&page=api",
             status=200,
             body=json.dumps(get_blocks_found_response),
-            headers={"Content-Type": "text/html"},
+            headers=CONTENT_HEADERS,
         )
-        result = await miningpoolhubapi.async_get_blocks_found(coin_name="ethereum")
+        result = await miningpoolhubapi.async_get_blocks_found(coin_name=ETHEREUM)
 
         assert isinstance(result, list)
         assert isinstance(result[0], dict)
@@ -85,9 +88,9 @@ async def test_get_current_workers(get_current_workers_response):
             "https://ethereum.miningpoolhub.com/index.php?action=getcurrentworkers&api_key=test&page=api",
             status=200,
             body=json.dumps(get_current_workers_response),
-            headers={"Content-Type": "text/html"},
+            headers=CONTENT_HEADERS,
         )
-        result = await miningpoolhubapi.async_get_current_workers(coin_name="ethereum")
+        result = await miningpoolhubapi.async_get_current_workers(coin_name=ETHEREUM)
 
         assert isinstance(result, int)
         assert result == 190057
@@ -106,9 +109,9 @@ async def test_get_dashboard(get_dashboard_keys, get_dashboard_data_response):
             "https://ethereum.miningpoolhub.com/index.php?action=getdashboarddata&api_key=test&page=api",
             status=200,
             body=json.dumps(get_dashboard_data_response),
-            headers={"Content-Type": "text/html"},
+            headers=CONTENT_HEADERS,
         )
-        result = await miningpoolhubapi.async_get_dashboard(coin_name="ethereum")
+        result = await miningpoolhubapi.async_get_dashboard(coin_name=ETHEREUM)
 
         assert isinstance(result, dict)
         assert (
@@ -130,9 +133,9 @@ async def test_get_difficulty(get_difficulty_response):
             "https://ethereum.miningpoolhub.com/index.php?action=getdifficulty&api_key=test&page=api",
             status=200,
             body=json.dumps(get_difficulty_response),
-            headers={"Content-Type": "text/html"},
+            headers=CONTENT_HEADERS,
         )
-        result = await miningpoolhubapi.async_get_difficulty(coin_name="ethereum")
+        result = await miningpoolhubapi.async_get_difficulty(coin_name=ETHEREUM)
 
         assert isinstance(result, int)
         assert result == 10248372611623184
@@ -151,9 +154,9 @@ async def test_get_estimated_time(get_estimated_time_response):
             "https://ethereum.miningpoolhub.com/index.php?action=getestimatedtime&api_key=test&page=api",
             status=200,
             body=json.dumps(get_estimated_time_response),
-            headers={"Content-Type": "text/html"},
+            headers=CONTENT_HEADERS,
         )
-        result = await miningpoolhubapi.async_get_estimated_time(coin_name="ethereum")
+        result = await miningpoolhubapi.async_get_estimated_time(coin_name=ETHEREUM)
 
         assert isinstance(result, int)
         assert result == 2059292915976
@@ -174,9 +177,9 @@ async def test_get_hourly_hash_rate(
             "https://ethereum.miningpoolhub.com/index.php?action=gethourlyhashrates&api_key=test&page=api",
             status=200,
             body=json.dumps(get_hourly_hash_rates_response),
-            headers={"Content-Type": "text/html"},
+            headers=CONTENT_HEADERS,
         )
-        result = await miningpoolhubapi.async_get_hourly_hash_rate(coin_name="ethereum")
+        result = await miningpoolhubapi.async_get_hourly_hash_rate(coin_name=ETHEREUM)
 
         assert isinstance(result, list)
         assert isinstance(result[0], dict)
@@ -198,9 +201,9 @@ async def test_get_nav_bar_data(get_nav_bar_data_response):
             "https://ethereum.miningpoolhub.com/index.php?action=getnavbardata&api_key=test&page=api",
             status=200,
             body=json.dumps(get_nav_bar_data_response),
-            headers={"Content-Type": "text/html"},
+            headers=CONTENT_HEADERS,
         )
-        result = await miningpoolhubapi.async_get_nav_bar_data(coin_name="ethereum")
+        result = await miningpoolhubapi.async_get_nav_bar_data(coin_name=ETHEREUM)
 
         assert isinstance(result, dict)
         assert result["error"] == "disabled", "The endpoint is disabled"
@@ -219,9 +222,9 @@ async def test_get_pool_hash_rate(get_pool_hash_rate_response):
             "https://ethereum.miningpoolhub.com/index.php?action=getpoolhashrate&api_key=test&page=api",
             status=200,
             body=json.dumps(get_pool_hash_rate_response),
-            headers={"Content-Type": "text/html"},
+            headers=CONTENT_HEADERS,
         )
-        result = await miningpoolhubapi.async_get_pool_hash_rate(coin_name="ethereum")
+        result = await miningpoolhubapi.async_get_pool_hash_rate(coin_name=ETHEREUM)
 
         assert isinstance(result, float)
         assert result == 21318913068.661
@@ -240,9 +243,9 @@ async def test_get_pool_info(get_pool_info_keys, get_pool_info_response):
             "https://ethereum.miningpoolhub.com/index.php?action=getpoolinfo&api_key=test&page=api",
             status=200,
             body=json.dumps(get_pool_info_response),
-            headers={"Content-Type": "text/html"},
+            headers=CONTENT_HEADERS,
         )
-        result = await miningpoolhubapi.async_get_pool_info(coin_name="ethereum")
+        result = await miningpoolhubapi.async_get_pool_info(coin_name=ETHEREUM)
 
         assert isinstance(result, dict)
         assert set(get_pool_info_keys).issubset(result.keys()), NOT_ALL_KEYS_PRESENT
@@ -261,9 +264,9 @@ async def test_get_pool_share_rate(get_pool_share_rate_response):
             "https://ethereum.miningpoolhub.com/index.php?action=getpoolsharerate&api_key=test&page=api",
             status=200,
             body=json.dumps(get_pool_share_rate_response),
-            headers={"Content-Type": "text/html"},
+            headers=CONTENT_HEADERS,
         )
-        result = await miningpoolhubapi.async_get_pool_share_rate(coin_name="ethereum")
+        result = await miningpoolhubapi.async_get_pool_share_rate(coin_name=ETHEREUM)
 
         assert isinstance(result, int)
 
@@ -281,9 +284,9 @@ async def test_get_pool_status(get_pool_status_keys, get_pool_status_response):
             "https://ethereum.miningpoolhub.com/index.php?action=getpoolstatus&api_key=test&page=api",
             status=200,
             body=json.dumps(get_pool_status_response),
-            headers={"Content-Type": "text/html"},
+            headers=CONTENT_HEADERS,
         )
-        result = await miningpoolhubapi.async_get_pool_status(coin_name="ethereum")
+        result = await miningpoolhubapi.async_get_pool_status(coin_name=ETHEREUM)
 
         assert isinstance(result, dict)
         assert set(get_pool_status_keys).issubset(result.keys()), NOT_ALL_KEYS_PRESENT
@@ -302,10 +305,10 @@ async def test_get_time_since_last_block(get_time_since_last_block_response):
             "https://ethereum.miningpoolhub.com/index.php?action=gettimesincelastblock&api_key=test&page=api",
             status=200,
             body=json.dumps(get_time_since_last_block_response),
-            headers={"Content-Type": "text/html"},
+            headers=CONTENT_HEADERS,
         )
         result = await miningpoolhubapi.async_get_time_since_last_block(
-            coin_name="ethereum"
+            coin_name=ETHEREUM
         )
 
         assert isinstance(result, int)
@@ -327,9 +330,9 @@ async def test_get_top_contributors(
             "https://ethereum.miningpoolhub.com/index.php?action=gettopcontributors&api_key=test&page=api",
             status=200,
             body=json.dumps(get_top_contributors_response),
-            headers={"Content-Type": "text/html"},
+            headers=CONTENT_HEADERS,
         )
-        result = await miningpoolhubapi.async_get_top_contributors(coin_name="ethereum")
+        result = await miningpoolhubapi.async_get_top_contributors(coin_name=ETHEREUM)
 
         assert isinstance(result, dict)
         assert set(get_top_contributors_keys).issubset(
@@ -350,9 +353,9 @@ async def test_get_user_balance(get_user_balance_keys, get_user_balance_response
             "https://ethereum.miningpoolhub.com/index.php?action=getuserbalance&api_key=test&page=api",
             status=200,
             body=json.dumps(get_user_balance_response),
-            headers={"Content-Type": "text/html"},
+            headers=CONTENT_HEADERS,
         )
-        result = await miningpoolhubapi.async_get_user_balance(coin_name="ethereum")
+        result = await miningpoolhubapi.async_get_user_balance(coin_name=ETHEREUM)
 
         assert isinstance(result, dict)
         assert set(get_user_balance_keys).issubset(result.keys()), NOT_ALL_KEYS_PRESENT
@@ -371,9 +374,9 @@ async def test_get_user_hash_rate(get_user_hash_rate_response):
             "https://ethereum.miningpoolhub.com/index.php?action=getuserhashrate&api_key=test&page=api",
             status=200,
             body=json.dumps(get_user_hash_rate_response),
-            headers={"Content-Type": "text/html"},
+            headers=CONTENT_HEADERS,
         )
-        result = await miningpoolhubapi.async_get_user_hash_rate(coin_name="ethereum")
+        result = await miningpoolhubapi.async_get_user_hash_rate(coin_name=ETHEREUM)
 
         assert isinstance(result, float)
         assert result == 200431.807
@@ -392,9 +395,9 @@ async def test_get_user_share_rate(get_user_share_rate_response):
             "https://ethereum.miningpoolhub.com/index.php?action=getusersharerate&api_key=test&page=api",
             status=200,
             body=json.dumps(get_user_share_rate_response),
-            headers={"Content-Type": "text/html"},
+            headers=CONTENT_HEADERS,
         )
-        result = await miningpoolhubapi.async_get_user_share_rate(coin_name="ethereum")
+        result = await miningpoolhubapi.async_get_user_share_rate(coin_name=ETHEREUM)
 
         assert isinstance(result, int)
         assert result == 0
@@ -413,9 +416,9 @@ async def test_get_user_status(get_user_status_keys, get_user_status_response):
             "https://ethereum.miningpoolhub.com/index.php?action=getuserstatus&api_key=test&page=api",
             status=200,
             body=json.dumps(get_user_status_response),
-            headers={"Content-Type": "text/html"},
+            headers=CONTENT_HEADERS,
         )
-        result = await miningpoolhubapi.async_get_user_status(coin_name="ethereum")
+        result = await miningpoolhubapi.async_get_user_status(coin_name=ETHEREUM)
 
         assert isinstance(result, dict)
         assert set(get_user_status_keys).issubset(result.keys()), NOT_ALL_KEYS_PRESENT
@@ -436,11 +439,9 @@ async def test_get_user_transactions(
             "https://ethereum.miningpoolhub.com/index.php?action=getusertransactions&api_key=test&page=api",
             status=200,
             body=json.dumps(get_user_transactions_response),
-            headers={"Content-Type": "text/html"},
+            headers=CONTENT_HEADERS,
         )
-        result = await miningpoolhubapi.async_get_user_transactions(
-            coin_name="ethereum"
-        )
+        result = await miningpoolhubapi.async_get_user_transactions(coin_name=ETHEREUM)
 
         assert isinstance(result, list)
         assert isinstance(result[0], dict)
@@ -462,9 +463,9 @@ async def test_get_user_workers(get_user_workers_keys, get_user_workers_response
             "https://ethereum.miningpoolhub.com/index.php?action=getuserworkers&api_key=test&page=api",
             status=200,
             body=json.dumps(get_user_workers_response),
-            headers={"Content-Type": "text/html"},
+            headers=CONTENT_HEADERS,
         )
-        result = await miningpoolhubapi.async_get_user_workers(coin_name="ethereum")
+        result = await miningpoolhubapi.async_get_user_workers(coin_name=ETHEREUM)
 
         assert isinstance(result, list)
         assert isinstance(result[0], dict)
@@ -486,9 +487,9 @@ async def test_public(public_keys, public_response):
             "https://ethereum.miningpoolhub.com/index.php?action=public&api_key=test&page=api",
             status=200,
             body=json.dumps(public_response),
-            headers={"Content-Type": "text/html"},
+            headers=CONTENT_HEADERS,
         )
-        result = await miningpoolhubapi.async_public(coin_name="ethereum")
+        result = await miningpoolhubapi.async_public(coin_name=ETHEREUM)
 
         assert isinstance(result, dict)
         assert set(public_keys).issubset(result.keys()), NOT_ALL_KEYS_PRESENT
@@ -510,7 +511,7 @@ async def test_get_auto_switching_and_profits_statistics(
             "https://miningpoolhub.com/index.php?action=getautoswitchingandprofitsstatistics&api_key=test&page=api",
             status=200,
             body=json.dumps(get_auto_switching_and_profits_statistics_response),
-            headers={"Content-Type": "text/html"},
+            headers=CONTENT_HEADERS,
         )
         result = (
             await miningpoolhubapi.async_get_auto_switching_and_profits_statistics()
@@ -538,7 +539,7 @@ async def test_get_mining_profit_and_statistics(
             "https://miningpoolhub.com/index.php?action=getminingandprofitsstatistics&api_key=test&page=api",
             status=200,
             body=json.dumps(get_mining_and_profit_statistics_response),
-            headers={"Content-Type": "text/html"},
+            headers=CONTENT_HEADERS,
         )
         result = await miningpoolhubapi.async_get_mining_profit_and_statistics()
 
@@ -564,7 +565,7 @@ async def test_get_user_all_balances(
             "https://miningpoolhub.com/index.php?action=getuserallbalances&api_key=test&page=api",
             status=200,
             body=json.dumps(get_user_all_balances_response),
-            headers={"Content-Type": "text/html"},
+            headers=CONTENT_HEADERS,
         )
         result = await miningpoolhubapi.async_get_user_all_balances()
 
