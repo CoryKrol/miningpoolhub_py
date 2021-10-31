@@ -8,7 +8,6 @@ from aiohttp import (
 from json.decoder import JSONDecodeError
 from . import API_KEY
 
-from .client import MiningPoolHubClient
 from .exceptions import APIError, JsonFormatError, NotFoundError
 from .urls import Urls
 
@@ -16,11 +15,13 @@ DATA = "data"
 
 
 class MiningPoolHubAPI(object):
-    __client = None
-
     def __init__(self, session: ClientSession, api_key: str = API_KEY):
-        self.__client = MiningPoolHubClient(session=session, api_key=api_key)
+        self.__client = session
+        self.__api_key = {"api_key": api_key}
         self.urls = Urls()
+
+    def api_key_set(self):
+        return self.__api_key is not None
 
     @staticmethod
     async def __to_json(response: ClientResponse):
@@ -59,7 +60,7 @@ class MiningPoolHubAPI(object):
             Raises when there is an issue parsing the JSON response
         """
         try:
-            response = await self.__client.get_request(url)
+            response = await self.__client.get(url % self.__api_key)
 
             # raises if the status code is an error - 4xx, 5xx
             response.raise_for_status()
@@ -72,7 +73,7 @@ class MiningPoolHubAPI(object):
         except JSONDecodeError as e:
             raise JsonFormatError(e)
 
-    async def async_get_block_count(self, coin_name="ethereum"):
+    async def async_get_block_count(self, coin_name: str):
         """ "Get current block height in blockchain
 
         Returns
@@ -85,7 +86,7 @@ class MiningPoolHubAPI(object):
         )
         return int((response[self.urls.action_get_block_count][DATA]))
 
-    async def async_get_block_stats(self, coin_name: str = "ethereum"):
+    async def async_get_block_stats(self, coin_name: str):
         """Get pool block stats
 
         Parameters
@@ -103,7 +104,7 @@ class MiningPoolHubAPI(object):
         )
         return result[self.urls.action_get_block_stats][DATA]
 
-    async def async_get_blocks_found(self, coin_name: str = "ethereum"):
+    async def async_get_blocks_found(self, coin_name: str):
         """Get last N blocks found as configured in admin panel
 
         Parameters
@@ -121,7 +122,7 @@ class MiningPoolHubAPI(object):
         )
         return result[self.urls.action_get_blocks_found][DATA]
 
-    async def async_get_current_workers(self, coin_name: str = "ethereum"):
+    async def async_get_current_workers(self, coin_name: str):
         """Get the total hash rate of current workers for a coin pool
 
         Parameters
@@ -139,7 +140,7 @@ class MiningPoolHubAPI(object):
         )
         return int(result[self.urls.action_get_current_workers][DATA])
 
-    async def async_get_dashboard(self, coin_name: str = "ethereum"):
+    async def async_get_dashboard(self, coin_name: str):
         """Load a user's dashboard data for a pool: hash rate, share rate, balance, recent credits
 
         Parameters
@@ -157,7 +158,7 @@ class MiningPoolHubAPI(object):
         )
         return result[self.urls.action_get_dashboard_data][DATA]
 
-    async def async_get_difficulty(self, coin_name: str = "ethereum"):
+    async def async_get_difficulty(self, coin_name: str):
         """Get current difficulty in blockchain
 
         Parameters
@@ -175,7 +176,7 @@ class MiningPoolHubAPI(object):
         )
         return int(result[self.urls.action_get_difficulty][DATA])
 
-    async def async_get_estimated_time(self, coin_name: str = "ethereum"):
+    async def async_get_estimated_time(self, coin_name: str):
         """Get estimated time to next block based on pool hashrate (seconds)
 
         Parameters
@@ -193,7 +194,7 @@ class MiningPoolHubAPI(object):
         )
         return int(result[self.urls.action_get_estimated_time][DATA])
 
-    async def async_get_hourly_hash_rate(self, coin_name: str = "ethereum"):
+    async def async_get_hourly_hash_rate(self, coin_name: str):
         """Get the average hash rate each hour for the last 24 hours, total and by worker, currently broken
         according to API docs
 
@@ -212,7 +213,7 @@ class MiningPoolHubAPI(object):
         )
         return result[self.urls.action_get_hourly_hash_rates][DATA]["mine"]
 
-    async def async_get_nav_bar_data(self, coin_name: str = "ethereum"):
+    async def async_get_nav_bar_data(self, coin_name: str):
         """Get the data displayed on the navbar. Always returns { "error": "disabled" }
 
         Parameters
@@ -230,7 +231,7 @@ class MiningPoolHubAPI(object):
         )
         return result[self.urls.action_get_nav_bar_data][DATA]
 
-    async def async_get_pool_hash_rate(self, coin_name: str = "ethereum"):
+    async def async_get_pool_hash_rate(self, coin_name: str):
         """Get current pool hash rate
 
         Parameters
@@ -248,7 +249,7 @@ class MiningPoolHubAPI(object):
         )
         return result[self.urls.action_get_pool_hash_rate][DATA]
 
-    async def async_get_pool_info(self, coin_name: str = "ethereum"):
+    async def async_get_pool_info(self, coin_name: str):
         """Get the information on pool settings
 
         Parameters
@@ -264,7 +265,7 @@ class MiningPoolHubAPI(object):
         result = await self.__get_data(self.urls.get_pool_info_url(coin_name=coin_name))
         return result[self.urls.action_get_pool_info][DATA]
 
-    async def async_get_pool_share_rate(self, coin_name: str = "ethereum"):
+    async def async_get_pool_share_rate(self, coin_name: str):
         """Get current pool share rate (shares/s)
 
         Parameters
@@ -282,7 +283,7 @@ class MiningPoolHubAPI(object):
         )
         return result[self.urls.action_get_pool_share_rate]
 
-    async def async_get_pool_status(self, coin_name: str = "ethereum"):
+    async def async_get_pool_status(self, coin_name: str):
         """Fetch overall pool status
 
         Parameters
@@ -300,7 +301,7 @@ class MiningPoolHubAPI(object):
         )
         return result[self.urls.action_get_pool_status][DATA]
 
-    async def async_get_time_since_last_block(self, coin_name: str = "ethereum"):
+    async def async_get_time_since_last_block(self, coin_name: str):
         """Get time since last block found (seconds)
 
         Parameters
@@ -318,7 +319,7 @@ class MiningPoolHubAPI(object):
         )
         return result[self.urls.action_get_time_since_last_block][DATA]
 
-    async def async_get_top_contributors(self, coin_name: str = "ethereum"):
+    async def async_get_top_contributors(self, coin_name: str):
         """Fetch top contributors data
 
         Parameters
@@ -336,7 +337,7 @@ class MiningPoolHubAPI(object):
         )
         return result[self.urls.action_get_top_contributors][DATA]["hashes"]
 
-    async def async_get_user_balance(self, coin_name: str = "ethereum"):
+    async def async_get_user_balance(self, coin_name: str):
         """Fetch a user's balance
 
         Parameters
@@ -354,7 +355,7 @@ class MiningPoolHubAPI(object):
         )
         return result[self.urls.action_get_user_balance][DATA]
 
-    async def async_get_user_hash_rate(self, coin_name: str = "ethereum"):
+    async def async_get_user_hash_rate(self, coin_name: str):
         """Fetch a user's total hash rate
 
         Parameters
@@ -372,7 +373,7 @@ class MiningPoolHubAPI(object):
         )
         return result[self.urls.action_get_user_hash_rate][DATA]
 
-    async def async_get_user_share_rate(self, coin_name: str = "ethereum"):
+    async def async_get_user_share_rate(self, coin_name: str):
         """Fetch a user's share rate
 
         Parameters
@@ -390,7 +391,7 @@ class MiningPoolHubAPI(object):
         )
         return result[self.urls.action_get_user_share_rate][DATA]
 
-    async def async_get_user_status(self, coin_name: str = "ethereum"):
+    async def async_get_user_status(self, coin_name: str):
         """Fetch a user's overall status
 
         Parameters
@@ -409,7 +410,7 @@ class MiningPoolHubAPI(object):
         )
         return result[self.urls.action_get_user_status][DATA]
 
-    async def async_get_user_transactions(self, coin_name: str = "ethereum"):
+    async def async_get_user_transactions(self, coin_name: str):
         """Get a user's transactions
 
         Parameters
@@ -427,7 +428,7 @@ class MiningPoolHubAPI(object):
         )
         return result[self.urls.action_get_user_transactions][DATA]["transactions"]
 
-    async def async_get_user_workers(self, coin_name: str = "ethereum"):
+    async def async_get_user_workers(self, coin_name: str):
         """Fetch a user's worker status
 
         Parameters
@@ -445,7 +446,7 @@ class MiningPoolHubAPI(object):
         )
         return result[self.urls.action_get_user_workers][DATA]
 
-    async def async_public(self, coin_name: str = "ethereum"):
+    async def async_public(self, coin_name: str):
         """Fetch public pool statistics, no authentication required
 
         Parameters

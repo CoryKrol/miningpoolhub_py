@@ -1,561 +1,578 @@
 import aiohttp
+import json
 
-from miningpoolhub_py.exceptions import NotFoundError
 from miningpoolhub_py import MiningPoolHubAPI
 import pytest
-from pytest import fixture
+from aioresponses import aioresponses
 
 NOT_ALL_KEYS_PRESENT = "All keys should be in the response"
 
-
-@fixture
-def get_block_stats_keys():
-    return [
-        "Total",
-        "TotalValid",
-        "TotalOrphan",
-        "TotalDifficulty",
-        "TotalShares",
-        "TotalEstimatedShares",
-        "TotalAmount",
-        "1HourTotal",
-        "1HourValid",
-        "1HourOrphan",
-        "1HourDifficulty",
-        "1HourShares",
-        "1HourEstimatedShares",
-        "1HourAmount",
-        "24HourTotal",
-        "24HourValid",
-        "24HourOrphan",
-        "24HourDifficulty",
-        "24HourShares",
-        "24HourEstimatedShares",
-        "24HourAmount",
-        "7DaysTotal",
-        "7DaysValid",
-        "7DaysOrphan",
-        "7DaysDifficulty",
-        "7DaysShares",
-        "7DaysEstimatedShares",
-        "7DaysAmount",
-        "4WeeksTotal",
-        "4WeeksValid",
-        "4WeeksOrphan",
-        "4WeeksDifficulty",
-        "4WeeksShares",
-        "4WeeksEstimatedShares",
-        "4WeeksAmount",
-        "12MonthTotal",
-        "12MonthValid",
-        "12MonthOrphan",
-        "12MonthDifficulty",
-        "12MonthShares",
-        "12MonthEstimatedShares",
-        "12MonthAmount",
-    ]
-
-
-@fixture
-def get_blocks_found_keys():
-    return [
-        "id",
-        "height",
-        "blockhash",
-        "confirmations",
-        "amount",
-        "difficulty",
-        "time",
-        "accounted",
-        "account_id",
-        "worker_name",
-        "shares",
-        "share_id",
-        "finder",
-        "is_anonymous",
-        "estshares",
-    ]
-
-
-@fixture
-def get_dashboard_keys():
-    return [
-        "raw",
-        "personal",
-        "balance",
-        "balance_for_auto_exchange",
-        "balance_on_exchange",
-        "recent_credits",
-        "pool",
-        "system",
-        "network",
-    ]
-
-
-@fixture
-def get_hourly_hash_rate_keys():
-    return ["id", "username", "hashrate"]
-
-
-@fixture
-def get_pool_info_keys():
-    return [
-        "currency",
-        "coinname",
-        "cointarget",
-        "coindiffchangetarget",
-        "stratumport",
-        "payout_system",
-        "confirmations",
-        "min_ap_threshold",
-        "max_ap_threshold",
-        "reward_type",
-        "reward",
-        "txfee",
-        "txfee_manual",
-        "txfee_auto",
-        "fees",
-    ]
-
-
-@fixture
-def get_pool_status_keys():
-    return [
-        "pool_name",
-        "hashrate",
-        "efficiency",
-        "workers",
-        "currentnetworkblock",
-        "nextnetworkblock",
-        "lastblock",
-        "networkdiff",
-        "esttime",
-        "estshares",
-        "timesincelast",
-        "nethashrate",
-    ]
-
-
-@fixture
-def get_top_contributors_keys():
-    return ["account", "hashrate"]
-
-
-@fixture
-def get_user_balance_keys():
-    return ["confirmed", "unconfirmed"]
-
-
-@fixture
-def get_user_status_keys():
-    return ["username", "shares", "hashrate", "sharerate"]
-
-
-@fixture
-def public_keys():
-    return [
-        "pool_name",
-        "hashrate",
-        "workers",
-        "shares_this_round",
-        "last_block",
-        "network_hashrate",
-    ]
-
-
-@fixture
-def get_user_transactions_keys():
-    return [
-        "id",
-        "username",
-        "type",
-        "amount",
-        "coin_address",
-        "txid",
-        "height",
-        "blockhash",
-        "confirmations",
-    ]
-
-
-@fixture
-def get_user_workers_keys():
-    return ["id", "username", "password", "monitor", "hashrate", "difficulty"]
-
-
-@fixture
-def get_auto_switching_and_profits_statistics_keys():
-    return [
-        "algo",
-        "current_mining_coin",
-        "current_mining_coin_symbol",
-        "host",
-        "all_host_list",
-        "port",
-        "algo_switch_port",
-        "multialgo_switch_port",
-        "profit",
-        "normalized_profit_amd",
-        "normalized_profit_nvidia",
-    ]
-
-
-@fixture
-def get_mining_profit_and_statistics_keys():
-    return [
-        "coin_name",
-        "symbol",
-        "host",
-        "host_list",
-        "port",
-        "direct_mining_host",
-        "direct_mining_host_list",
-        "direct_mining_algo_port",
-        "algo",
-        "normalized_profit",
-        "normalized_profit_amd",
-        "normalized_profit_nvidia",
-        "profit",
-        "pool_hash",
-        "net_hash",
-        "difficulty",
-        "reward",
-        "last_block",
-        "time_since_last_block",
-        "time_since_last_block_in_words",
-        "dovewallet_buy_price",
-        "bittrex_buy_price",
-        "poloniex_buy_price",
-        "highest_buy_price",
-        "fee",
-        "workers",
-    ]
-
-
-@fixture
-def get_user_all_balances_keys():
-    return [
-        "coin",
-        "confirmed",
-        "unconfirmed",
-        "ae_confirmed",
-        "ae_unconfirmed",
-        "exchange",
-    ]
+CONTENT_HEADERS = {"Content-Type": "text/html"}
+ETHEREUM = "ethereum"
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
-async def test_get_block_count():
+async def test_get_block_count(get_block_count_response):
     """Tests an API call to get block count data for a coin_name"""
-    async with aiohttp.ClientSession() as session:
-        pool_instance = MiningPoolHubAPI(session=session)
+    session = aiohttp.ClientSession()
+    miningpoolhubapi = MiningPoolHubAPI(session=session)
+    assert miningpoolhubapi.api_key_set() is True
+    with aioresponses() as m:
+        m.get(
+            "https://ethereum.miningpoolhub.com/index.php?action=getblockcount&api_key=test&page=api",
+            status=200,
+            body=json.dumps(get_block_count_response),
+            headers=CONTENT_HEADERS,
+        )
 
-        response = await pool_instance.async_get_block_count()
+        resp = await miningpoolhubapi.async_get_block_count(coin_name=ETHEREUM)
+        assert isinstance(resp, int)
+        assert resp == 13503059
 
-        assert isinstance(response, int)
+    await session.close()
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
-async def test_get_block_stats(get_block_stats_keys):
+async def test_get_block_stats(get_block_stats_keys, get_block_stats_response):
     """Tests an API call to get block stats data for a coin_name"""
-    async with aiohttp.ClientSession() as session:
-        pool_instance = MiningPoolHubAPI(session=session)
-        response = await pool_instance.async_get_block_stats()
+    session = aiohttp.ClientSession()
+    miningpoolhubapi = MiningPoolHubAPI(session=session)
+    assert miningpoolhubapi.api_key_set() is True
+    with aioresponses() as m:
+        m.get(
+            "https://ethereum.miningpoolhub.com/index.php?action=getblockstats&api_key=test&page=api",
+            status=200,
+            payload=get_block_stats_response,
+            headers=CONTENT_HEADERS,
+        )
 
-        assert isinstance(response, dict)
-        assert set(get_block_stats_keys).issubset(response.keys()), NOT_ALL_KEYS_PRESENT
+        result = await miningpoolhubapi.async_get_block_stats(coin_name=ETHEREUM)
+        assert isinstance(result, dict)
+        assert set(get_block_stats_keys).issubset(result.keys()), NOT_ALL_KEYS_PRESENT
+
+    await session.close()
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
-async def test_get_blocks_found(get_blocks_found_keys):
+async def test_get_blocks_found(get_blocks_found_keys, get_blocks_found_response):
     """Tests an API call to get blocks found data for a coin_name"""
-    async with aiohttp.ClientSession() as session:
-        pool_instance = MiningPoolHubAPI(session=session)
-        response = await pool_instance.async_get_blocks_found()
+    session = aiohttp.ClientSession()
+    miningpoolhubapi = MiningPoolHubAPI(session=session)
+    assert miningpoolhubapi.api_key_set() is True
+    with aioresponses() as m:
+        m.get(
+            "https://ethereum.miningpoolhub.com/index.php?action=getblocksfound&api_key=test&page=api",
+            status=200,
+            body=json.dumps(get_blocks_found_response),
+            headers=CONTENT_HEADERS,
+        )
+        result = await miningpoolhubapi.async_get_blocks_found(coin_name=ETHEREUM)
 
-        assert isinstance(response, list)
-        assert isinstance(response[0], dict)
+        assert isinstance(result, list)
+        assert isinstance(result[0], dict)
         assert set(get_blocks_found_keys).issubset(
-            response[0].keys()
+            result[0].keys()
         ), NOT_ALL_KEYS_PRESENT
+
+    await session.close()
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
-async def test_get_current_workers():
+async def test_get_current_workers(get_current_workers_response):
     """Tests an API call to get current worker hash rate data for a coin_name"""
-    async with aiohttp.ClientSession() as session:
-        pool_instance = MiningPoolHubAPI(session=session)
-        response = await pool_instance.async_get_current_workers()
+    session = aiohttp.ClientSession()
+    miningpoolhubapi = MiningPoolHubAPI(session=session)
+    assert miningpoolhubapi.api_key_set() is True
+    with aioresponses() as m:
+        m.get(
+            "https://ethereum.miningpoolhub.com/index.php?action=getcurrentworkers&api_key=test&page=api",
+            status=200,
+            body=json.dumps(get_current_workers_response),
+            headers=CONTENT_HEADERS,
+        )
+        result = await miningpoolhubapi.async_get_current_workers(coin_name=ETHEREUM)
 
-        assert isinstance(response, int)
+        assert isinstance(result, int)
+        assert result == 190057
+
+    await session.close()
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
-async def test_get_dashboard(get_dashboard_keys):
+async def test_get_dashboard(get_dashboard_keys, get_dashboard_data_response):
     """Tests an API call to get dashboard data for a coin_name"""
-    async with aiohttp.ClientSession() as session:
-        pool_instance = MiningPoolHubAPI(session=session)
-        response = await pool_instance.async_get_dashboard()
+    session = aiohttp.ClientSession()
+    miningpoolhubapi = MiningPoolHubAPI(session=session)
+    assert miningpoolhubapi.api_key_set() is True
+    with aioresponses() as m:
+        m.get(
+            "https://ethereum.miningpoolhub.com/index.php?action=getdashboarddata&api_key=test&page=api",
+            status=200,
+            body=json.dumps(get_dashboard_data_response),
+            headers=CONTENT_HEADERS,
+        )
+        result = await miningpoolhubapi.async_get_dashboard(coin_name=ETHEREUM)
 
-        assert isinstance(response, dict)
+        assert isinstance(result, dict)
         assert (
-            response["pool"]["info"]["currency"] == "ETH"
+            result["pool"]["info"]["currency"] == "ETH"
         ), "The coin name should be in the response"
-        assert set(get_dashboard_keys).issubset(response.keys()), NOT_ALL_KEYS_PRESENT
+        assert set(get_dashboard_keys).issubset(result.keys()), NOT_ALL_KEYS_PRESENT
+
+    await session.close()
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
-async def test_get_dashboard_invalid_name():
-    """Tests an API call to get dashboard data for a coin_name that is invalid"""
-    async with aiohttp.ClientSession() as session:
-        pool_instance = MiningPoolHubAPI(session=session)
-        with pytest.raises(NotFoundError):
-            await pool_instance.async_get_dashboard(coin_name="poocash")
-
-
-@pytest.mark.asyncio
-@pytest.mark.vcr
-async def test_get_difficulty():
+async def test_get_difficulty(get_difficulty_response):
     """Tests an API call to get difficulty data for a coin_name"""
-    async with aiohttp.ClientSession() as session:
-        pool_instance = MiningPoolHubAPI(session=session)
-        response = await pool_instance.async_get_difficulty()
+    session = aiohttp.ClientSession()
+    miningpoolhubapi = MiningPoolHubAPI(session=session)
+    assert miningpoolhubapi.api_key_set() is True
+    with aioresponses() as m:
+        m.get(
+            "https://ethereum.miningpoolhub.com/index.php?action=getdifficulty&api_key=test&page=api",
+            status=200,
+            body=json.dumps(get_difficulty_response),
+            headers=CONTENT_HEADERS,
+        )
+        result = await miningpoolhubapi.async_get_difficulty(coin_name=ETHEREUM)
 
-        assert isinstance(response, int)
+        assert isinstance(result, int)
+        assert result == 10248372611623184
+
+    await session.close()
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
-async def test_get_difficulty():
+async def test_get_estimated_time(get_estimated_time_response):
     """Tests an API call to get estimated time for a coin_name"""
-    async with aiohttp.ClientSession() as session:
-        pool_instance = MiningPoolHubAPI(session=session)
-        response = await pool_instance.async_get_estimated_time()
+    session = aiohttp.ClientSession()
+    miningpoolhubapi = MiningPoolHubAPI(session=session)
+    assert miningpoolhubapi.api_key_set() is True
+    with aioresponses() as m:
+        m.get(
+            "https://ethereum.miningpoolhub.com/index.php?action=getestimatedtime&api_key=test&page=api",
+            status=200,
+            body=json.dumps(get_estimated_time_response),
+            headers=CONTENT_HEADERS,
+        )
+        result = await miningpoolhubapi.async_get_estimated_time(coin_name=ETHEREUM)
 
-        assert isinstance(response, int)
+        assert isinstance(result, int)
+        assert result == 2059292915976
+
+    await session.close()
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
-async def test_get_hourly_hash_rate(get_hourly_hash_rate_keys):
+async def test_get_hourly_hash_rate(
+    get_hourly_hash_rate_keys, get_hourly_hash_rates_response
+):
     """Tests an API call to get hourly hash rate data for a pool"""
-    async with aiohttp.ClientSession() as session:
-        api_instance = MiningPoolHubAPI(session=session)
-        response = await api_instance.async_get_hourly_hash_rate()
+    session = aiohttp.ClientSession()
+    miningpoolhubapi = MiningPoolHubAPI(session=session)
+    assert miningpoolhubapi.api_key_set() is True
+    with aioresponses() as m:
+        m.get(
+            "https://ethereum.miningpoolhub.com/index.php?action=gethourlyhashrates&api_key=test&page=api",
+            status=200,
+            body=json.dumps(get_hourly_hash_rates_response),
+            headers=CONTENT_HEADERS,
+        )
+        result = await miningpoolhubapi.async_get_hourly_hash_rate(coin_name=ETHEREUM)
 
-        assert isinstance(response, list)
-        assert isinstance(response[0], dict)
+        assert isinstance(result, list)
+        assert isinstance(result[0], dict)
         assert set(get_hourly_hash_rate_keys).issubset(
-            response[0].keys()
+            result[0].keys()
         ), NOT_ALL_KEYS_PRESENT
+
+    await session.close()
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
-async def test_get_nav_bar_data():
+async def test_get_nav_bar_data(get_nav_bar_data_response):
     """Tests an API call to get nav bar data for a pool"""
-    async with aiohttp.ClientSession() as session:
-        pool_instance = MiningPoolHubAPI(session=session)
-        response = await pool_instance.async_get_nav_bar_data()
+    session = aiohttp.ClientSession()
+    miningpoolhubapi = MiningPoolHubAPI(session=session)
+    assert miningpoolhubapi.api_key_set() is True
+    with aioresponses() as m:
+        m.get(
+            "https://ethereum.miningpoolhub.com/index.php?action=getnavbardata&api_key=test&page=api",
+            status=200,
+            body=json.dumps(get_nav_bar_data_response),
+            headers=CONTENT_HEADERS,
+        )
+        result = await miningpoolhubapi.async_get_nav_bar_data(coin_name=ETHEREUM)
 
-        assert isinstance(response, dict)
-        assert response["error"] == "disabled", "The endpoint is disabled"
+        assert isinstance(result, dict)
+        assert result["error"] == "disabled", "The endpoint is disabled"
+
+    await session.close()
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
-async def test_get_pool_hash_rate():
+async def test_get_pool_hash_rate(get_pool_hash_rate_response):
     """Tests an API call to get pool hash rate"""
-    async with aiohttp.ClientSession() as session:
-        pool_instance = MiningPoolHubAPI(session=session)
-        response = await pool_instance.async_get_pool_hash_rate()
+    session = aiohttp.ClientSession()
+    miningpoolhubapi = MiningPoolHubAPI(session=session)
+    assert miningpoolhubapi.api_key_set() is True
+    with aioresponses() as m:
+        m.get(
+            "https://ethereum.miningpoolhub.com/index.php?action=getpoolhashrate&api_key=test&page=api",
+            status=200,
+            body=json.dumps(get_pool_hash_rate_response),
+            headers=CONTENT_HEADERS,
+        )
+        result = await miningpoolhubapi.async_get_pool_hash_rate(coin_name=ETHEREUM)
 
-        assert isinstance(response, float)
+        assert isinstance(result, float)
+        assert result == 21318913068.661
+
+    await session.close()
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
-async def test_get_pool_info(get_pool_info_keys):
+async def test_get_pool_info(get_pool_info_keys, get_pool_info_response):
     """Tests an API call to get pool info"""
-    async with aiohttp.ClientSession() as session:
-        pool_instance = MiningPoolHubAPI(session=session)
-        response = await pool_instance.async_get_pool_info()
+    session = aiohttp.ClientSession()
+    miningpoolhubapi = MiningPoolHubAPI(session=session)
+    assert miningpoolhubapi.api_key_set() is True
+    with aioresponses() as m:
+        m.get(
+            "https://ethereum.miningpoolhub.com/index.php?action=getpoolinfo&api_key=test&page=api",
+            status=200,
+            body=json.dumps(get_pool_info_response),
+            headers=CONTENT_HEADERS,
+        )
+        result = await miningpoolhubapi.async_get_pool_info(coin_name=ETHEREUM)
 
-        assert isinstance(response, dict)
-        assert set(get_pool_info_keys).issubset(response.keys()), NOT_ALL_KEYS_PRESENT
+        assert isinstance(result, dict)
+        assert set(get_pool_info_keys).issubset(result.keys()), NOT_ALL_KEYS_PRESENT
+
+    await session.close()
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
-async def test_get_pool_share_rate():
+async def test_get_pool_share_rate(get_pool_share_rate_response):
     """Tests an API call to get pool share rate"""
-    async with aiohttp.ClientSession() as session:
-        pool_instance = MiningPoolHubAPI(session=session)
-        response = await pool_instance.async_get_pool_share_rate()
+    session = aiohttp.ClientSession()
+    miningpoolhubapi = MiningPoolHubAPI(session=session)
+    assert miningpoolhubapi.api_key_set() is True
+    with aioresponses() as m:
+        m.get(
+            "https://ethereum.miningpoolhub.com/index.php?action=getpoolsharerate&api_key=test&page=api",
+            status=200,
+            body=json.dumps(get_pool_share_rate_response),
+            headers=CONTENT_HEADERS,
+        )
+        result = await miningpoolhubapi.async_get_pool_share_rate(coin_name=ETHEREUM)
 
-        assert isinstance(response, int)
+        assert isinstance(result, int)
+
+    await session.close()
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
-async def test_get_pool_status(get_pool_status_keys):
+async def test_get_pool_status(get_pool_status_keys, get_pool_status_response):
     """Tests an API call to get pool status"""
-    async with aiohttp.ClientSession() as session:
-        pool_instance = MiningPoolHubAPI(session=session)
-        response = await pool_instance.async_get_pool_status()
+    session = aiohttp.ClientSession()
+    miningpoolhubapi = MiningPoolHubAPI(session=session)
+    assert miningpoolhubapi.api_key_set() is True
+    with aioresponses() as m:
+        m.get(
+            "https://ethereum.miningpoolhub.com/index.php?action=getpoolstatus&api_key=test&page=api",
+            status=200,
+            body=json.dumps(get_pool_status_response),
+            headers=CONTENT_HEADERS,
+        )
+        result = await miningpoolhubapi.async_get_pool_status(coin_name=ETHEREUM)
 
-        assert isinstance(response, dict)
-        assert set(get_pool_status_keys).issubset(response.keys()), NOT_ALL_KEYS_PRESENT
+        assert isinstance(result, dict)
+        assert set(get_pool_status_keys).issubset(result.keys()), NOT_ALL_KEYS_PRESENT
+
+    await session.close()
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
-async def test_get_time_since_last_block():
+async def test_get_time_since_last_block(get_time_since_last_block_response):
     """Tests an API call to get time since last block found"""
-    async with aiohttp.ClientSession() as session:
-        pool_instance = MiningPoolHubAPI(session=session)
-        response = await pool_instance.async_get_time_since_last_block()
+    session = aiohttp.ClientSession()
+    miningpoolhubapi = MiningPoolHubAPI(session=session)
+    assert miningpoolhubapi.api_key_set() is True
+    with aioresponses() as m:
+        m.get(
+            "https://ethereum.miningpoolhub.com/index.php?action=gettimesincelastblock&api_key=test&page=api",
+            status=200,
+            body=json.dumps(get_time_since_last_block_response),
+            headers=CONTENT_HEADERS,
+        )
+        result = await miningpoolhubapi.async_get_time_since_last_block(
+            coin_name=ETHEREUM
+        )
 
-        assert isinstance(response, int)
+        assert isinstance(result, int)
+        assert result == 1153
+
+    await session.close()
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
-async def test_get_top_contributors(get_top_contributors_keys):
+async def test_get_top_contributors(
+    get_top_contributors_keys, get_top_contributors_response
+):
     """Tests an API call to get top contributor information"""
-    async with aiohttp.ClientSession() as session:
-        pool_instance = MiningPoolHubAPI(session=session)
-        response = await pool_instance.async_get_top_contributors()
+    session = aiohttp.ClientSession()
+    miningpoolhubapi = MiningPoolHubAPI(session=session)
+    assert miningpoolhubapi.api_key_set() is True
+    with aioresponses() as m:
+        m.get(
+            "https://ethereum.miningpoolhub.com/index.php?action=gettopcontributors&api_key=test&page=api",
+            status=200,
+            body=json.dumps(get_top_contributors_response),
+            headers=CONTENT_HEADERS,
+        )
+        result = await miningpoolhubapi.async_get_top_contributors(coin_name=ETHEREUM)
 
-        assert isinstance(response, dict)
+        assert isinstance(result, dict)
         assert set(get_top_contributors_keys).issubset(
-            response.keys()
+            result.keys()
         ), NOT_ALL_KEYS_PRESENT
+
+    await session.close()
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
-async def test_get_user_balance(get_user_balance_keys):
+async def test_get_user_balance(get_user_balance_keys, get_user_balance_response):
     """Tests an API call to get user balance information"""
-    async with aiohttp.ClientSession() as session:
-        pool_instance = MiningPoolHubAPI(session=session)
-        response = await pool_instance.async_get_user_balance()
+    session = aiohttp.ClientSession()
+    miningpoolhubapi = MiningPoolHubAPI(session=session)
+    assert miningpoolhubapi.api_key_set() is True
+    with aioresponses() as m:
+        m.get(
+            "https://ethereum.miningpoolhub.com/index.php?action=getuserbalance&api_key=test&page=api",
+            status=200,
+            body=json.dumps(get_user_balance_response),
+            headers=CONTENT_HEADERS,
+        )
+        result = await miningpoolhubapi.async_get_user_balance(coin_name=ETHEREUM)
 
-        assert isinstance(response, dict)
-        assert set(get_user_balance_keys).issubset(
-            response.keys()
-        ), NOT_ALL_KEYS_PRESENT
+        assert isinstance(result, dict)
+        assert set(get_user_balance_keys).issubset(result.keys()), NOT_ALL_KEYS_PRESENT
+
+    await session.close()
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
-async def test_get_user_hash_rate():
+async def test_get_user_hash_rate(get_user_hash_rate_response):
     """Tests an API call to get user hash rate"""
-    async with aiohttp.ClientSession() as session:
-        pool_instance = MiningPoolHubAPI(session=session)
-        response = await pool_instance.async_get_user_hash_rate()
+    session = aiohttp.ClientSession()
+    miningpoolhubapi = MiningPoolHubAPI(session=session)
+    assert miningpoolhubapi.api_key_set() is True
+    with aioresponses() as m:
+        m.get(
+            "https://ethereum.miningpoolhub.com/index.php?action=getuserhashrate&api_key=test&page=api",
+            status=200,
+            body=json.dumps(get_user_hash_rate_response),
+            headers=CONTENT_HEADERS,
+        )
+        result = await miningpoolhubapi.async_get_user_hash_rate(coin_name=ETHEREUM)
 
-        assert isinstance(response, float)
+        assert isinstance(result, float)
+        assert result == 200431.807
+
+    await session.close()
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
-async def test_get_user_share_rate():
+async def test_get_user_share_rate(get_user_share_rate_response):
     """Tests an API call to get user share rate"""
-    async with aiohttp.ClientSession() as session:
-        pool_instance = MiningPoolHubAPI(session=session)
-        response = await pool_instance.async_get_user_share_rate()
+    session = aiohttp.ClientSession()
+    miningpoolhubapi = MiningPoolHubAPI(session=session)
+    assert miningpoolhubapi.api_key_set() is True
+    with aioresponses() as m:
+        m.get(
+            "https://ethereum.miningpoolhub.com/index.php?action=getusersharerate&api_key=test&page=api",
+            status=200,
+            body=json.dumps(get_user_share_rate_response),
+            headers=CONTENT_HEADERS,
+        )
+        result = await miningpoolhubapi.async_get_user_share_rate(coin_name=ETHEREUM)
 
-        assert isinstance(response, int)
+        assert isinstance(result, int)
+        assert result == 0
+
+    await session.close()
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
-async def test_get_user_status(get_user_status_keys):
+async def test_get_user_status(get_user_status_keys, get_user_status_response):
     """Tests an API call to get user status"""
-    async with aiohttp.ClientSession() as session:
-        pool_instance = MiningPoolHubAPI(session=session)
-        response = await pool_instance.async_get_user_status()
+    session = aiohttp.ClientSession()
+    miningpoolhubapi = MiningPoolHubAPI(session=session)
+    assert miningpoolhubapi.api_key_set() is True
+    with aioresponses() as m:
+        m.get(
+            "https://ethereum.miningpoolhub.com/index.php?action=getuserstatus&api_key=test&page=api",
+            status=200,
+            body=json.dumps(get_user_status_response),
+            headers=CONTENT_HEADERS,
+        )
+        result = await miningpoolhubapi.async_get_user_status(coin_name=ETHEREUM)
 
-        assert isinstance(response, dict)
-        assert set(get_user_status_keys).issubset(response.keys()), NOT_ALL_KEYS_PRESENT
+        assert isinstance(result, dict)
+        assert set(get_user_status_keys).issubset(result.keys()), NOT_ALL_KEYS_PRESENT
+
+    await session.close()
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
-async def test_get_user_transactions(get_user_transactions_keys):
+async def test_get_user_transactions(
+    get_user_transactions_keys, get_user_transactions_response
+):
     """Tests an API call to get user transactions"""
-    async with aiohttp.ClientSession() as session:
-        pool_instance = MiningPoolHubAPI(session=session)
-        response = await pool_instance.async_get_user_transactions()
+    session = aiohttp.ClientSession()
+    miningpoolhubapi = MiningPoolHubAPI(session=session)
+    assert miningpoolhubapi.api_key_set() is True
+    with aioresponses() as m:
+        m.get(
+            "https://ethereum.miningpoolhub.com/index.php?action=getusertransactions&api_key=test&page=api",
+            status=200,
+            body=json.dumps(get_user_transactions_response),
+            headers=CONTENT_HEADERS,
+        )
+        result = await miningpoolhubapi.async_get_user_transactions(coin_name=ETHEREUM)
 
-        assert isinstance(response, list)
-        assert isinstance(response[0], dict)
+        assert isinstance(result, list)
+        assert isinstance(result[0], dict)
         assert set(get_user_transactions_keys).issubset(
-            response[0].keys()
+            result[0].keys()
         ), NOT_ALL_KEYS_PRESENT
 
+    await session.close()
+
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
-async def test_public(public_keys):
+async def test_get_user_workers(get_user_workers_keys, get_user_workers_response):
+    """Tests an API call to get user workers"""
+    session = aiohttp.ClientSession()
+    miningpoolhubapi = MiningPoolHubAPI(session=session)
+    assert miningpoolhubapi.api_key_set() is True
+    with aioresponses() as m:
+        m.get(
+            "https://ethereum.miningpoolhub.com/index.php?action=getuserworkers&api_key=test&page=api",
+            status=200,
+            body=json.dumps(get_user_workers_response),
+            headers=CONTENT_HEADERS,
+        )
+        result = await miningpoolhubapi.async_get_user_workers(coin_name=ETHEREUM)
+
+        assert isinstance(result, list)
+        assert isinstance(result[0], dict)
+        assert set(get_user_workers_keys).issubset(
+            result[0].keys()
+        ), NOT_ALL_KEYS_PRESENT
+
+    await session.close()
+
+
+@pytest.mark.asyncio
+async def test_public(public_keys, public_response):
     """Tests an API call to get public data for a a pool"""
-    async with aiohttp.ClientSession() as session:
-        pool_instance = MiningPoolHubAPI(session=session)
-        response = await pool_instance.async_public()
+    session = aiohttp.ClientSession()
+    miningpoolhubapi = MiningPoolHubAPI(session=session)
+    assert miningpoolhubapi.api_key_set() is True
+    with aioresponses() as m:
+        m.get(
+            "https://ethereum.miningpoolhub.com/index.php?action=public&api_key=test&page=api",
+            status=200,
+            body=json.dumps(public_response),
+            headers=CONTENT_HEADERS,
+        )
+        result = await miningpoolhubapi.async_public(coin_name=ETHEREUM)
 
-        assert isinstance(response, dict)
-        assert set(public_keys).issubset(response.keys()), NOT_ALL_KEYS_PRESENT
+        assert isinstance(result, dict)
+        assert set(public_keys).issubset(result.keys()), NOT_ALL_KEYS_PRESENT
+
+    await session.close()
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
 async def test_get_auto_switching_and_profits_statistics(
     get_auto_switching_and_profits_statistics_keys,
+    get_auto_switching_and_profits_statistics_response,
 ):
     """Tests an API call to get mining profit and statistics"""
-    async with aiohttp.ClientSession() as session:
-        pool_instance = MiningPoolHubAPI(session=session)
-        response = await pool_instance.async_get_auto_switching_and_profits_statistics()
+    session = aiohttp.ClientSession()
+    miningpoolhubapi = MiningPoolHubAPI(session=session)
+    assert miningpoolhubapi.api_key_set() is True
+    with aioresponses() as m:
+        m.get(
+            "https://miningpoolhub.com/index.php?action=getautoswitchingandprofitsstatistics&api_key=test&page=api",
+            status=200,
+            body=json.dumps(get_auto_switching_and_profits_statistics_response),
+            headers=CONTENT_HEADERS,
+        )
+        result = (
+            await miningpoolhubapi.async_get_auto_switching_and_profits_statistics()
+        )
 
-        assert isinstance(response, list)
-        assert isinstance(response[0], dict)
+        assert isinstance(result, list)
+        assert isinstance(result[0], dict)
         assert set(get_auto_switching_and_profits_statistics_keys).issubset(
-            response[0].keys()
+            result[0].keys()
         ), NOT_ALL_KEYS_PRESENT
+
+    await session.close()
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
-async def test_get_mining_profit_and_statistics(get_mining_profit_and_statistics_keys):
+async def test_get_mining_profit_and_statistics(
+    get_mining_profit_and_statistics_keys, get_mining_and_profit_statistics_response
+):
     """Tests an API call to get mining profit and statistics"""
-    async with aiohttp.ClientSession() as session:
-        pool_instance = MiningPoolHubAPI(session=session)
-        response = await pool_instance.async_get_mining_profit_and_statistics()
+    session = aiohttp.ClientSession()
+    miningpoolhubapi = MiningPoolHubAPI(session=session)
+    assert miningpoolhubapi.api_key_set() is True
+    with aioresponses() as m:
+        m.get(
+            "https://miningpoolhub.com/index.php?action=getminingandprofitsstatistics&api_key=test&page=api",
+            status=200,
+            body=json.dumps(get_mining_and_profit_statistics_response),
+            headers=CONTENT_HEADERS,
+        )
+        result = await miningpoolhubapi.async_get_mining_profit_and_statistics()
 
-        assert isinstance(response, list)
-        assert isinstance(response[0], dict)
+        assert isinstance(result, list)
+        assert isinstance(result[0], dict)
         assert set(get_mining_profit_and_statistics_keys).issubset(
-            response[0].keys()
+            result[0].keys()
         ), NOT_ALL_KEYS_PRESENT
+
+    await session.close()
 
 
 @pytest.mark.asyncio
-@pytest.mark.vcr
-async def test_get_user_all_balances(get_user_all_balances_keys):
+async def test_get_user_all_balances(
+    get_user_all_balances_keys, get_user_all_balances_response
+):
     """Tests an API call to get mining profit and statistics"""
-    async with aiohttp.ClientSession() as session:
-        pool_instance = MiningPoolHubAPI(session=session)
-        response = await pool_instance.async_get_user_all_balances()
+    session = aiohttp.ClientSession()
+    miningpoolhubapi = MiningPoolHubAPI(session=session)
+    assert miningpoolhubapi.api_key_set() is True
+    with aioresponses() as m:
+        m.get(
+            "https://miningpoolhub.com/index.php?action=getuserallbalances&api_key=test&page=api",
+            status=200,
+            body=json.dumps(get_user_all_balances_response),
+            headers=CONTENT_HEADERS,
+        )
+        result = await miningpoolhubapi.async_get_user_all_balances()
 
-        assert isinstance(response, list)
-        assert isinstance(response[0], dict)
+        assert isinstance(result, list)
+        assert isinstance(result[0], dict)
         assert set(get_user_all_balances_keys).issubset(
-            response[0].keys()
+            result[0].keys()
         ), NOT_ALL_KEYS_PRESENT
+
+    await session.close()
