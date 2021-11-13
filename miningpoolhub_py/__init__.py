@@ -14,6 +14,5 @@ from .miningpoolhubapi import MiningPoolHubAPI
 # TODO: Possible Errors
 # 1. Bad auth token -> 401 Unauthorized ('Access denied')
 # 2. Success status on auto switching bad -> APIError
-# 3. Unknown mining pool name -> 404 Not found
 # 4. API Key Rate limit error
 # 5. Need to test calls to API for new account with 0s/nulls in responses -> 200, html document as response
