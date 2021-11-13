@@ -1,14 +1,93 @@
 import aiohttp
 import json
 
+from miningpoolhub_py.exceptions import (
+    APIError,
+    APIRateLimitError,
+    UnauthorizedError,
+    NotFoundError,
+)
 from miningpoolhub_py import MiningPoolHubAPI
 import pytest
 from aioresponses import aioresponses
 
 NOT_ALL_KEYS_PRESENT = "All keys should be in the response"
 
+GET_USER_BALANCES_URL = "https://ethereum.miningpoolhub.com/index.php?action=getuserbalance&api_key=test&page=api"
+GET_AUTO_SWITCHING_URL = "https://miningpoolhub.com/index.php?action=getautoswitchingandprofitsstatistics&page=api"
+
 CONTENT_HEADERS = {"Content-Type": "text/html"}
 ETHEREUM = "ethereum"
+
+
+@pytest.mark.asyncio
+async def test_unauthorized_api_key():
+    """Tests an API call with a bad API key"""
+    session = aiohttp.ClientSession()
+    miningpoolhubapi = MiningPoolHubAPI(session=session)
+    assert miningpoolhubapi.api_key_set() is True
+    with aioresponses() as m:
+        m.get(GET_USER_BALANCES_URL, status=401)
+        with pytest.raises(UnauthorizedError):
+            await miningpoolhubapi.async_get_user_balance(coin_name=ETHEREUM)
+    await session.close()
+
+
+@pytest.mark.asyncio
+async def test_bad_coin_name(get_auto_switching_and_profits_statistics_response):
+    """Tests an API call with a non-existent coin name"""
+    session = aiohttp.ClientSession()
+    miningpoolhubapi = MiningPoolHubAPI(session=session)
+    assert miningpoolhubapi.api_key_set() is True
+    with aioresponses() as m:
+        m.get(
+            "https://doggy_coin.miningpoolhub.com/index.php?action=getuserbalance&api_key=test&page=api",
+            exception=aiohttp.ClientConnectionError(),
+        )
+        m.get(
+            GET_AUTO_SWITCHING_URL,
+            status=200,
+            body=json.dumps(get_auto_switching_and_profits_statistics_response),
+            headers=CONTENT_HEADERS,
+        )
+        with pytest.raises(NotFoundError):
+            await miningpoolhubapi.async_get_user_balance(coin_name="doggy_coin")
+    await session.close()
+
+
+@pytest.mark.asyncio
+async def test_bad_connection():
+    """Tests an API call with a bad connection, to distinguish from a bad coin name"""
+    session = aiohttp.ClientSession()
+    miningpoolhubapi = MiningPoolHubAPI(session=session)
+    assert miningpoolhubapi.api_key_set() is True
+    with aioresponses() as m:
+        m.get(GET_USER_BALANCES_URL, exception=aiohttp.ClientConnectionError())
+        m.get(
+            "https://miningpoolhub.com/index.php?action=getautoswitchingandprofitsstatistics&api_key=test&page=api",
+            exception=aiohttp.ClientConnectionError(),
+        )
+        with pytest.raises(aiohttp.ClientConnectionError):
+            await miningpoolhubapi.async_get_user_balance(coin_name=ETHEREUM)
+    await session.close()
+
+
+@pytest.mark.asyncio
+async def test_api_rate_limit(api_rate_limit_response):
+    """Tests an API call with a non-existent coin name"""
+    session = aiohttp.ClientSession()
+    miningpoolhubapi = MiningPoolHubAPI(session=session)
+    assert miningpoolhubapi.api_key_set() is True
+    with aioresponses() as m:
+        m.get(
+            GET_USER_BALANCES_URL,
+            status=200,
+            body=api_rate_limit_response,
+            headers=CONTENT_HEADERS,
+        )
+        with pytest.raises(APIRateLimitError):
+            await miningpoolhubapi.async_get_user_balance(coin_name=ETHEREUM)
+    await session.close()
 
 
 @pytest.mark.asyncio
@@ -350,7 +429,7 @@ async def test_get_user_balance(get_user_balance_keys, get_user_balance_response
     assert miningpoolhubapi.api_key_set() is True
     with aioresponses() as m:
         m.get(
-            "https://ethereum.miningpoolhub.com/index.php?action=getuserbalance&api_key=test&page=api",
+            GET_USER_BALANCES_URL,
             status=200,
             body=json.dumps(get_user_balance_response),
             headers=CONTENT_HEADERS,
@@ -484,7 +563,7 @@ async def test_public(public_keys, public_response):
     assert miningpoolhubapi.api_key_set() is True
     with aioresponses() as m:
         m.get(
-            "https://ethereum.miningpoolhub.com/index.php?action=public&api_key=test&page=api",
+            "https://ethereum.miningpoolhub.com/index.php?action=public&page=api",
             status=200,
             body=json.dumps(public_response),
             headers=CONTENT_HEADERS,
@@ -502,13 +581,13 @@ async def test_get_auto_switching_and_profits_statistics(
     get_auto_switching_and_profits_statistics_keys,
     get_auto_switching_and_profits_statistics_response,
 ):
-    """Tests an API call to get mining profit and statistics"""
+    """Tests an API call to get auto switching profit and statistics"""
     session = aiohttp.ClientSession()
     miningpoolhubapi = MiningPoolHubAPI(session=session)
     assert miningpoolhubapi.api_key_set() is True
     with aioresponses() as m:
         m.get(
-            "https://miningpoolhub.com/index.php?action=getautoswitchingandprofitsstatistics&api_key=test&page=api",
+            GET_AUTO_SWITCHING_URL,
             status=200,
             body=json.dumps(get_auto_switching_and_profits_statistics_response),
             headers=CONTENT_HEADERS,
@@ -527,16 +606,37 @@ async def test_get_auto_switching_and_profits_statistics(
 
 
 @pytest.mark.asyncio
-async def test_get_mining_profit_and_statistics(
-    get_mining_profit_and_statistics_keys, get_mining_and_profit_statistics_response
+async def test_get_auto_switching_and_profits_statistics_fail(
+    get_auto_switching_and_profits_statistics_response_fail,
 ):
-    """Tests an API call to get mining profit and statistics"""
+    """Tests an API call to get auto switching profit and statistics that failed"""
     session = aiohttp.ClientSession()
     miningpoolhubapi = MiningPoolHubAPI(session=session)
     assert miningpoolhubapi.api_key_set() is True
     with aioresponses() as m:
         m.get(
-            "https://miningpoolhub.com/index.php?action=getminingandprofitsstatistics&api_key=test&page=api",
+            GET_AUTO_SWITCHING_URL,
+            status=200,
+            body=json.dumps(get_auto_switching_and_profits_statistics_response_fail),
+            headers=CONTENT_HEADERS,
+        )
+        with pytest.raises(APIError):
+            await miningpoolhubapi.async_get_auto_switching_and_profits_statistics()
+
+    await session.close()
+
+
+@pytest.mark.asyncio
+async def test_get_mining_profit_and_statistics(
+    get_mining_profit_and_statistics_keys,
+    get_mining_and_profit_statistics_response,
+):
+    """Tests an API call to get auto switching profit and statistics that failed"""
+    session = aiohttp.ClientSession()
+    miningpoolhubapi = MiningPoolHubAPI(session=session)
+    with aioresponses() as m:
+        m.get(
+            "https://miningpoolhub.com/index.php?action=getminingandprofitsstatistics&page=api",
             status=200,
             body=json.dumps(get_mining_and_profit_statistics_response),
             headers=CONTENT_HEADERS,
@@ -549,6 +649,25 @@ async def test_get_mining_profit_and_statistics(
             result[0].keys()
         ), NOT_ALL_KEYS_PRESENT
 
+    await session.close()
+
+
+@pytest.mark.asyncio
+async def test_get_mining_profit_and_statistics_fail(
+    get_mining_and_profit_statistics_response_fail,
+):
+    """Tests an API call to get mining profit and statistics"""
+    session = aiohttp.ClientSession()
+    miningpoolhubapi = MiningPoolHubAPI(session=session)
+    with aioresponses() as m:
+        m.get(
+            "https://miningpoolhub.com/index.php?action=getminingandprofitsstatistics&page=api",
+            status=200,
+            body=json.dumps(get_mining_and_profit_statistics_response_fail),
+            headers=CONTENT_HEADERS,
+        )
+        with pytest.raises(APIError):
+            await miningpoolhubapi.async_get_mining_profit_and_statistics()
     await session.close()
 
 

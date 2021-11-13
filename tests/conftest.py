@@ -2,7 +2,14 @@ from pytest import fixture
 
 
 @fixture
-def get_block_count_response():
+def api_rate_limit_response() -> str:
+    with open("tests/api_rate_limit_response.html") as f:
+        raw = f.read()
+    return raw
+
+
+@fixture
+def get_block_count_response() -> dict:
     return {
         "getblockcount": {
             "version": "1.0.0",
@@ -13,7 +20,7 @@ def get_block_count_response():
 
 
 @fixture
-def get_block_stats_response():
+def get_block_stats_response() -> dict:
     return {
         "getblockstats": {
             "version": "1.0.0",
@@ -70,7 +77,7 @@ ANON = "anonymous.anon"
 
 
 @fixture
-def get_blocks_found_response():
+def get_blocks_found_response() -> dict:
     return {
         "getblocksfound": {
             "version": "1.0.0",
@@ -422,7 +429,7 @@ def get_blocks_found_response():
 
 
 @fixture
-def get_current_workers_response():
+def get_current_workers_response() -> dict:
     return {
         "getcurrentworkers": {
             "version": "1.0.0",
@@ -436,7 +443,7 @@ ETH_POOL_NAME = "Ethereum (ETH) Mining Pool Hub"
 
 
 @fixture
-def get_dashboard_data_response():
+def get_dashboard_data_response() -> dict:
     return {
         "getdashboarddata": {
             "version": "1.0.0",
@@ -515,7 +522,7 @@ def get_dashboard_data_response():
 
 
 @fixture
-def get_difficulty_response():
+def get_difficulty_response() -> dict:
     return {
         "getdifficulty": {
             "version": "1.0.0",
@@ -526,7 +533,7 @@ def get_difficulty_response():
 
 
 @fixture
-def get_estimated_time_response():
+def get_estimated_time_response() -> dict:
     return {
         "getestimatedtime": {
             "version": "1.0.0",
@@ -538,7 +545,7 @@ def get_estimated_time_response():
 
 # noinspection DuplicatedCode
 @fixture
-def get_hourly_hash_rates_response():
+def get_hourly_hash_rates_response() -> dict:
     return {
         "gethourlyhashrates": {
             "version": "1.0.0",
@@ -612,7 +619,7 @@ def get_hourly_hash_rates_response():
 
 
 @fixture
-def get_nav_bar_data_response():
+def get_nav_bar_data_response() -> dict:
     return {
         "getnavbardata": {
             "version": "1.0.0",
@@ -623,7 +630,7 @@ def get_nav_bar_data_response():
 
 
 @fixture
-def get_pool_hash_rate_response():
+def get_pool_hash_rate_response() -> dict:
     return {
         "getpoolhashrate": {
             "version": "1.0.0",
@@ -634,7 +641,7 @@ def get_pool_hash_rate_response():
 
 
 @fixture
-def get_pool_info_response():
+def get_pool_info_response() -> dict:
     return {
         "getpoolinfo": {
             "version": "1.0.0",
@@ -661,12 +668,12 @@ def get_pool_info_response():
 
 
 @fixture
-def get_pool_share_rate_response():
+def get_pool_share_rate_response() -> dict:
     return {"getpoolsharerate": 0}
 
 
 @fixture
-def get_pool_status_response():
+def get_pool_status_response() -> dict:
     return {
         "getpoolstatus": {
             "version": "1.0.0",
@@ -690,7 +697,7 @@ def get_pool_status_response():
 
 
 @fixture
-def get_time_since_last_block_response():
+def get_time_since_last_block_response() -> dict:
     return {
         "gettimesincelastblock": {
             "version": "1.0.0",
@@ -701,7 +708,7 @@ def get_time_since_last_block_response():
 
 
 @fixture
-def get_top_contributors_response():
+def get_top_contributors_response() -> dict:
     return {
         "gettopcontributors": {
             "version": "1.0.0",
@@ -712,7 +719,7 @@ def get_top_contributors_response():
 
 
 @fixture
-def get_user_balance_response():
+def get_user_balance_response() -> dict:
     return {
         "getuserbalance": {
             "version": "1.0.0",
@@ -723,7 +730,7 @@ def get_user_balance_response():
 
 
 @fixture
-def get_user_hash_rate_response():
+def get_user_hash_rate_response() -> dict:
     return {
         "getuserhashrate": {
             "version": "1.0.0",
@@ -734,14 +741,14 @@ def get_user_hash_rate_response():
 
 
 @fixture
-def get_user_share_rate_response():
+def get_user_share_rate_response() -> dict:
     return {
         "getusersharerate": {"version": "1.0.0", "runtime": 5.9411525726318, "data": 0}
     }
 
 
 @fixture
-def get_user_status_response():
+def get_user_status_response() -> dict:
     return {
         "getuserstatus": {
             "version": "1.0.0",
@@ -757,7 +764,7 @@ def get_user_status_response():
 
 
 @fixture
-def get_user_transactions_response():
+def get_user_transactions_response() -> dict:
     return {
         "getusertransactions": {
             "version": "1.0.0",
@@ -1131,7 +1138,7 @@ def get_user_transactions_response():
 
 
 @fixture
-def get_user_workers_response():
+def get_user_workers_response() -> dict:
     return {
         "getuserworkers": {
             "version": "1.0.0",
@@ -1164,7 +1171,7 @@ ET_HASH_LIST_TWO = "us-east.ethash-hub.miningpoolhub.com;asia.ethash-hub.miningp
 
 
 @fixture
-def get_auto_switching_and_profits_statistics_response():
+def get_auto_switching_and_profits_statistics_response() -> dict:
     return {
         "success": True,
         "return": [
@@ -1406,11 +1413,18 @@ def get_auto_switching_and_profits_statistics_response():
     }
 
 
+@fixture
+def get_auto_switching_and_profits_statistics_response_fail() -> dict:
+    return {
+        "success": False,
+    }
+
+
 ONE_MIN_AGO = "1m ago"
 
 
 @fixture
-def get_mining_and_profit_statistics_response():
+def get_mining_and_profit_statistics_response() -> dict:
     return {
         "success": True,
         "return": [
@@ -2175,7 +2189,14 @@ def get_mining_and_profit_statistics_response():
 
 
 @fixture
-def get_user_all_balances_response():
+def get_mining_and_profit_statistics_response_fail() -> dict:
+    return {
+        "success": False,
+    }
+
+
+@fixture
+def get_user_all_balances_response() -> dict:
     return {
         "getuserallbalances": {
             "version": "1.0.0",
@@ -2203,7 +2224,7 @@ def get_user_all_balances_response():
 
 
 @fixture
-def public_response():
+def public_response() -> dict:
     return {
         "pool_name": ETH_POOL_NAME,
         "hashrate": 21318913068.661,
@@ -2215,7 +2236,7 @@ def public_response():
 
 
 @fixture
-def get_block_stats_keys():
+def get_block_stats_keys() -> list:
     return [
         "Total",
         "TotalValid",
@@ -2263,7 +2284,7 @@ def get_block_stats_keys():
 
 
 @fixture
-def get_blocks_found_keys():
+def get_blocks_found_keys() -> list:
     return [
         "id",
         "height",
@@ -2284,7 +2305,7 @@ def get_blocks_found_keys():
 
 
 @fixture
-def get_dashboard_keys():
+def get_dashboard_keys() -> list:
     return [
         "raw",
         "personal",
@@ -2299,12 +2320,12 @@ def get_dashboard_keys():
 
 
 @fixture
-def get_hourly_hash_rate_keys():
+def get_hourly_hash_rate_keys() -> list:
     return ["id", "username", "hashrate"]
 
 
 @fixture
-def get_pool_info_keys():
+def get_pool_info_keys() -> list:
     return [
         "currency",
         "coinname",
@@ -2325,7 +2346,7 @@ def get_pool_info_keys():
 
 
 @fixture
-def get_pool_status_keys():
+def get_pool_status_keys() -> list:
     return [
         "pool_name",
         "hashrate",
@@ -2343,22 +2364,22 @@ def get_pool_status_keys():
 
 
 @fixture
-def get_top_contributors_keys():
+def get_top_contributors_keys() -> list:
     return ["account", "hashrate"]
 
 
 @fixture
-def get_user_balance_keys():
+def get_user_balance_keys() -> list:
     return ["confirmed", "unconfirmed"]
 
 
 @fixture
-def get_user_status_keys():
+def get_user_status_keys() -> list:
     return ["username", "shares", "hashrate", "sharerate"]
 
 
 @fixture
-def public_keys():
+def public_keys() -> list:
     return [
         "pool_name",
         "hashrate",
@@ -2370,7 +2391,7 @@ def public_keys():
 
 
 @fixture
-def get_user_transactions_keys():
+def get_user_transactions_keys() -> list:
     return [
         "id",
         "username",
@@ -2385,12 +2406,12 @@ def get_user_transactions_keys():
 
 
 @fixture
-def get_user_workers_keys():
+def get_user_workers_keys() -> list:
     return ["id", "username", "password", "monitor", "hashrate", "difficulty"]
 
 
 @fixture
-def get_auto_switching_and_profits_statistics_keys():
+def get_auto_switching_and_profits_statistics_keys() -> list:
     return [
         "algo",
         "current_mining_coin",
@@ -2407,7 +2428,7 @@ def get_auto_switching_and_profits_statistics_keys():
 
 
 @fixture
-def get_mining_profit_and_statistics_keys():
+def get_mining_profit_and_statistics_keys() -> list:
     return [
         "coin_name",
         "symbol",
@@ -2439,7 +2460,7 @@ def get_mining_profit_and_statistics_keys():
 
 
 @fixture
-def get_user_all_balances_keys():
+def get_user_all_balances_keys() -> list:
     return [
         "coin",
         "confirmed",
