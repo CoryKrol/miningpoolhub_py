@@ -7,8 +7,12 @@ class APIRateLimitError(Exception):
     meaning they likely have rate limited you
     """
 
+    pass
 
-class NotFoundError(Exception):
+
+class InvalidCoinError(Exception):
+    """Thrown when an invalid coin name is given"""
+
     pass
 
 

@@ -12,7 +12,7 @@ from .exceptions import (
     APIError,
     APIRateLimitError,
     JsonFormatError,
-    NotFoundError,
+    InvalidCoinError,
     UnauthorizedError,
 )
 from .urls import Urls
@@ -96,9 +96,10 @@ class MiningPoolHubAPI(object):
                 raise UnauthorizedError(e)
             raise APIError(e)
         except JSONDecodeError as e:
-            if e.doc.find("Mining Pool Hub I Error"):
+            if e.doc.find("Mining Pool Hub I Error") is not -1:
                 raise APIRateLimitError(e)
-            raise JsonFormatError(e)
+            else:
+                raise JsonFormatError(e)
 
     async def __get_coin_data(self, url: URL) -> dict:
         """Private method to make a GET request to the URL for coin specific endpoints
@@ -125,7 +126,7 @@ class MiningPoolHubAPI(object):
         except ClientConnectionError as e:
             try:
                 await self.async_get_auto_switching_and_profits_statistics()
-                raise NotFoundError(e)
+                raise InvalidCoinError(e)
             except ClientConnectionError:
                 raise e
 
@@ -557,7 +558,7 @@ class MiningPoolHubAPI(object):
         path = self.urls.get_auto_switching_and_profits_statistics_url()
         response = await self.__get_data(path)
         if response["success"] is not True:
-            raise APIError("Call failed")
+            raise APIError()
 
         return response["return"]
 
@@ -577,7 +578,7 @@ class MiningPoolHubAPI(object):
         path = self.urls.get_mining_profit_and_statistics_url()
         response = await self.__get_data(path)
         if response["success"] is not True:
-            raise APIError("Call failed")
+            raise APIError()
 
         return response["return"]
 

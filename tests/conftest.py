@@ -3,9 +3,14 @@ from pytest import fixture
 
 @fixture
 def api_rate_limit_response() -> str:
-    with open("tests/api_rate_limit_response.html") as f:
-        raw = f.read()
-    return raw
+    try:
+        with open("tests/api_rate_limit_response.html") as f:
+            raw = f.read()
+        return raw
+    except FileNotFoundError:
+        with open("api_rate_limit_response.html") as f:
+            raw = f.read()
+        return raw
 
 
 @fixture

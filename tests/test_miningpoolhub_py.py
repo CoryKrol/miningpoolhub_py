@@ -4,8 +4,8 @@ import json
 from miningpoolhub_py.exceptions import (
     APIError,
     APIRateLimitError,
+    InvalidCoinError,
     UnauthorizedError,
-    NotFoundError,
 )
 from miningpoolhub_py import MiningPoolHubAPI
 import pytest
@@ -50,7 +50,7 @@ async def test_bad_coin_name(get_auto_switching_and_profits_statistics_response)
             body=json.dumps(get_auto_switching_and_profits_statistics_response),
             headers=CONTENT_HEADERS,
         )
-        with pytest.raises(NotFoundError):
+        with pytest.raises(InvalidCoinError):
             await miningpoolhubapi.async_get_user_balance(coin_name="doggy_coin")
     await session.close()
 
@@ -622,7 +622,6 @@ async def test_get_auto_switching_and_profits_statistics_fail(
         )
         with pytest.raises(APIError):
             await miningpoolhubapi.async_get_auto_switching_and_profits_statistics()
-
     await session.close()
 
 
