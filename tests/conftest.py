@@ -3,7 +3,7 @@ from pytest import fixture
 
 @fixture
 def api_rate_limit_response() -> str:
-    with open("test/api_rate_limit_response.html") as f:
+    with open("tests/api_rate_limit_response.html") as f:
         raw = f.read()
     return raw
 
