@@ -924,7 +924,7 @@ docs = ["Sphinx", "sphinx-rtd-theme", "sphinxcontrib-napoleon"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "f94e89f4ac479a62627a368758b8a07e4d26dfbf0b4159d3aa2634927b855af8"
+content-hash = "9ce6895f963a34f1b3cf7090c66d291f07ba03ce9343e5ade6127da9ce6c2cfc"
 
 [metadata.files]
 aiohttp = [
