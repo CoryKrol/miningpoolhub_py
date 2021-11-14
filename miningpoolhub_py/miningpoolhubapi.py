@@ -96,7 +96,7 @@ class MiningPoolHubAPI(object):
                 raise UnauthorizedError(e)
             raise APIError(e)
         except JSONDecodeError as e:
-            if e.doc.find("Mining Pool Hub I Error") is not -1:
+            if e.doc.find("Mining Pool Hub I Error") == 211:
                 raise APIRateLimitError(e)
             else:
                 raise JsonFormatError(e)
