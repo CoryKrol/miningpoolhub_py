@@ -217,7 +217,22 @@ class MiningPoolHubAPI(object):
                 url=self.urls.get_dashboard_data_url(coin_name=coin_name)
             )
         )
-        return result[self.urls.action_get_dashboard_data][DATA]
+        result = result[self.urls.action_get_dashboard_data][DATA]
+        value = result["balance_on_exchange"]
+        result["balance_on_exchange"] = float(value) if value else 0.0
+
+        value = result["personal"]["shares"]["valid"]
+        result["personal"]["shares"]["valid"] = int(value) if value else 0
+
+        value = result["personal"]["shares"]["invalid"]
+        result["personal"]["shares"]["invalid"] = int(value) if value else 0
+
+        value = result["pool"]["shares"]["valid"]
+        result["pool"]["shares"]["valid"] = int(value) if value else 0
+
+        value = result["pool"]["shares"]["invalid"]
+        result["pool"]["shares"]["invalid"] = int(value) if value else 0
+        return result
 
     async def async_get_difficulty(self, coin_name: str):
         """Get current difficulty in blockchain
@@ -487,7 +502,11 @@ class MiningPoolHubAPI(object):
         result = await self.__get_coin_data(
             self.__authenticate(url=self.urls.get_user_status_url(coin_name=coin_name))
         )
-        return result[self.urls.action_get_user_status][DATA]
+
+        result = result[self.urls.action_get_user_status][DATA]
+        value = result["shares"]
+        result["shares"] = int(value) if value else 0
+        return result
 
     async def async_get_user_transactions(self, coin_name: str):
         """Get a user's transactions

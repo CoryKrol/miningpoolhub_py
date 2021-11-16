@@ -465,7 +465,7 @@ def get_dashboard_data_response() -> dict:
                     "sharedifficulty": 0,
                     "shares": {
                         "valid": 12288,
-                        "invalid": 0,
+                        "invalid": 1,
                         "invalid_percent": 0,
                         "unpaid": 0,
                     },
@@ -478,7 +478,7 @@ def get_dashboard_data_response() -> dict:
                 },
                 "balance": {"confirmed": 0.060241, "unconfirmed": 1.996e-5},
                 "balance_for_auto_exchange": {"confirmed": 5.287e-5, "unconfirmed": 0},
-                "balance_on_exchange": 0,
+                "balance_on_exchange": 0.1,
                 "recent_credits_24hours": {"amount": 0.0027158152},
                 "recent_credits": [
                     {"date": "2021-10-29", "amount": 0.0025277042},
@@ -760,7 +760,7 @@ def get_user_status_response() -> dict:
             "runtime": 6.4799785614014,
             "data": {
                 "username": "coryt",
-                "shares": None,
+                "shares": 1,
                 "hashrate": 200431.807,
                 "sharerate": 0,
             },

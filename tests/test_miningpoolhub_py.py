@@ -196,6 +196,87 @@ async def test_get_dashboard(get_dashboard_keys, get_dashboard_data_response):
         assert (
             result["pool"]["info"]["currency"] == "ETH"
         ), "The coin name should be in the response"
+        assert (
+            result["balance_on_exchange"] is not None
+        ), "Balance on exchange should not be null"
+        assert result["balance_on_exchange"] == 0.1
+        assert (
+            result["personal"]["shares"]["valid"] is not None
+        ), "Valid shares should not be null"
+        assert result["personal"]["shares"]["valid"] == 12288
+        assert (
+            result["personal"]["shares"]["invalid"] is not None
+        ), "Invalid shares should not be null"
+        assert result["personal"]["shares"]["invalid"] == 1
+        assert (
+            result["pool"]["shares"]["valid"] is not None
+        ), "Valid shares should not be null"
+        assert result["pool"]["shares"]["valid"] == 2287112448
+        assert (
+            result["pool"]["shares"]["invalid"] is not None
+        ), "Invalid shares should not be null"
+        assert result["pool"]["shares"]["invalid"] == 2129568
+        assert set(get_dashboard_keys).issubset(result.keys()), NOT_ALL_KEYS_PRESENT
+
+    await session.close()
+
+
+@pytest.mark.asyncio
+async def test_get_dashboard_null_balance_on_exchange(
+    get_dashboard_keys, get_dashboard_data_response
+):
+    """Tests an API call to get dashboard data for a coin_name"""
+    get_dashboard_data_response["getdashboarddata"]["data"][
+        "balance_on_exchange"
+    ] = None
+    get_dashboard_data_response["getdashboarddata"]["data"]["personal"]["shares"][
+        "valid"
+    ] = None
+    get_dashboard_data_response["getdashboarddata"]["data"]["personal"]["shares"][
+        "invalid"
+    ] = None
+    get_dashboard_data_response["getdashboarddata"]["data"]["pool"]["shares"][
+        "valid"
+    ] = None
+    get_dashboard_data_response["getdashboarddata"]["data"]["pool"]["shares"][
+        "invalid"
+    ] = None
+    session = aiohttp.ClientSession()
+    miningpoolhubapi = MiningPoolHubAPI(session=session)
+    assert miningpoolhubapi.api_key_set() is True
+    with aioresponses() as m:
+        m.get(
+            "https://ethereum.miningpoolhub.com/index.php?action=getdashboarddata&api_key=test&page=api",
+            status=200,
+            body=json.dumps(get_dashboard_data_response),
+            headers=CONTENT_HEADERS,
+        )
+        result = await miningpoolhubapi.async_get_dashboard(coin_name=ETHEREUM)
+
+        assert isinstance(result, dict)
+        assert (
+            result["pool"]["info"]["currency"] == "ETH"
+        ), "The coin name should be in the response"
+        assert (
+            result["balance_on_exchange"] is not None
+        ), "Balance on exchange should not be null"
+        assert result["balance_on_exchange"] == 0.0
+        assert (
+            result["personal"]["shares"]["valid"] is not None
+        ), "Valid shares should not be null"
+        assert result["personal"]["shares"]["valid"] == 0
+        assert (
+            result["personal"]["shares"]["invalid"] is not None
+        ), "Invalid shares should not be null"
+        assert result["personal"]["shares"]["invalid"] == 0
+        assert (
+            result["pool"]["shares"]["valid"] is not None
+        ), "Valid shares should not be null"
+        assert result["pool"]["shares"]["valid"] == 0
+        assert (
+            result["pool"]["shares"]["invalid"] is not None
+        ), "Invalid shares should not be null"
+        assert result["pool"]["shares"]["invalid"] == 0
         assert set(get_dashboard_keys).issubset(result.keys()), NOT_ALL_KEYS_PRESENT
 
     await session.close()
@@ -501,6 +582,34 @@ async def test_get_user_status(get_user_status_keys, get_user_status_response):
 
         assert isinstance(result, dict)
         assert set(get_user_status_keys).issubset(result.keys()), NOT_ALL_KEYS_PRESENT
+        assert result["shares"] is not None, "Invalid shares should not be null"
+        assert result["shares"] == 1
+
+    await session.close()
+
+
+@pytest.mark.asyncio
+async def test_get_user_status_null_shares(
+    get_user_status_keys, get_user_status_response
+):
+    """Tests an API call to get user status"""
+    get_user_status_response["getuserstatus"]["data"]["shares"] = None
+    session = aiohttp.ClientSession()
+    miningpoolhubapi = MiningPoolHubAPI(session=session)
+    assert miningpoolhubapi.api_key_set() is True
+    with aioresponses() as m:
+        m.get(
+            "https://ethereum.miningpoolhub.com/index.php?action=getuserstatus&api_key=test&page=api",
+            status=200,
+            body=json.dumps(get_user_status_response),
+            headers=CONTENT_HEADERS,
+        )
+        result = await miningpoolhubapi.async_get_user_status(coin_name=ETHEREUM)
+
+        assert isinstance(result, dict)
+        assert set(get_user_status_keys).issubset(result.keys()), NOT_ALL_KEYS_PRESENT
+        assert result["shares"] is not None, "Invalid shares should not be null"
+        assert result["shares"] == 0
 
     await session.close()
 
