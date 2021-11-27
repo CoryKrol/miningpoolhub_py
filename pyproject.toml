@@ -38,6 +38,7 @@ mypy = "^0.910"
 pre-commit = "^2.15.0"
 mutmut = "^2.2.0"
 aioresponses = "^0.7.2"
+tox = "^3.24.4"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
